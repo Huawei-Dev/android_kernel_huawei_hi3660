@@ -21,7 +21,7 @@
 #define CTR_IDC_SHIFT		28
 #define CTR_DIC_SHIFT		29
 
-#define L1_CACHE_SHIFT		6
+#define L1_CACHE_SHIFT		7
 #define L1_CACHE_BYTES		(1 << L1_CACHE_SHIFT)
 
 
