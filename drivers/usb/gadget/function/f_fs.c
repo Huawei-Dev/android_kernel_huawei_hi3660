@@ -24,6 +24,7 @@
 #include <linux/hid.h>
 #include <linux/module.h>
 #include <linux/uio.h>
+#include <linux/freezer.h>
 #include <asm/unaligned.h>
 
 #include <linux/usb/composite.h>
@@ -902,7 +903,7 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 		if (file->f_flags & O_NONBLOCK)
 			return -EAGAIN;
 
-		ret = wait_event_interruptible(epfile->wait, (ep = epfile->ep));
+		ret = wait_event_freezable(epfile->wait, (ep = epfile->ep));
 		if (ret)
 			return -EINTR;
 	}
