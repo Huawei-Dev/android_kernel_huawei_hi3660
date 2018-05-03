@@ -182,6 +182,11 @@ static void bcm2835aux_spi_transfer_helper(struct bcm2835aux_spi *bs)
 {
 	u32 stat = bcm2835aux_rd(bs, BCM2835_AUX_SPI_STAT);
 
+	/* IRQ may be shared, so return if our interrupts are disabled */
+	if (!(bcm2835aux_rd(bs, BCM2835_AUX_SPI_CNTL1) &
+	      (BCM2835_AUX_SPI_CNTL1_TXEMPTY | BCM2835_AUX_SPI_CNTL1_IDLE)))
+		return ret;
+
 	/* check if we have data to read */
 	for (; bs->rx_len && (stat & BCM2835_AUX_SPI_STAT_RX_LVL);
 	     stat = bcm2835aux_rd(bs, BCM2835_AUX_SPI_STAT))
