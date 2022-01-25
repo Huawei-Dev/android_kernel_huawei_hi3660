@@ -412,9 +412,6 @@ void ion_chunk_heap_destroy(struct ion_heap *);
 struct ion_heap *ion_cma_heap_create(struct ion_platform_heap *);
 void ion_cma_heap_destroy(struct ion_heap *);
 
-struct ion_handle *pass_to_user(struct ion_handle *handle);
-void user_ion_free_nolock(struct ion_client *client, struct ion_handle *handle);
-
 struct ion_heap *ion_cma_pool_heap_create(struct ion_platform_heap *);
 void ion_cma_pool_heap_destroy(struct ion_heap *);
 
@@ -547,6 +544,9 @@ int ion_sync_for_device(struct ion_client *client, int fd);
 
 struct ion_handle *ion_handle_get_by_id_nolock(struct ion_client *client,
 						int id);
+
+bool ion_handle_validate(struct ion_client *client,
+			 struct ion_handle *handle);
 
 void ion_free_nolock(struct ion_client *client, struct ion_handle *handle);
 
