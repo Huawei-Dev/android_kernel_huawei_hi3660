@@ -105,18 +105,11 @@ long ion_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		struct ion_handle *handle;
 
 		handle = __ion_alloc(client, data.allocation.len,
-						data.allocation.align,
-						data.allocation.heap_id_mask,
-						data.allocation.flags, true);
-		if (IS_ERR(handle)) {
-			pr_err("%s: ion alloc failed!\n", __func__);
-			pr_err("len:%lx,align:%lx,heap_id_mask:%x,flags:%x\n",
-				data.allocation.len,
-				data.allocation.align,
-				data.allocation.heap_id_mask,
-				data.allocation.flags);
+				     data.allocation.align,
+				     data.allocation.heap_id_mask,
+				     data.allocation.flags, true);
+		if (IS_ERR(handle))
 			return PTR_ERR(handle);
-		}
 		pass_to_user(handle);
 		data.allocation.handle = handle->id;
 
@@ -248,8 +241,6 @@ long ion_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 
 	if (dir & _IOC_READ) {
 		if (copy_to_user((void __user *)arg, &data, _IOC_SIZE(cmd))) {
-			pr_err("%s: copy to user failed! cmd: %d\n",
-					__func__, cmd);
 			if (cleanup_handle) {
 				mutex_lock(&client->lock);
 				user_ion_free_nolock(client, cleanup_handle);
