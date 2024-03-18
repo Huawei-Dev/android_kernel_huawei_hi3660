@@ -1,0 +1,9 @@
+config SCHED_HISI_FORCE_CMP_BACKUP
+	bool "Always consider backup cpu in non-preferidle case"
+	depends on HISI_EAS_SCHED
+	default n
+	help
+	  This option compares backup_cpu if target_cpu == prev_cpu.
+	  In other words, for non-prefer idle tasks it may chose an idle
+	  cpu even if prev_cpu is the best active cpu.
+	  Not recommended because it will make all tasks spread.

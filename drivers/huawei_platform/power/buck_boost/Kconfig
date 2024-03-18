@@ -1,0 +1,12 @@
+#
+# buck_boost drivers
+#
+
+config BUCKBOOST
+	bool "buck boost"
+	default n
+	help
+	  Say Y here to enable buck_boost driver.
+	  This driver provides a unified interface to buck_boost.
+	  This driver is in logic layer.
+	  Currently supported device_check and set_vol etc.

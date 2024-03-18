@@ -1,0 +1,4 @@
+config HUAWEI_XENGINE
+	bool "Huawei xengine feature support"
+	default n
+

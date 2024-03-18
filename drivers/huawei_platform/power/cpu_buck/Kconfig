@@ -1,0 +1,6 @@
+config HUAWEI_CPU_BUCK
+	bool "huawei cpu_buck"
+	default n
+config HI6422V200
+	bool "hi6422v200"
+	default n

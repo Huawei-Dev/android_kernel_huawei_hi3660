@@ -1,0 +1,13 @@
+#
+# Huawei Kernel Harden
+#
+
+menu "Huawei Kernel Harden"
+
+config HUAWEI_HIDESYMS
+	bool "hide symbols"
+	default n
+	help
+	Hide some sensitive kernel symbols
+endmenu
+#a blank line must be existed

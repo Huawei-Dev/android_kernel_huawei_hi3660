@@ -1,0 +1,16 @@
+config CONTEXTHUB
+	bool "Sensor CONTEXTHUB driver"
+	depends on INPUTHUB || INPUTHUB_20
+	default n
+	help
+	Sensor CONTEXTHUB driver.
+
+config CONTEXTHUB_SHMEM
+	bool "Sensor CONTEXTHUB SHMEM driver"
+	depends on INPUTHUB || INPUTHUB_20
+	default y
+	help
+	Say yes here if you want to configure contexthub share memory
+
+source "drivers/contexthub/flp/Kconfig"
+

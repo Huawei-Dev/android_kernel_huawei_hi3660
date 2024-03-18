@@ -1,7 +1,9 @@
 #
 # Makefile for the memory technology device drivers.
 #
-
+ifeq ($(TARGET_VERSION_MODE),factory)
+EXTRA_CFLAGS += -DCONFIG_HISI_FACTORY_VERSION
+endif
 # Core functionality.
 obj-$(CONFIG_MTD)		+= mtd.o
 mtd-y				:= mtdcore.o mtdsuper.o mtdconcat.o mtdpart.o mtdchar.o
@@ -27,6 +29,7 @@ obj-$(CONFIG_SM_FTL)		+= sm_ftl.o
 obj-$(CONFIG_MTD_OOPS)		+= mtdoops.o
 obj-$(CONFIG_MTD_SWAP)		+= mtdswap.o
 
+obj-$(CONFIG_HISI_NVE)		+= hisi_nve.o
 nftl-objs		:= nftlcore.o nftlmount.o
 inftl-objs		:= inftlcore.o inftlmount.o
 
