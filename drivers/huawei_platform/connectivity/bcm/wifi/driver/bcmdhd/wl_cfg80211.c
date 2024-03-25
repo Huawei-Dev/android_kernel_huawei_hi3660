@@ -8191,59 +8191,6 @@ get_station_err:
 	return err;
 }
 
-#ifdef CONFIG_HW_GET_P2P_TX_RATE
-static s32
-wl_cfg80211_get_p2p_tx_rate(struct wiphy *wiphy, struct net_device *dev,
-	struct station_info *sinfo)
-{
-	struct bcm_cfg80211 *cfg = wiphy_priv(wiphy);
-	s32 rate = 0;
-	s32 err = 0;
-
-	RETURN_EIO_IF_NOT_UP(cfg);
-	WL_DBG(("wl_cfg80211_get_p2p_tx_rate\n")); //For Signal Poll block issue debug ccbc.
-
-	/* Report the current tx rate */
-	err = wldev_ioctl(dev, WLC_GET_RATE, &rate, sizeof(rate), false);
-	if (err) {
-		WL_ERR(("Could not get rate (%d)\n", err));
-	} else {
-#if defined(USE_DYNAMIC_MAXPKT_RXGLOM)
-		int rxpktglom;
-#endif
-		rate = dtoh32(rate);
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 0, 0)) && defined(HW_KERNEL_4_0_ADAPTATION)
-		sinfo->filled |= BIT(NL80211_STA_INFO_TX_BITRATE);
-#else
-#ifndef  BRCM_RSDB
-		sinfo->filled |= STATION_INFO_TX_BITRATE;
-#else
-		sinfo->filled |= STA_INFO_BIT(INFO_TX_BITRATE);
-#endif
-#endif
-		sinfo->txrate.legacy = rate * 5;
-		WL_DBG(("Rate %d Mbps\n", (rate / 2)));
-#if defined(USE_DYNAMIC_MAXPKT_RXGLOM)
-		rxpktglom = ((rate/2) > 150) ? 20 : 10;
-
-		if (maxrxpktglom != rxpktglom) {
-			maxrxpktglom = rxpktglom;
-			WL_DBG(("Rate %d Mbps, update bus:maxtxpktglom=%d\n", (rate/2),
-				maxrxpktglom));
-			err = wldev_iovar_setbuf(dev, "bus:maxtxpktglom",
-				(char*)&maxrxpktglom, 4, cfg->ioctl_buf,
-				WLC_IOCTL_MAXLEN, NULL);
-			if (err < 0) {
-				WL_ERR(("set bus:maxtxpktglom failed, %d\n", err));
-			}
-		}
-#endif
-	}
-
-	return err;
-}
-#endif /* CONFIG_HW_GET_P2P_TX_RATE */
-
 static s32
 wl_cfg80211_set_power_mgmt(struct wiphy *wiphy, struct net_device *dev,
 	bool enabled, s32 timeout)
@@ -12975,9 +12922,6 @@ static struct cfg80211_ops wl_cfg80211_ops = {
 	.start_p2p_device = wl_cfgp2p_start_p2p_device,
 	.stop_p2p_device = wl_cfgp2p_stop_p2p_device,
 #endif /* WL_CFG80211_P2P_DEV_IF */
-#ifdef CONFIG_HW_GET_P2P_TX_RATE
-	.get_p2p_tx_rate = wl_cfg80211_get_p2p_tx_rate,
-#endif /* CONFIG_HW_GET_P2P_TX_RATE */
 	.scan = wl_cfg80211_scan,
 	.set_wiphy_params = wl_cfg80211_set_wiphy_params,
 	.join_ibss = wl_cfg80211_join_ibss,

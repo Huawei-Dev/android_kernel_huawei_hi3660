@@ -16,7 +16,3 @@ menuconfig HW_VOWIFI
 menuconfig HW_GET_EXT_SIG
     bool "HUAWEI WIFI HW_GET_EXT_SIG support"
     default n
-
-menuconfig HW_GET_P2P_TX_RATE
-    bool "HUAWEI WIFI HW_GET_P2P_TX_RATE support"
-    default n
