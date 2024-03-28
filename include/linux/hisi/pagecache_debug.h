@@ -28,11 +28,6 @@
 
 #define PGCACHE_DUMP_HEAD_LINE		"[PGCACHE_LOG],"
 
-static inline int is_pagecache_stats_enable(void)
-{
-	return 0;
-}
-
 #define stat_inc_hit_count()
 #define stat_inc_miss_count()
 #define stat_inc_syncread_pages_count(cnt)
@@ -46,9 +41,5 @@ static inline int is_pagecache_stats_enable(void)
 #define stat_inc_dirty_pages_count()
 #define stat_dec_dirty_pages_count()
 #define stat_inc_shrink_pages_count()
-
-static inline void pgcache_log(u32 ctrl, const char *fmt, ...) {}
-static inline void pgcache_log_path(u32 ctrl, const struct path *path, const char *fmt, ...) {}
-static inline void pgcache_log_dentry(u32 ctrl, const struct dentry *dentry, const char *fmt, ...) {}
 
 #endif /* _LINUX_PAGECACHE_DEBUG_H */
