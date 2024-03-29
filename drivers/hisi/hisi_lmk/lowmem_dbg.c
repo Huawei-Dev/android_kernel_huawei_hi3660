@@ -18,7 +18,6 @@
 #include <linux/ion.h>
 #include <linux/hisi/hisi_ion.h>
 #include <linux/version.h>
-#include <linux/hisi/page_tracker.h>
 #include <log/log_usertype.h>
 #include <linux/slub_def.h>
 
@@ -124,8 +123,6 @@ static void lowmem_dump(struct work_struct *work)
 	ksm_show_stats();
 	hisi_ion_memory_info(verbose);
 	show_slab(verbose);
-	if (verbose)
-		page_tracker_wake_up();
 	mutex_unlock(&lowmem_dump_mutex);
 }
 
