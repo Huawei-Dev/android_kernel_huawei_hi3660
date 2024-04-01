@@ -51,6 +51,10 @@ struct hwspinlock {
 	void *priv;
 };
 
+#ifdef CONFIG_HISI_HWSPINLOCK_DEBUG
+extern struct hwspinlock *hwspin_lock_lookup(unsigned int id);
+#endif
+
 /**
  * struct hwspinlock_device - a device which usually spans numerous hwspinlocks
  * @dev: underlying device, will be used to invoke runtime PM api

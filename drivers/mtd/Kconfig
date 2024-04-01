@@ -12,6 +12,10 @@ menuconfig MTD
 
 if MTD
 
+config BALONG_MTD
+        tristate "MTD for balong modem"
+        ---help---
+          This option advance the block2mtd action for balong modem nv use
 config MTD_TESTS
 	tristate "MTD tests support (DANGEROUS)"
 	depends on m

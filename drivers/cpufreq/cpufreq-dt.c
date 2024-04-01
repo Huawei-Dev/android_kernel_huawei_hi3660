@@ -24,6 +24,8 @@
 #include <linux/regulator/consumer.h>
 #include <linux/slab.h>
 #include <linux/thermal.h>
+#include <linux/hisi/hisi_cpufreq_dt.h>
+#include <linux/hisi/hifreq_hotplug.h>
 
 #include "cpufreq-dt.h"
 
@@ -32,7 +34,6 @@ struct private_data {
 	struct device *cpu_dev;
 	struct thermal_cooling_device *cdev;
 	const char *reg_name;
-	bool have_static_opps;
 };
 
 static struct freq_attr *cpufreq_dt_attr[] = {
@@ -44,9 +45,6 @@ static struct freq_attr *cpufreq_dt_attr[] = {
 static int set_target(struct cpufreq_policy *policy, unsigned int index)
 {
 	struct private_data *priv = policy->driver_data;
-
-	return dev_pm_opp_set_rate(priv->cpu_dev,
-				   policy->freq_table[index].frequency * 1000);
 }
 
 /*
@@ -198,14 +196,12 @@ static int cpufreq_init(struct cpufreq_policy *policy)
 		}
 	}
 
-	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
-	if (!priv) {
-		ret = -ENOMEM;
-		goto out_put_regulator;
-	}
-
-	priv->reg_name = name;
-	priv->opp_table = opp_table;
+#ifdef CONFIG_HISI_CPUFREQ_DT
+	ret = hisi_cpufreq_set_supported_hw(policy);
+	if (ret)
+		dev_err(cpu_dev, "%s: failed to set supported hw: %d\n",
+			__func__, ret);
+#endif
 
 	/*
 	 * Initialize OPP tables for all policy->cpus. They will be shared by
@@ -217,8 +213,7 @@ static int cpufreq_init(struct cpufreq_policy *policy)
 	 *
 	 * OPPs might be populated at runtime, don't check for error here
 	 */
-	if (!dev_pm_opp_of_cpumask_add_table(policy->cpus))
-		priv->have_static_opps = true;
+	dev_pm_opp_of_cpumask_add_table(policy->cpus);
 
 	/*
 	 * But we need OPP table to function so if it is not there let's
@@ -244,10 +239,19 @@ static int cpufreq_init(struct cpufreq_policy *policy)
 				__func__, ret);
 	}
 
+	priv = kzalloc(sizeof(*priv), GFP_KERNEL);
+	if (!priv) {
+		ret = -ENOMEM;
+		goto out_free_opp;
+	}
+
+	priv->reg_name = name;
+	priv->opp_table = opp_table;
+
 	ret = dev_pm_opp_init_cpufreq_table(cpu_dev, &freq_table);
 	if (ret) {
 		dev_err(cpu_dev, "failed to init cpufreq table: %d\n", ret);
-		goto out_free_opp;
+		goto out_free_priv;
 	}
 
 	priv->cpu_dev = cpu_dev;
@@ -259,6 +263,9 @@ static int cpufreq_init(struct cpufreq_policy *policy)
 	if (suspend_opp)
 		policy->suspend_freq = dev_pm_opp_get_freq(suspend_opp) / 1000;
 	rcu_read_unlock();
+#ifdef CONFIG_HISI_CPUFREQ_DT
+	hisi_cpufreq_get_suspend_freq(policy);
+#endif
 
 	ret = cpufreq_table_validate_and_show(policy, freq_table);
 	if (ret) {
@@ -282,22 +289,14 @@ static int cpufreq_init(struct cpufreq_policy *policy)
 
 	policy->cpuinfo.transition_latency = transition_latency;
 
-        /*
-         * Android: set default parameters for parity between schedutil and
-         * schedfreq
-         */
-	policy->up_transition_delay_us = transition_latency / NSEC_PER_USEC;
-	policy->down_transition_delay_us = 50000; /* 50ms */
-
 	return 0;
 
 out_free_cpufreq_table:
 	dev_pm_opp_free_cpufreq_table(cpu_dev, &freq_table);
-out_free_opp:
-	if (priv->have_static_opps)
-		dev_pm_opp_of_cpumask_remove_table(policy->cpus);
+out_free_priv:
 	kfree(priv);
-out_put_regulator:
+out_free_opp:
+	dev_pm_opp_of_cpumask_remove_table(policy->cpus);
 	if (name)
 		dev_pm_opp_put_regulator(opp_table);
 out_put_clk:
@@ -312,12 +311,17 @@ static int cpufreq_exit(struct cpufreq_policy *policy)
 
 	cpufreq_cooling_unregister(priv->cdev);
 	dev_pm_opp_free_cpufreq_table(priv->cpu_dev, &policy->freq_table);
-	if (priv->have_static_opps)
-		dev_pm_opp_of_cpumask_remove_table(policy->related_cpus);
+	dev_pm_opp_of_cpumask_remove_table(policy->related_cpus);
+#ifdef CONFIG_HISI_CPUFREQ_DT
+	hisi_cpufreq_put_supported_hw(policy);
+#endif
 	if (priv->reg_name)
 		dev_pm_opp_put_regulator(priv->opp_table);
 
 	clk_put(policy->clk);
+#ifdef CONFIG_HISI_CPUFREQ
+	policy->clk = ERR_PTR(-EINVAL);
+#endif
 	kfree(priv);
 
 	return 0;
@@ -386,6 +390,13 @@ static int dt_cpufreq_probe(struct platform_device *pdev)
 
 	if (data && data->have_governor_per_policy)
 		dt_cpufreq_driver.flags |= CPUFREQ_HAVE_GOVERNOR_PER_POLICY;
+
+#ifdef CONFIG_HISI_CPUFREQ_DT
+	dt_cpufreq_driver.flags |= CPUFREQ_HAVE_GOVERNOR_PER_POLICY;
+	ret = hisi_cpufreq_init();
+	if (ret)
+		return ret;
+#endif
 
 	ret = cpufreq_register_driver(&dt_cpufreq_driver);
 	if (ret)

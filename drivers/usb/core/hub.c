@@ -33,6 +33,8 @@
 #include "hub.h"
 #include "otg_whitelist.h"
 
+#include <linux/hisi/usb/hisi_usb.h>
+
 #define USB_VENDOR_GENESYS_LOGIC		0x05e3
 #define HUB_QUIRK_CHECK_PORT_AUTOSUSPEND	0x01
 
@@ -1734,6 +1736,7 @@ static int hub_probe(struct usb_interface *intf, const struct usb_device_id *id)
 	}
 
 	if (hdev->level == MAX_TOPO_LEVEL) {
+		hw_usb_host_abnormal_event_notify(USB_HOST_EVENT_HUB_TOO_DEEP);
 		dev_err(&intf->dev,
 			"Unsupported bus topology: hub nested too deep\n");
 		return -E2BIG;
@@ -3280,7 +3283,9 @@ static int finish_port_resume(struct usb_device *udev)
 		 * the device will be rediscovered.
 		 */
  retry_reset_resume:
-		if (udev->quirks & USB_QUIRK_RESET)
+		if ((udev->quirks & USB_QUIRK_RESET) ||
+				((udev->quirks & USB_QUIRK_PM_NO_RESET_RESUME) &&
+				 udev->do_dpm_resume))
 			status = -ENODEV;
 		else
 			status = usb_reset_and_verify_device(udev);
@@ -3429,6 +3434,9 @@ int usb_port_resume(struct usb_device *udev, pm_message_t msg)
 	}
 
 	usb_lock_port(port_dev);
+	/* PM_EVENT_RESUME: System resume */
+	if (msg.event == PM_EVENT_RESUME)
+		udev->do_dpm_resume = 1;
 
 	/* Skip the initial Clear-Suspend step for a remote wakeup */
 	status = hub_port_status(hub, port1, &portstatus, &portchange);
@@ -3497,6 +3505,7 @@ int usb_port_resume(struct usb_device *udev, pm_message_t msg)
 		usb_unlocked_enable_lpm(udev);
 	}
 
+	udev->do_dpm_resume = 0;
 	usb_unlock_port(port_dev);
 
 	return status;
@@ -5590,6 +5599,12 @@ done:
 	return 0;
 
 re_enumerate:
+	/*
+	 * udev->bos may update during reset,
+	 * make sure usb2_hw_lpm_enabled cleared
+	 */
+	if (udev->usb2_hw_lpm_enabled == 1)
+		usb_set_usb2_hardware_lpm(udev, 0);
 	usb_release_bos_descriptor(udev);
 	udev->bos = bos;
 re_enumerate_no_bos:

@@ -225,13 +225,6 @@ static irqreturn_t hisi_powerkey_handler(int irq, void *data)
 	} else if (irq == info->irq[3]) {
 		pr_info("[%s]response long press 6s interrupt!\n",
 			__func__);
-#ifdef INPUT_MINI_BUGREPORT_TRIGGER
-		input_report_key(info->idev, KEY_F23, POWER_KEY_PRESS);
-		input_sync(info->idev);
-
-		input_report_key(info->idev, KEY_F23, POWER_KEY_RELEASE);
-		input_sync(info->idev);
-#endif
 		up(&long_presspowerkey_happen_sem);
 	} else if (irq == info->irq[4]) {
 		pr_info("[%s]response long press 8s interrupt!\n",
@@ -270,7 +263,7 @@ static int hisi_powerkey_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "Failed to allocate input device\n");
 		ret = -ENOENT;
 		devm_kfree(dev, info);
-		return ret;/*lint !e429*/
+		return ret;
 	}
 
 	info->idev->name = "hisi_on";
@@ -278,9 +271,6 @@ static int hisi_powerkey_probe(struct platform_device *pdev)
 	info->idev->dev.parent = &pdev->dev;
 	info->idev->evbit[0] = BIT_MASK(EV_KEY);
 	__set_bit(KEY_POWER, info->idev->keybit);
-#ifdef INPUT_MINI_BUGREPORT_TRIGGER
-	__set_bit(KEY_F23, info->idev->keybit);
-#endif
 
 	wake_lock_init(&info->pwr_wake_lock, WAKE_LOCK_SUSPEND, "android-pwr");
 

@@ -1665,6 +1665,10 @@ static int super_1_validate(struct mddev *mddev, struct md_rdev *rdev)
 			} else
 				set_bit(In_sync, &rdev->flags);
 			rdev->raid_disk = role;
+			if (role >= mddev->raid_disks) {
+				rdev->saved_raid_disk = -1;
+				rdev->raid_disk = -1;
+			}
 			break;
 		}
 		if (sb->devflags & WriteMostly1)
@@ -2694,10 +2698,7 @@ state_store(struct md_rdev *rdev, const char *buf, size_t len)
 			err = 0;
 		}
 	} else if (cmd_match(buf, "re-add")) {
-		if (!rdev->mddev->pers)
-			err = -EINVAL;
-		else if (test_bit(Faulty, &rdev->flags) && (rdev->raid_disk == -1) &&
-				rdev->saved_raid_disk >= 0) {
+		if (test_bit(Faulty, &rdev->flags) && (rdev->raid_disk == -1)) {
 			/* clear_bit is performed _after_ all the devices
 			 * have their local Faulty bit cleared. If any writes
 			 * happen in the meantime in the local node, they
@@ -4829,10 +4830,8 @@ array_size_store(struct mddev *mddev, const char *buf, size_t len)
 		return err;
 
 	/* cluster raid doesn't support change array_sectors */
-	if (mddev_is_clustered(mddev)) {
-		mddev_unlock(mddev);
+	if (mddev_is_clustered(mddev))
 		return -EINVAL;
-	}
 
 	if (strncmp(buf, "default", 7) == 0) {
 		if (mddev->pers)
@@ -5317,8 +5316,8 @@ int md_run(struct mddev *mddev)
 			queue_flag_set_unlocked(QUEUE_FLAG_NONROT, mddev->queue);
 		else
 			queue_flag_clear_unlocked(QUEUE_FLAG_NONROT, mddev->queue);
-		mddev->queue->backing_dev_info.congested_data = mddev;
-		mddev->queue->backing_dev_info.congested_fn = md_congested;
+		mddev->queue->backing_dev_info->congested_data = mddev;
+		mddev->queue->backing_dev_info->congested_fn = md_congested;
 	}
 	if (pers->sync_request) {
 		if (mddev->kobj.sd &&
@@ -5673,7 +5672,7 @@ static int do_md_stop(struct mddev *mddev, int mode,
 
 		__md_stop_writes(mddev);
 		__md_stop(mddev);
-		mddev->queue->backing_dev_info.congested_fn = NULL;
+		mddev->queue->backing_dev_info->congested_fn = NULL;
 
 		/* tell userspace to handle 'inactive' */
 		sysfs_notify_dirent_safe(mddev->sysfs_state);
@@ -6193,9 +6192,6 @@ static int hot_remove_disk(struct mddev *mddev, dev_t dev)
 {
 	char b[BDEVNAME_SIZE];
 	struct md_rdev *rdev;
-
-	if (!mddev->pers)
-		return -ENODEV;
 
 	rdev = find_rdev(mddev, dev);
 	if (!rdev)
@@ -8206,19 +8202,6 @@ void md_do_sync(struct md_thread *thread)
 	set_mask_bits(&mddev->flags, 0,
 		      BIT(MD_CHANGE_PENDING) | BIT(MD_CHANGE_DEVS));
 
-	if (test_bit(MD_RECOVERY_RESHAPE, &mddev->recovery) &&
-			!test_bit(MD_RECOVERY_INTR, &mddev->recovery) &&
-			mddev->delta_disks > 0 &&
-			mddev->pers->finish_reshape &&
-			mddev->pers->size &&
-			mddev->queue) {
-		mddev_lock_nointr(mddev);
-		md_set_array_sectors(mddev, mddev->pers->size(mddev, 0, 0));
-		mddev_unlock(mddev);
-		set_capacity(mddev->gendisk, mddev->array_sectors);
-		revalidate_disk(mddev->gendisk);
-	}
-
 	spin_lock(&mddev->lock);
 	if (!test_bit(MD_RECOVERY_INTR, &mddev->recovery)) {
 		/* We completed so min/max setting can be forgotten if used. */
@@ -8278,7 +8261,6 @@ static int remove_and_add_spares(struct mddev *mddev,
 			if (mddev->pers->hot_remove_disk(
 				    mddev, rdev) == 0) {
 				sysfs_unlink_rdev(mddev, rdev);
-				rdev->saved_raid_disk = rdev->raid_disk;
 				rdev->raid_disk = -1;
 				removed++;
 			}
