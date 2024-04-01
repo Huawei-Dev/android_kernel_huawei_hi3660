@@ -136,6 +136,15 @@ struct kobject *get_governor_parent_kobj(struct cpufreq_policy *policy)
 }
 EXPORT_SYMBOL_GPL(get_governor_parent_kobj);
 
+struct cpufreq_frequency_table *cpufreq_frequency_get_table(unsigned int cpu)
+{
+	struct cpufreq_policy *policy = per_cpu(cpufreq_cpu_data, cpu);
+
+	return policy && !policy_is_inactive(policy) ?
+		policy->freq_table : NULL;
+}
+EXPORT_SYMBOL_GPL(cpufreq_frequency_get_table);
+
 static inline u64 get_cpu_idle_time_jiffy(unsigned int cpu, u64 *wall)
 {
 	u64 idle_time;
@@ -773,7 +782,10 @@ static ssize_t store_##file_name					\
 	temp = new_policy.object;					\
 	ret = cpufreq_set_policy(policy, &new_policy);		\
 	if (!ret)							\
-		policy->user_policy.object = temp;			\
+		policy->user_policy.object = clamp_val(temp, policy->cpuinfo.min_freq, policy->cpuinfo.max_freq); \
+	/* show user_policy.min/max after drg enable, keep the same way as before */	\
+									\
+	trace_cpufreq_policy_update(current, policy->min, policy->max);	\
 									\
 	return ret ? ret : count;					\
 }
@@ -1753,6 +1765,9 @@ void cpufreq_resume(void)
 	if (!cpufreq_driver)
 		return;
 
+	if (unlikely(!cpufreq_suspended))
+		return;
+
 	cpufreq_suspended = false;
 
 	if (!has_target() && !cpufreq_driver->resume)
@@ -1969,9 +1984,6 @@ static int __target_index(struct cpufreq_policy *policy, int index)
 	int retval = -EINVAL;
 	bool notify;
 
-	if (newfreq == policy->cur)
-		return 0;
-
 	notify = !(cpufreq_driver->flags & CPUFREQ_ASYNC_NOTIFICATION);
 	if (notify) {
 		/* Handle switching to intermediate frequency */
@@ -2033,15 +2045,6 @@ int __cpufreq_driver_target(struct cpufreq_policy *policy,
 
 	pr_debug("target for CPU %u: %u kHz, relation %u, requested %u kHz\n",
 		 policy->cpu, target_freq, relation, old_target_freq);
-
-	/*
-	 * This might look like a redundant call as we are checking it again
-	 * after finding index. But it is left intentionally for cases where
-	 * exactly same freq is called again and so we can save on few function
-	 * calls.
-	 */
-	if (target_freq == policy->cur)
-		return 0;
 
 	/* Save last value to restore later on errors */
 	policy->restore_freq = policy->cur;

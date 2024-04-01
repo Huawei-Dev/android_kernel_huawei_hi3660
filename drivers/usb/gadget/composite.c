@@ -439,6 +439,7 @@ static u8 encode_bMaxPower(enum usb_device_speed speed,
 		return 0;
 	switch (speed) {
 	case USB_SPEED_SUPER:
+	case USB_SPEED_SUPER_PLUS:
 		return DIV_ROUND_UP(val, 8);
 	default:
 		return DIV_ROUND_UP(val, 2);
@@ -966,7 +967,6 @@ static void remove_config(struct usb_composite_dev *cdev,
 			/* may free memory for "f" */
 		}
 	}
-	list_del(&config->list);
 	if (config->unbind) {
 		DBG(cdev, "unbind config '%s'/%p\n", config->label, config);
 		config->unbind(config);
@@ -992,6 +992,9 @@ void usb_remove_config(struct usb_composite_dev *cdev,
 
 	if (cdev->config == config)
 		reset_config(cdev);
+		
+	if (!list_empty(&cdev->configs))
+		list_del(&config->list);
 
 	spin_unlock_irqrestore(&cdev->lock, flags);
 
@@ -1996,7 +1999,7 @@ void composite_disconnect(struct usb_gadget *gadget)
 	struct usb_composite_dev	*cdev = get_gadget_data(gadget);
 	unsigned long			flags;
 
-	if (cdev == NULL) {
+	if (!cdev) {
 		WARN(1, "%s: Calling disconnect on a Gadget that is \
 			 not connected\n", __func__);
 		return;
@@ -2042,6 +2045,7 @@ static void __composite_unbind(struct usb_gadget *gadget, bool unbind_driver)
 		struct usb_configuration	*c;
 		c = list_first_entry(&cdev->configs,
 				struct usb_configuration, list);
+		list_del(&c->list);
 		remove_config(cdev, c);
 	}
 	if (cdev->driver->unbind && unbind_driver)

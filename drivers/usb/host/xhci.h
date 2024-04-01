@@ -33,6 +33,7 @@
 /* Code sharing between pci-quirks and xhci hcd */
 #include	"xhci-ext-caps.h"
 #include "pci-quirks.h"
+#include "xhci-local-mem.h"
 
 /* xHCI PCI Configuration Registers */
 #define XHCI_SBRN_OFFSET	(0x60)
@@ -1625,7 +1626,7 @@ struct xhci_hcd {
 #define XHCI_STATE_REMOVING	(1 << 2)
 	/* Statistics */
 	int			error_bitmask;
-	unsigned int		quirks;
+	u64		quirks;
 #define	XHCI_LINK_TRB_QUIRK	(1 << 0)
 #define XHCI_RESET_EP_QUIRK	(1 << 1)
 #define XHCI_NEC_HOST		(1 << 2)
@@ -1666,6 +1667,10 @@ struct xhci_hcd {
 #define XHCI_LIMIT_ENDPOINT_INTERVAL_7	(1 << 26)
 /* Reserved. It was XHCI_U2_DISABLE_WAKE */
 #define XHCI_ASMEDIA_MODIFY_FLOWCONTROL	(1 << 28)
+
+#define XHCI_CTRL_NYET_ABNORMAL	(1 << 29)
+#define XHCI_WARM_RESET_AFTER_INIT	(1ULL << 33)
+#define XHCI_DELAY_CTRL_DATA_STAGE	(1ULL << 34)
 
 	unsigned int		num_active_eps;
 	unsigned int		limit_active_eps;

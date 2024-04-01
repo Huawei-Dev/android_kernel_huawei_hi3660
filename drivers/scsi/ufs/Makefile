@@ -15,6 +15,7 @@ obj-$(CONFIG_SCSI_UFS_FAULT_INJECT) += ufs_fault_inject.o
 obj-$(CONFIG_SCSI_UFS_BLOCK_TEST) += ufs_block_test.o
 obj-$(CONFIG_SCSI_UFS_TEST) += ufs_test.o
 obj-$(CONFIG_HUAWEI_UFS_DSM) += dsm_ufs.o
+obj-$(CONFIG_HISI_BOOTDEVICE) += ufs-rpmb.o
 
 ifeq ($(TARGET_VERSION_MODE),factory)
     EXTRA_CFLAGS += -DHEALTH_INFO_FACTORY_MODE
