@@ -7,6 +7,7 @@
  *
  */
 #include <net/tcp.h>
+#include <linux/version.h>
 
 #ifdef CONFIG_TCP_ARGO
 int sysctl_tcp_argo __read_mostly = 1;
