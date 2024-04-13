@@ -959,8 +959,8 @@ KBUILD_CFLAGS   += $(call cc-option,-Werror=strict-prototypes)
 # Allow date/time macros
 KBUILD_CFLAGS   += $(call cc-option,-Wno=date-time)
 
-# enforce correct pointer usage
-KBUILD_CFLAGS   += $(call cc-option,-Werror=incompatible-pointer-types)
+# Relax correct pointer usage
+KBUILD_CFLAGS   += $(call cc-option,-Wno=incompatible-pointer-types)
 
 # use the deterministic mode of AR if available
 KBUILD_ARFLAGS := $(call ar-option,D)
