@@ -7,7 +7,7 @@
 #include "basedef.h"
 #include "mem_manage.h"
 
-//PIC 下行消息组
+//PIC ??????????
 typedef struct
 {
     USIGN pic_coding_type:                      1;
@@ -146,7 +146,7 @@ typedef struct
     USIGN tab_addr:                              32;
 } VP6_DWNMSG_D39;
 
-//上行消息组
+//??????????
 typedef struct
 {
     USIGN error_mb_num:                         16;

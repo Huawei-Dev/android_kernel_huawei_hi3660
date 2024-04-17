@@ -41,11 +41,11 @@ typedef enum
 
 typedef struct
 {
-	HI_U64 DdrBasePhyAddr;	 /*起始物理地址*/
+	HI_U64 DdrBasePhyAddr;	 /*??????????????????*/
 	HI_U8* pDdrBaseVirAddr;
 	HI_U64 Vir2BusOffset;
-	HI_U64 DdrOffset;	/*偏移*/
-	HI_U32 DdrSize; 	/*分配大小，以字节为单位*/
+	HI_U64 DdrOffset;	/*??????*/
+	HI_U32 DdrSize; 	/*?????????????????????????????????*/
 }DDR_MEM_ALLOC;
 
 typedef struct
@@ -100,7 +100,7 @@ HI_S32 DRV_Venc_GetTimeStampMs(HI_U32 *pu32TimeMs);
 HI_S32 DRV_MEM_INIT(HI_VOID);
 HI_S32 DRV_MEM_EXIT(HI_VOID);
 
-/* MMU内存分配  */
+/* MMU????????????  */
 HI_S32 DRV_MMU_MEM_AllocAndMap(const HI_CHAR *bufname, HI_CHAR *zone_name,HI_U32 size, HI_S32 align, MEM_BUFFER_S *psMBuf,HI_U32 mmu_bypass_flag);
 HI_S32 DRV_MMU_MEM_UnmapAndRelease(MEM_BUFFER_S *psMBuf,HI_U32 mmu_bypass_flag);
 

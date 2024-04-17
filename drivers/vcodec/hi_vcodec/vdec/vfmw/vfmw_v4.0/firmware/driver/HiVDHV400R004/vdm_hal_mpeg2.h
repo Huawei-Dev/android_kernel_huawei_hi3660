@@ -22,7 +22,7 @@
 
 #include "basedef.h"
 
-//MPEG2下行消息池
+//MPEG2??????????
 typedef struct
 {
     USIGN pic_width_in_mb:                      9;
@@ -143,7 +143,7 @@ typedef struct
     USIGN first_slc_dnmsg_addr:                32;
 } MP2DNMSG_D63;
 
-//MPEG2上行消息池
+//MPEG2??????????
 typedef struct
 {
     USIGN slice_start_mb_num:                   16;

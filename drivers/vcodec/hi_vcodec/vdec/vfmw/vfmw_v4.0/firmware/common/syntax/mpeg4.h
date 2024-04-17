@@ -35,7 +35,7 @@ Lm31zdoF6uSknVe/21QSVHGiD9iQTGx8zLjcy7sOSTWslqLK/TWJMY2jp4O8bQ==*/
 #include "vdm_hal.h"
 #include "syntax.h"
 
-/* 返回状态宏定义*/
+/* ??????????????*/
 #define MPEG4_FAIL            -1
 #define MPEG4_OK              0
 #define MPEG4_NOTDEC          3
@@ -49,25 +49,25 @@ Lm31zdoF6uSknVe/21QSVHGiD9iQTGx8zLjcy7sOSTWslqLK/TWJMY2jp4O8bQ==*/
 #define FRAME_REQ_SUCCESS          0
 
 
-/*按照最大空间分配 */
+/*???????????????? */
 #define FRAME_ALLOC_NUM            8
                         
 
-/* 语法用到的宏定义*/
-//#define    OVERFLOW                       1          // 码流越界
-#define    SYN_SHOK                       3          // ShortHeader解码正常
-#define    SYNTAX_OK                      1          // 语法解析正确，返回配置硬件状态
+/* ????????????????*/
+//#define    OVERFLOW                       1          // ????????
+#define    SYN_SHOK                       3          // ShortHeader????????
+#define    SYNTAX_OK                      1          // ??????????????????????????????
                                                     
-#define    NO_START_CODE                  0xc5       // 没有找到起始码
-#define    SHORT_HEADER                   0xc4       // 短头格式起始码
+#define    NO_START_CODE                  0xc5       // ??????????????
+#define    SHORT_HEADER                   0xc4       // ??????????????
                                                      
-#define    MARKER_THRESHOLD               6400          // marker的阈值为4字节
-#define    SH_THRESHOLD                   18          // ShortHeader头标识计数//modify by l57648 from 8 to 18,Because we found 13 Short Header in X-Men stream.
-#define    PEI_THRESHOLD                  16         // shortheader语法元素pei的阈值
+#define    MARKER_THRESHOLD               6400          // marker????????4????
+#define    SH_THRESHOLD                   18          // ShortHeader??????????//modify by l57648 from 8 to 18,Because we found 13 Short Header in X-Men stream.
+#define    PEI_THRESHOLD                  16         // shortheader????????pei??????
                                           
 /* coding_mode */                         
-#define    ONLY_I_MODE                    1          // 解码模式
-#define    NEXT_I_MODE                    2          // 解码模式
+#define    ONLY_I_MODE                    1          // ????????
+#define    NEXT_I_MODE                    2          // ????????
 
 /*start_code */
 #define    SHORT_VIDEO_START_CODE         0x00008000
@@ -85,10 +85,10 @@ Lm31zdoF6uSknVe/21QSVHGiD9iQTGx8zLjcy7sOSTWslqLK/TWJMY2jp4O8bQ==*/
 #define    USERDATA_START_CODE            0x000001b2
 #define    HISI_END_OF_FRAME              0x0000011e
 
-// 这个值不能随便修改，如要修改需要同时改scd过滤头及PTS检测新帧seg两处地方
+// ??????????????????????????????????????scd????????PTS????????seg????????
 #define    HISI_STREAM_END_CODE           0x000001fe
 
-/* VOS层*/
+/* VOS??*/
 #define    SP_LEVEL1        0x01
 #define    SP_LEVEL2        0x02
 #define    SP_LEVEL3        0x03
@@ -100,42 +100,42 @@ Lm31zdoF6uSknVe/21QSVHGiD9iQTGx8zLjcy7sOSTWslqLK/TWJMY2jp4O8bQ==*/
 #define    ASP_LEVEL4       0xF4
 #define    ASP_LEVEL5       0xF5
 
-#define    SYN_VOSOK        1              // VOS解码正常
-#define    SYN_VOSERR       0              // VOS解码错误
+#define    SYN_VOSOK        1              // VOS????????
+#define    SYN_VOSERR       0              // VOS????????
 
-/*VO层*/
-#define    SYN_VOOK         1              // VO解码正常
-#define    SYN_VOERR        0              // VO解码错误
+/*VO??*/
+#define    SYN_VOOK         1              // VO????????
+#define    SYN_VOERR        0              // VO????????
 #define    VIDEO_ID         1              // Visual_Object_type Video ID
 
-/*GOP层*/
-#define    SYN_GOPOK        1              // GOP解码正常
-#define    SYN_GOPERR       0              // GOP解码错误
+/*GOP??*/
+#define    SYN_GOPOK        1              // GOP????????
+#define    SYN_GOPERR       0              // GOP????????
 
-/*VOL层*/
-#define    SYN_VOLOK                    1              // VOL解码正常
-#define    SYN_VOLERR                   0              // VOL解码错误
-#define    VO_Type_SP                   0x00000001     // video_object_type为SP
-#define    VO_Type_ASP                  0x11           // video_object_type为ASP
-#define    VIDOBJLAY_AR_EXTPAR          15             // Aspect_ratio_info为extended PAR
-#define    VIDOBJLAY_SHAPE_RECTANGULAR  0              // video_object_layer_shape为矩形
+/*VOL??*/
+#define    SYN_VOLOK                    1              // VOL????????
+#define    SYN_VOLERR                   0              // VOL????????
+#define    VO_Type_SP                   0x00000001     // video_object_type??SP
+#define    VO_Type_ASP                  0x11           // video_object_type??ASP
+#define    VIDOBJLAY_AR_EXTPAR          15             // Aspect_ratio_info??extended PAR
+#define    VIDOBJLAY_SHAPE_RECTANGULAR  0              // video_object_layer_shape??????
 #define    VIDOBJLAY_SHAPE_BINARY_ONLY  2
 #define    SPRITE_NONE    0
 #define    SPRITE_STATIC  1
 #define    SPRITE_GMC	     2
 
-/*VOP层*/
+/*VOP??*/
 #define    I_VOP                 0
 #define    P_VOP                 1
 #define    B_VOP                 2
 #define    S_VOP                 3
 #define    N_VOP                 4
-#define    SYN_VOPOK             1              // VOP解码正常
-#define    SYN_VOPERR            0              // VOP解码错误
+#define    SYN_VOPOK             1              // VOP????????
+#define    SYN_VOPERR            0              // VOP????????
 
 /*USERDATA*/
-#define    SYN_USERDATAOK        1              // USERDATA解码正常
-#define    SYN_USERDATAERR       0              // USERDATA解码错误
+#define    SYN_USERDATAOK        1              // USERDATA????????
+#define    SYN_USERDATAERR       0              // USERDATA????????
 
 /* seg num in vop */
 #define    MAX_SEG_NUM_IN_VOP     1024          
@@ -181,7 +181,7 @@ typedef struct
 	SINT32 sW, sH;
 	/* gradient, calculated from warp points */
 	SINT32 dU[2], dV[2], Uo, Vo, Uco, Vco;
-	/*协议中的含义
+	/*????????????
 	  Uo: du[0]*s/2;
 	  Vo: dv[0]*s/2;	  
 	*/
@@ -334,7 +334,7 @@ typedef struct
 } MP4_SYNTAX_STATE;
 
 
-/* VDM 相关数据 */
+/* VDM ???????? */
 typedef struct
 {
     UINT8     *pmv_vir_addr;
@@ -354,13 +354,13 @@ typedef struct
     UADDR     pmv_backward_ref_addr;
 } MSG_AV_IMG2PMV_ADDR;
 
-/* 码流管理信息*/
+/* ????????????*/
 typedef struct
 {
     UINT8     *vir_addr;
     UADDR     phy_addr;   
     SINT32    len;  
-    UINT32    offset;        //字节第几比特开始有效
+    UINT32    offset;        //????????????????????
 } BITS_OBJ;
 
 typedef struct
@@ -381,7 +381,7 @@ typedef struct
 	UINT8  BwdCodingType;
 	UINT8  CurCodingType;
     
-    UINT8  TmpUserData[MAX_USRDAT_SIZE+8]; /* +8 为了确保安全 */
+    UINT8  TmpUserData[MAX_USRDAT_SIZE+8]; /* +8 ???????????? */
     MP4_DEC_PARAM_S *pMp4DecParam;
     MP4_DEC_PARAM_S Mp4DecParam;
     DEC_STREAM_PACKET_S  stCurPacket;
@@ -393,7 +393,7 @@ typedef struct
 
     MP4_VOS MP4Vos;
     MP4_VOL MP4Vol;
-    MP4_VOL MP4VolLastBack; /* 记录最近一次解析OK的信息 */
+    MP4_VOL MP4VolLastBack; /* ????????????????OK?????? */
     MP4_VOP MP4Vop;
     MP4_SYNTAX MP4Syntax;
     MP4_SYNTAX_STATE MP4SyntaxState;
@@ -422,7 +422,7 @@ typedef struct
     VDEC_USRDAT_S  *UsrData[4];
     VDEC_USRDAT_S  *CurUsrData;
 
-    /* 如果IP VOP出错，寻找下一个IVOP的标示，=1代表IPVOP出错*/
+    /* ????IP VOP????????????????IVOP????????=1????IPVOP????*/
     UINT32 IPVopErr;
 
     IMAGE_VO_QUEUE     ImageQue;

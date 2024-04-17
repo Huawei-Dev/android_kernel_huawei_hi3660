@@ -109,7 +109,7 @@ typedef struct hiSYNTAX_CTX_S
     #ifdef VFMW_VP8_SUPPORT
         VP8_CTX_S   stVp8Ctx;
     #endif
-    } unSyntax;                     /* 该通道对应的syntax上下文 */
+    } unSyntax;                     /* ????????????syntax?????? */
 } SYNTAX_CTX_S;
 
 #define  MAX_USRDAT_BLK_NUM   48*4

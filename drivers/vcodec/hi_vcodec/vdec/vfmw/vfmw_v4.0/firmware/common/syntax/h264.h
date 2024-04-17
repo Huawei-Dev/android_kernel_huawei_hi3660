@@ -54,7 +54,7 @@ do                               \
 
 
 #define   H264_ERR_FS_OUT_AGAIN   (-3)
-#define   H264_NOTDEC             (-2)    //表示H264DEC_DecodePacket()里面有一个NAL没有解码就返回了，下次调用不用送码流了
+#define   H264_NOTDEC             (-2)    //????H264DEC_DecodePacket()??????????NAL??????????????????????????????????????
 #define   H264_ERR                (-1)
 #define   H264_OK                  0
 #define   H264_ALREADY_OUT   1
@@ -79,7 +79,7 @@ do                               \
 #define   START_FRAME                         0
 
 #define   MAX_BYTES_START                     (512*1024)    // 512*1024 bytes received, start VDM to dec
-#define   GET_ONE_NALU_SIZE                   (4*1024) //SCD_SEG_BLANK_LEN           // 拼包的最小长度
+#define   GET_ONE_NALU_SIZE                   (4*1024) //SCD_SEG_BLANK_LEN           // ??????????????
 
 /***************************** define *****************************/
 #define   PIC_DECODING                        1
@@ -139,7 +139,7 @@ do                               \
 #define   NALU_TYPE_UNSPECIFIED 24
 #define   NALU_TYPE_END       31              //Unspecified [24,31]
 
-/*定义解码模式*/
+/*????????????*/
 #define  IMODE                2               // only dec I pic
 #define  IPMODE               1               // dec I pic, p pic and ref b pic, no ref b pic not dec
 #define  IPBMODE              0               // all pic dec
@@ -306,7 +306,7 @@ typedef struct
     UINT8   frame_cropping_flag;                   // u(1)
     UINT8   vui_parameters_present_flag;           // u(1)
     UINT8   is_valid;                              // the sps content of this sps_id is geted or not
-    UINT8   is_refreshed;                          // 是否更新，初始值为0
+    UINT8   is_refreshed;                          // ??????????????????0
     UINT8   seq_scaling_matrix_present_flag;
 
     UINT32  profile_idc;                           // u(8)
@@ -317,8 +317,8 @@ typedef struct
     UINT32  bit_depth_chroma;                      // ue(v)
     SINT32  ScalingList4x4[6][16];                 // se(v)
     SINT32  ScalingList8x8[6][64];                 // se(v)
-    UINT32  qmatrix4x4[6][4];                      // 16 个bytes拼在4words中
-    UINT32  qmatrix8x8[2][16];                     // 64 个bytes拼在16words中    
+    UINT32  qmatrix4x4[6][4];                      // 16 ??bytes????4words??
+    UINT32  qmatrix8x8[2][16];                     // 64 ??bytes????16words??    
     UINT32  log2_max_frame_num_minus4;             // ue(v)
     UINT32  pic_order_cnt_type;                    // ue(v)
     UINT32  log2_max_pic_order_cnt_lsb_minus4;     // ue(v)
@@ -366,8 +366,8 @@ typedef struct
     UINT32  transform_8x8_mode_flag;
     SINT32  ScalingList4x4[6][16];                  // se(v)
     SINT32  ScalingList8x8[6][64];                  // se(v)
-    UINT32  qmatrix4x4[6][4];                       // 16 个bytes拼在4words中
-    UINT32  qmatrix8x8[2][16];                      // 64 个bytes拼在16words中    
+    UINT32  qmatrix4x4[6][4];                       // 16 ??bytes????4words??
+    UINT32  qmatrix8x8[2][16];                      // 64 ??bytes????16words??    
 } H264_PPS_S;
 
 typedef struct
@@ -428,8 +428,8 @@ typedef struct
     UINT32  disable_deblocking_filter_idc;
     SINT32  slice_alpha_c0_offset_div2;
     SINT32  slice_beta_offset_div2;
-    SINT32  picid_refidx0; // 当前slice在list0中第一个元素对应的帧存槽位号，负数无效
-    SINT32  picid_nearpoc; // 当前slice在dpb中找到的poc距离最近的帧存的槽位号，负数无效
+    SINT32  picid_refidx0; // ????slice??list0??????????????????????????????????????
+    SINT32  picid_nearpoc; // ????slice??dpb????????poc????????????????????????????????
     UINT64  PTS;
 } H264_SLICE_S;
 
@@ -520,7 +520,7 @@ typedef struct
     UINT8  pic_struct;
     SINT32 cpb_removal_delay;
     SINT32 dpb_output_delay;
-    /* 后面还有许多语法元素，暂时用不到，不列了 */
+    /* ???????????????????????????????????????? */
 } H264_PIC_TIMING_SEI_S;
 
 typedef struct
@@ -552,11 +552,11 @@ typedef enum
 
 typedef struct H264_FRAMESTORE_S
 {   
-    UINT8   non_existing;   // 1: 该fs中图像不存在, 0: 存在 
+    UINT8   non_existing;   // 1: ??fs????????????, 0: ???? 
     UINT8   is_used;        // 0: empty, 1: top, 2: bottom, 3: both fields (or frame)--output
     UINT8   is_reference;   // 0: not used for ref, 1: top used, 2: bottom used,
     UINT8   mode_skip_flag; // 0: all dec, 1: top not dec, 2: bottom not dec, 3: both fields (or frame) not dec
-    UINT8   is_in_dpb;       // 已经出了DPB, 0: already out from dpb, 1: still in dpb
+    UINT8   is_in_dpb;       // ????????DPB, 0: already out from dpb, 1: still in dpb
     IMAGE   fs_image; 
     SINT32  logic_fs_id;    /*  */
         
@@ -565,7 +565,7 @@ typedef struct H264_FRAMESTORE_S
     UINT32  long_term_frame_idx;
     SINT32  poc;
   
-    UINT32  is_displayed;    // VO 是否显示，0: not display; 1: displayed
+    UINT32  is_displayed;    // VO ??????????0: not display; 1: displayed
     UINT32  MbaffFrameFlag;
     UINT32  pic_type;
     UINT32  err_level;
@@ -576,14 +576,14 @@ typedef struct H264_FRAMESTORE_S
     H264_STORABLEPIC_S  top_field;
     H264_STORABLEPIC_S  bottom_field;
 
-    FO_STATE_E  eFoState;  // 处理第一帧快速输出时使用  
+    FO_STATE_E  eFoState;  // ????????????????????????  
 } H264_FRAMESTORE_S;
 
 typedef struct
 {
     UINT8   state;
     UINT8   field_pair_flag;
-    UINT8   non_existing;  // 0：当前图像存在, 1：当前图像不存在. 主要用于Frame_num gap的情况下.
+    UINT8   non_existing;  // 0??????????????, 1????????????????. ????????Frame_num gap????????.
     UINT8   structure;     // 0: frame, 1: top_field, 2: bottom_field, 3: reserved
     UINT8   is_long_term;  // 0: not long term ref,  1: long term ref 
     UINT8   is_short_term; // 0: not short term ref, 1: short term ref. BUT one pic cann't long and short.    
@@ -618,7 +618,7 @@ typedef struct
 
 typedef struct
 {
-    UINT8   structure;    // 图像结构, 0: frame, 1: top field, 2:bottom field, 3: rsv
+    UINT8   structure;    // ????????, 0: frame, 1: top field, 2:bottom field, 3: rsv
     UINT8   FrameStoreFlag;
     UINT32  nal_ref_idc;
     UINT32  frame_num;
@@ -654,7 +654,7 @@ typedef struct
 typedef struct 
 {      
     H264_NALU_S *pSliceNal;
-} H264_SLCINFO_S;  //Slice信息, 主要是记录未释放的码流
+} H264_SLCINFO_S;  //Slice????, ??????????????????????
 
 typedef struct
 {
@@ -698,7 +698,7 @@ typedef struct
 
     H264_NALU_S        *pCurrNal;
     H264_NALU_S         NalArray[MAX_SLICE_SLOT_NUM+1]; 
-    BS                  BS;  // for bstream.c中的调用之用
+    BS                  BS;  // for bstream.c????????????
     UINT8               IsStreamEndFlag;
     UINT8               PicIsDecoded;     // pic is decoded with dsp_check_pic_over_flag
     SINT32              CurWidthInMb;
@@ -729,7 +729,7 @@ typedef struct
     H264_FRAMESTORE_S  *pDirectOutBuf;
     H264_FRAMESTORE_S  *pLastFieldBuf;
     SVC_NALUSVCEXT_S SVC_NALUSVCEXT_S;
-    H264_SLCINFO_S      SlcInfo[MAX_SLICE_SLOT_NUM];     //Slice信息, 主要是记录未释放的码流
+    H264_SLCINFO_S      SlcInfo[MAX_SLICE_SLOT_NUM];     //Slice????, ??????????????????????
     UINT32              PmvStoreUsedFlag[MAX_PMV_STORE]; // pmv store memory allocate statistic 
     UINT32              TotalFsNum;      // change while g_DPB.size change
     UINT32              TotalPmvNum;     // change while g_DPB.size change      

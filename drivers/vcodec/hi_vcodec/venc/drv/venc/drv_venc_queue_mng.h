@@ -28,7 +28,7 @@ typedef struct queue_info {
 	spinlock_t msg_lock;
 	wait_queue_head_t wait;
 
-	HI_VOID* alloc_data;              //实际为  queue_data_s* 类型
+	HI_VOID* alloc_data;              //??????  queue_data_s* ????
 	HI_U32   queue_num;
 	HI_S32   stop;
 	struct list_head head;

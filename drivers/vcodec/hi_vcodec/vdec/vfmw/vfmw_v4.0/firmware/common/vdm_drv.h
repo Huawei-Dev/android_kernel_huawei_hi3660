@@ -44,11 +44,11 @@ extern "C" {
 #define VDMDRV_OK                 (0)
 #define VDMDRV_ERR                (-1)
 
-#define MSG_SLOT_SIZE             (256)        //一个SLOT大小, WORD
+#define MSG_SLOT_SIZE             (256)        //????SLOT????, WORD
 #define UP_MSG_SLOT_NUM           (2)
-#define MAX_UP_MSG_SLICE_NUM      (200)        //最多支持上报的slice个数，final 200. vfmw test 40000
+#define MAX_UP_MSG_SLICE_NUM      (200)        //??????????????slice??????final 200. vfmw test 40000
 
-#define UP_MSG_SIZE               (MAX_UP_MSG_SLICE_NUM*4)  //一个slice消息槽占4word
+#define UP_MSG_SIZE               (MAX_UP_MSG_SLICE_NUM*4)  //????slice????????4word
 #define LUMA_HISTORGAM_NUM        (32)
 
 typedef enum
@@ -69,9 +69,9 @@ typedef enum
 
 typedef enum
 {
-    VDMDRV_SLEEP_STAGE_NONE = 0,      // 未休眠
-    VDMDRV_SLEEP_STAGE_PREPARE,       // 收到休眠命令，但还未完成休眠
-    VDMDRV_SLEEP_STAGE_SLEEP          // 已休眠
+    VDMDRV_SLEEP_STAGE_NONE = 0,      // ??????
+    VDMDRV_SLEEP_STAGE_PREPARE,       // ????????????????????????????
+    VDMDRV_SLEEP_STAGE_SLEEP          // ??????
 } VDMDRV_SLEEP_STAGE_E;
 
 typedef struct
@@ -86,19 +86,19 @@ typedef struct
     UINT32 LastWaitMoreStartTime;
     SINT32 ChanResetFlag;
 #ifdef VFMW_MODULE_LOWDLY_SUPPORT
-	SINT32 ChanIntState;/*用来表示vdh中断状态的标志，1:同时检测到行号中断和解码完成中断*/
+	SINT32 ChanIntState;/*????????vdh????????????????1:????????????????????????????????*/
 #endif
     VOID *pDecParam;
 } VDMDRV_PARAM_S;
 
 typedef struct 
 {
-    SINT32 PriorByChanId[MAX_CHAN_NUM];/*按通道号顺序各通道的优先级信息*/
-    SINT32 ChanIdTabByPrior[MAX_CHAN_NUM]; /* -1: 复位值，没有要处理的通道*/
-    SINT32 ChanDecByVdhPlusOne[MAX_CHAN_NUM]; /* 0: 未被VDH解码，n: 正在被(VDH_id + 1)解码  5: 正在被VEDU解码 */
+    SINT32 PriorByChanId[MAX_CHAN_NUM];/*??????????????????????????????*/
+    SINT32 ChanIdTabByPrior[MAX_CHAN_NUM]; /* -1: ????????????????????????*/
+    SINT32 ChanDecByVdhPlusOne[MAX_CHAN_NUM]; /* 0: ????VDH??????n: ??????(VDH_id + 1)????  5: ??????VEDU???? */
 } CHAN_CTX;
 
-/* VDM自用内存地址 */
+/* VDM???????????? */
 typedef struct
 {
     // vdm register base vir addr
@@ -156,7 +156,7 @@ typedef struct
     UINT8*    chrom_2d_vir_addr;
     UADDR     chrom_2d_phy_addr;
 #ifdef VFMW_MODULE_LOWDLY_SUPPORT
-	/*模块间低延时使用的行号*/
+	/*??????????????????????*/
     UADDR     line_num_stAddr;
 #endif
     
@@ -168,7 +168,7 @@ typedef struct
 	UINT32    LumaSumLow;
 	UINT32    LumaHistorgam[LUMA_HISTORGAM_NUM];
 }LUMA_INFO_S;
-/* 解码报告数据结构 */
+/* ???????????????? */
 typedef struct
 {
     UINT32    BasicCfg1;
@@ -188,7 +188,7 @@ typedef struct
 	UINT32    LumaHistorgam[LUMA_HISTORGAM_NUM];
 } VDMHAL_BACKUP_S;
 
-/* 修补参数数据结构 */
+/* ???????????????? */
 typedef struct
 {
     VID_STD_E VidStd;
@@ -215,7 +215,7 @@ typedef struct
 	UINT32 	   CtbSize;            // ctbsize for hevc
 	UINT32 	   tiles_enabled_flag; // for hevc
 } VDMHAL_REPAIR_PARAM_S;
-/* 解码报告数据结构 */
+/* ???????????????? */
 typedef struct
 {
     UINT32    RetType;
@@ -260,10 +260,10 @@ typedef struct
 }MAKE_DEC_REPORT_S;
 
 /*#########################################################################################
-       全局变量申明
+       ????????????
  ##########################################################################################*/
 extern VDMHAL_HWMEM_S        g_HwMem[MAX_VDH_NUM];
-extern UINT32                g_UpMsg[MAX_VDH_NUM][UP_MSG_SIZE];   //上行消息镜像
+extern UINT32                g_UpMsg[MAX_VDH_NUM][UP_MSG_SIZE];   //????????????
 extern VDMHAL_REPAIR_PARAM_S g_RepairParam[MAX_VDH_NUM][2];
 extern VDMHAL_DEC_REPORT_S   g_DecReport[MAX_VDH_NUM];
 extern VDMHAL_BACKUP_S       g_BackUp[MAX_VDH_NUM];

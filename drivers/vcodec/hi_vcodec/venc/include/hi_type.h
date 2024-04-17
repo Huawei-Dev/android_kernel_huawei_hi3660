@@ -65,14 +65,14 @@ typedef enum {
 
 typedef struct HI_MMZ_BUS
 {
-    HI_U8  bufname[24]; //buffer名字
-	HI_U64 kernel_viraddr;//buffer 内核地址
-	HI_U64 user_viraddr; //buffer虚拟地址
-	HI_U64 phyaddr;   //buffer物理地址
+    HI_U8  bufname[24]; //buffer????
+	HI_U64 kernel_viraddr;//buffer ????????
+	HI_U64 user_viraddr; //buffer????????
+	HI_U64 phyaddr;   //buffer????????
 
     HI_U32 bufsize;  //buffersize
-    HI_U32 bufid;    //需要分配的bufferID
-    HI_U32 portDir;  //端口类型
+    HI_U32 bufid;    //??????????bufferID
+    HI_U32 portDir;  //????????
 }HI_MMZ_BUF_S;
 
 
@@ -134,7 +134,7 @@ typedef struct HI_RECT_S{
 //#define spinlock_t int
 #define HI_INVALID_HANDLE (0xffffffff)
 
-#define IOC_TYPE_VENC  'V' // 魔数 0-255
+#define IOC_TYPE_VENC  'V' // ???? 0-255
 
 #ifdef __cplusplus
 #if __cplusplus

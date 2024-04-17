@@ -19,7 +19,7 @@ extern "C" {
 /** @{ */  /** <!-- [VIDEO] */
 
 /**Defines the video norm.*/
-/**CNcomment: 定义视频制式枚举*/
+/**CNcomment: ????????????????*/
 typedef enum hiUNF_ENC_FMT_E
 {
     HI_UNF_ENC_FMT_1080P_60 = 0,     /**<1080p 60 Hz*/
@@ -78,18 +78,18 @@ typedef enum hiUNF_ENC_FMT_E
 }HI_UNF_ENC_FMT_E;
 
 /**Defines the mode of the video decoder.*/
-/**CNcomment: 定义视频解码器模式枚举*/
+/**CNcomment: ??????????????????????*/
 typedef enum hiUNF_VCODEC_MODE_E
 {
-    HI_UNF_VCODEC_MODE_NORMAL = 0,   /**<Decode all frames.*/ /**<CNcomment: 解所有帧*/
-    HI_UNF_VCODEC_MODE_IP,           /**<Decode only I frames and P frames.*/ /**<CNcomment: 只解IP帧*/
-    HI_UNF_VCODEC_MODE_I,            /**<Decode only I frames.*/ /**<CNcomment: 只解I帧*/
-    HI_UNF_VCODEC_MODE_DROP_INVALID_B,  /**<Decode all frames except the first B frame sequence behind I frames */ /**<CNcomment: 解所有帧，除了紧跟着I帧后面的B帧*/
+    HI_UNF_VCODEC_MODE_NORMAL = 0,   /**<Decode all frames.*/ /**<CNcomment: ????????*/
+    HI_UNF_VCODEC_MODE_IP,           /**<Decode only I frames and P frames.*/ /**<CNcomment: ????IP??*/
+    HI_UNF_VCODEC_MODE_I,            /**<Decode only I frames.*/ /**<CNcomment: ????I??*/
+    HI_UNF_VCODEC_MODE_DROP_INVALID_B,  /**<Decode all frames except the first B frame sequence behind I frames */ /**<CNcomment: ????????????????????I????????B??*/
     HI_UNF_VCODEC_MODE_BUTT
 }HI_UNF_VCODEC_MODE_E;
 
 /**Defines special control operation of decoder*/
-/**CNcomment: 定义解码器解码的特殊控制选项 */
+/**CNcomment: ???????????????????????????? */
 typedef enum hiHI_UNF_VCODEC_CTRL_OPTION_E
 {
     HI_UNF_VCODEC_CTRL_OPTION_SIMPLE_DPB = 0x1,
@@ -97,35 +97,35 @@ typedef enum hiHI_UNF_VCODEC_CTRL_OPTION_E
 } HI_UNF_VCODEC_CTRL_OPTION_E;
 
 /**Defines the decoding capability (resolution) of the decoder.*/
-/**CNcomment: 定义解码器解码能力(分辨率) */
+/**CNcomment: ??????????????????(??????) */
 typedef enum hiUNF_VCODEC_CAP_LEVEL_E
 {
-    HI_UNF_VCODEC_CAP_LEVEL_NULL = 0, /**<Do not decode.*/ /**<CNcomment: 不需要解码 */
-    HI_UNF_VCODEC_CAP_LEVEL_QCIF = 0, /**<The resolution of the picture to be decoded is less than or equal to 176x144.*/ /**<CNcomment: 解码的图像大小不超过176*144 */
-    HI_UNF_VCODEC_CAP_LEVEL_CIF,      /**<The resolution of the picture to be decoded less than or equal to 352x288.*/ /**<CNcomment: 解码的图像大小不超过352*288 */
-    HI_UNF_VCODEC_CAP_LEVEL_D1,       /**<The resolution of the picture to be decoded less than or equal to 720x576.*/ /**<CNcomment: 解码的图像大小不超过720*576 */
-    HI_UNF_VCODEC_CAP_LEVEL_720P,     /**<The resolution of the picture to be decoded is less than or equal to 1280x720.*/ /**<CNcomment: 解码的图像大小不超过1280*720 */
-    HI_UNF_VCODEC_CAP_LEVEL_FULLHD,   /**<The resolution of the picture to be decoded is less than or equal to 1920x1080.*/ /**<CNcomment: 解码的图像大小不超过1920*1080 */
+    HI_UNF_VCODEC_CAP_LEVEL_NULL = 0, /**<Do not decode.*/ /**<CNcomment: ?????????? */
+    HI_UNF_VCODEC_CAP_LEVEL_QCIF = 0, /**<The resolution of the picture to be decoded is less than or equal to 176x144.*/ /**<CNcomment: ????????????????????176*144 */
+    HI_UNF_VCODEC_CAP_LEVEL_CIF,      /**<The resolution of the picture to be decoded less than or equal to 352x288.*/ /**<CNcomment: ????????????????????352*288 */
+    HI_UNF_VCODEC_CAP_LEVEL_D1,       /**<The resolution of the picture to be decoded less than or equal to 720x576.*/ /**<CNcomment: ????????????????????720*576 */
+    HI_UNF_VCODEC_CAP_LEVEL_720P,     /**<The resolution of the picture to be decoded is less than or equal to 1280x720.*/ /**<CNcomment: ????????????????????1280*720 */
+    HI_UNF_VCODEC_CAP_LEVEL_FULLHD,   /**<The resolution of the picture to be decoded is less than or equal to 1920x1080.*/ /**<CNcomment: ????????????????????1920*1080 */
 
-    HI_UNF_VCODEC_CAP_LEVEL_1280x800, /**<The resolution of the picture to be decoded is less than or equal to 1280x800.*/ /**<CNcomment: 解码的图像大小不超过1280x800*/
-    HI_UNF_VCODEC_CAP_LEVEL_800x1280, /**<The resolution of the picture to be decoded is less than or equal to 800x1280.*/ /**<CNcomment: 解码的图像大小不超过800x1280*/
-    HI_UNF_VCODEC_CAP_LEVEL_1488x1280, /**<The resolution of the picture to be decoded is less than or equal to 1488x1280.*/ /**<CNcomment: 解码的图像大小不超过1488x1280 */
-    HI_UNF_VCODEC_CAP_LEVEL_1280x1488, /**<The resolution of the picture to be decoded is less than or equal to 1280x1488.*/ /**<CNcomment: 解码的图像大小不超过1280x1488 */
-    HI_UNF_VCODEC_CAP_LEVEL_2160x1280, /**<The resolution of the picture to be decoded is less than or equal to 2160x1280.*/ /**<CNcomment: 解码的图像大小不超过2160x1280 */
-    HI_UNF_VCODEC_CAP_LEVEL_1280x2160, /**<The resolution of the picture to be decoded is less than or equal to 1280x2160.*/ /**<CNcomment: 解码的图像大小不超过1280x2160 */
-    HI_UNF_VCODEC_CAP_LEVEL_2160x2160, /**<The resolution of the picture to be decoded is less than or equal to 2160x2160.*/ /**<CNcomment: 解码的图像大小不超过2160x2160 */
-    HI_UNF_VCODEC_CAP_LEVEL_4096x2160, /**<The resolution of the picture to be decoded is less than or equal to 4096x2160.*/ /**<CNcomment: 解码的图像大小不超过4096x2160 */
-    HI_UNF_VCODEC_CAP_LEVEL_2160x4096, /**<The resolution of the picture to be decoded is less than or equal to 2160x4096.*/ /**<CNcomment: 解码的图像大小不超过2160x4096 */
-    HI_UNF_VCODEC_CAP_LEVEL_4096x4096, /**<The resolution of the picture to be decoded is less than or equal to 4096x4096.*/ /**<CNcomment: 解码的图像大小不超过4096x4096 */
-    HI_UNF_VCODEC_CAP_LEVEL_8192x4096, /**<The resolution of the picture to be decoded is less than or equal to 8192x4096.*/ /**<CNcomment: 解码的图像大小不超过8192x4096 */
-    HI_UNF_VCODEC_CAP_LEVEL_4096x8192, /**<The resolution of the picture to be decoded is less than or equal to 4096x8192.*/ /**<CNcomment: 解码的图像大小不超过4096x8192 */
-    HI_UNF_VCODEC_CAP_LEVEL_8192x8192, /**<The resolution of the picture to be decoded is less than or equal to 8192x8192.*/ /**<CNcomment: 解码的图像大小不超过8192x8192 */
+    HI_UNF_VCODEC_CAP_LEVEL_1280x800, /**<The resolution of the picture to be decoded is less than or equal to 1280x800.*/ /**<CNcomment: ????????????????????1280x800*/
+    HI_UNF_VCODEC_CAP_LEVEL_800x1280, /**<The resolution of the picture to be decoded is less than or equal to 800x1280.*/ /**<CNcomment: ????????????????????800x1280*/
+    HI_UNF_VCODEC_CAP_LEVEL_1488x1280, /**<The resolution of the picture to be decoded is less than or equal to 1488x1280.*/ /**<CNcomment: ????????????????????1488x1280 */
+    HI_UNF_VCODEC_CAP_LEVEL_1280x1488, /**<The resolution of the picture to be decoded is less than or equal to 1280x1488.*/ /**<CNcomment: ????????????????????1280x1488 */
+    HI_UNF_VCODEC_CAP_LEVEL_2160x1280, /**<The resolution of the picture to be decoded is less than or equal to 2160x1280.*/ /**<CNcomment: ????????????????????2160x1280 */
+    HI_UNF_VCODEC_CAP_LEVEL_1280x2160, /**<The resolution of the picture to be decoded is less than or equal to 1280x2160.*/ /**<CNcomment: ????????????????????1280x2160 */
+    HI_UNF_VCODEC_CAP_LEVEL_2160x2160, /**<The resolution of the picture to be decoded is less than or equal to 2160x2160.*/ /**<CNcomment: ????????????????????2160x2160 */
+    HI_UNF_VCODEC_CAP_LEVEL_4096x2160, /**<The resolution of the picture to be decoded is less than or equal to 4096x2160.*/ /**<CNcomment: ????????????????????4096x2160 */
+    HI_UNF_VCODEC_CAP_LEVEL_2160x4096, /**<The resolution of the picture to be decoded is less than or equal to 2160x4096.*/ /**<CNcomment: ????????????????????2160x4096 */
+    HI_UNF_VCODEC_CAP_LEVEL_4096x4096, /**<The resolution of the picture to be decoded is less than or equal to 4096x4096.*/ /**<CNcomment: ????????????????????4096x4096 */
+    HI_UNF_VCODEC_CAP_LEVEL_8192x4096, /**<The resolution of the picture to be decoded is less than or equal to 8192x4096.*/ /**<CNcomment: ????????????????????8192x4096 */
+    HI_UNF_VCODEC_CAP_LEVEL_4096x8192, /**<The resolution of the picture to be decoded is less than or equal to 4096x8192.*/ /**<CNcomment: ????????????????????4096x8192 */
+    HI_UNF_VCODEC_CAP_LEVEL_8192x8192, /**<The resolution of the picture to be decoded is less than or equal to 8192x8192.*/ /**<CNcomment: ????????????????????8192x8192 */
 
     HI_UNF_VCODEC_CAP_LEVEL_BUTT
 } HI_UNF_VCODEC_CAP_LEVEL_E;
 
 /**Defines the stream type supported by the decoder.*/
-/**CNcomment: 定义解码器支持的码流类型 */
+/**CNcomment: ???????????????????????? */
 typedef enum hiUNF_VCODEC_TYPE_E
 {
     HI_UNF_VCODEC_TYPE_MPEG2,       /**<MPEG2*/
@@ -170,18 +170,18 @@ typedef enum hiUNF_VCODEC_TYPE_E
 }HI_UNF_VCODEC_TYPE_E;
 
 /**Defines the H264 profile of the video encoder.*/
-/**CNcomment: 定义视频解码器 H264协议档次*/
+/**CNcomment: ?????????????? H264????????*/
 typedef enum hiUNF_H264_PROFILE_E
 {
-    HI_UNF_H264_PROFILE_BASELINE = 0,   /**<Encode H264 stream by baseline profile.*/ /**<CNcomment: 采用基线档次编码H264码流*/
-    HI_UNF_H264_PROFILE_MAIN,           /**<Encode H264 stream by main profile.*/     /**<CNcomment:采用主要档次编码H264码流*/
-    HI_UNF_H264_PROFILE_EXTENDED,       /**<Encode H264 stream by extended profile.*/ /**<CNcomment:采用扩展档次编码H264码流*/
-    HI_UNF_H264_PROFILE_HIGH,           /**<Encode H264 stream by high profile.*/     /**<CNcomment: 采用高级档次编码H264码流*/
+    HI_UNF_H264_PROFILE_BASELINE = 0,   /**<Encode H264 stream by baseline profile.*/ /**<CNcomment: ????????????????H264????*/
+    HI_UNF_H264_PROFILE_MAIN,           /**<Encode H264 stream by main profile.*/     /**<CNcomment:????????????????H264????*/
+    HI_UNF_H264_PROFILE_EXTENDED,       /**<Encode H264 stream by extended profile.*/ /**<CNcomment:????????????????H264????*/
+    HI_UNF_H264_PROFILE_HIGH,           /**<Encode H264 stream by high profile.*/     /**<CNcomment: ????????????????H264????*/
     HI_UNF_H264_PROFILE_BUTT
 }HI_UNF_H264_PROFILE_E;
 
 #ifdef VENC_OMX_HEVC
-/**CNcomment: 定义视频编码器 HEVC协议档次*/
+/**CNcomment: ?????????????? HEVC????????*/
 typedef enum hiUNF_HEVC_PROFILE_E
 {
     HI_UNF_HEVC_PROFILE_MAIN = 0,   /**<Encode Hevc stream by main profile.*/
@@ -212,7 +212,7 @@ typedef enum hi_UNF_AVC_LEVEL_E
     HI_LEVEL_52 = 52                                //!< H264 Level as specified in the specification
 } HI_UNF_ENC_LEVEL_E;
 
-/* 前处理   crop结构体 */
+/* ??????   crop?????? */
 typedef struct hiUNF_VCODEC_CROP_INFO_S
 {
     HI_U32   u32CropLeft;
@@ -224,7 +224,7 @@ typedef struct hiUNF_VCODEC_CROP_INFO_S
 }HI_UNF_VCODEC_CROP_INFO_S;
 
 
-/* 前处理   scaling 结构体 */
+/* ??????   scaling ?????? */
 typedef struct hiUNF_VCODEC_SCALE_INFO_S
 {
     HI_S32   s32Width;
@@ -232,7 +232,7 @@ typedef struct hiUNF_VCODEC_SCALE_INFO_S
 } HI_UNF_VCODEC_SCALE_INFO_S;
 
 
-/* 前处理 ROI结构体  */
+/* ?????? ROI??????  */
 typedef struct hiUNF_VCODEC_ROI_INFO_S
 {
 	HI_U8			bRegion0keep;
@@ -304,13 +304,13 @@ typedef struct hiUNF_VCODEC_ROI_INFO_S
 
 typedef struct hiUNF_VCODEC_VC1_ATTR_S
 {
-    HI_BOOL  bAdvancedProfile;   /**<Whether the profile is an advanced profile*/ /**<CNcomment: 是否Advanced Profile*/
-    HI_U32   u32CodecVersion;    /**<Version number*/ /**<CNcomment: 版本号*/
+    HI_BOOL  bAdvancedProfile;   /**<Whether the profile is an advanced profile*/ /**<CNcomment: ????Advanced Profile*/
+    HI_U32   u32CodecVersion;    /**<Version number*/ /**<CNcomment: ??????*/
 }HI_UNF_VCODEC_VC1_ATTR_S;
 
 typedef struct hiUNF_VCODEC_VP6_ATTR_S
 {
-    HI_BOOL  bReversed;    /**<To reverse a picture, set this parameter to 1. In this cases, set it to 0.*/ /**<CNcomment: 图像需要倒转时置1，否则置0*/
+    HI_BOOL  bReversed;    /**<To reverse a picture, set this parameter to 1. In this cases, set it to 0.*/ /**<CNcomment: ????????????????1????????0*/
 }HI_UNF_VCODEC_VP6_ATTR_S;
 
 typedef union hiUNF_VCODEC_EXTATTR_U
@@ -320,158 +320,158 @@ typedef union hiUNF_VCODEC_EXTATTR_U
 }HI_UNF_VCODEC_EXTATTR_U;
 
 /**Defines the attributes of a video decoder.*/
-/**CNcomment: 定义视频解码器属性结构*/
+/**CNcomment: ??????????????????????*/
 typedef struct hiUNF_VCODEC_ATTR_S
 {
-    HI_UNF_VCODEC_TYPE_E        enType;          /**<Video encoding type*/ /**<CNcomment: 视频编码类型*/
-    HI_UNF_VCODEC_EXTATTR_U     unExtAttr;       /**<Extra attributes related to the video encoding type*/ /**<CNcomment: 视频编码类型相关的额外属性*/
-    HI_UNF_VCODEC_MODE_E        enMode;          /**<Mode of a video decoder*/ /**<CNcomment: 视频解码器模式模式*/
+    HI_UNF_VCODEC_TYPE_E        enType;          /**<Video encoding type*/ /**<CNcomment: ????????????*/
+    HI_UNF_VCODEC_EXTATTR_U     unExtAttr;       /**<Extra attributes related to the video encoding type*/ /**<CNcomment: ??????????????????????????*/
+    HI_UNF_VCODEC_MODE_E        enMode;          /**<Mode of a video decoder*/ /**<CNcomment: ??????????????????*/
     HI_U32                      u32ErrCover;     /**<Error concealment threshold of the output frames of a video decoder. The value 0 indicates that no frames are output if an error occurs; the value 100 indicates that all frames are output no matter whether errors occur.*/
-                                                 /**<CNcomment: 视频解码器的输出帧错误隐藏门限，0:出现错误即不输出；100:不管错误比例全部输出*/
+                                                 /**<CNcomment: ????????????????????????????????0:??????????????????100:????????????????????*/
     HI_U32                      u32Priority;     /**<Priority of a video decoder. The value range is [1, HI_UNF_VCODEC_MAX_PRIORITY]. The value 0 is a reserved value. If you set the value to 0, no error message is displayed, but the value 1 is used automatically. The smaller the value, the lower the priority.*/
-                                                 /**<CNcomment: 视频解码器优先级, 取值范围: 大于等于1，小于等于HI_UNF_VCODEC_MAX_PRIORITY, 0是保留值，配置为0不会报错，但是会自动取值为1,数值越小优先级越低 */
+                                                 /**<CNcomment: ????????????????, ????????: ????????1??????????HI_UNF_VCODEC_MAX_PRIORITY, 0????????????????0??????????????????????????1,?????????????????? */
     HI_BOOL                     bOrderOutput;    /**<Whether the videos are output by the decoding sequence. You are advised to set this parameter to HI_TRUE in VP mode, and HI_FALSE in other modes.*/
-                                                 /**<CNcomment: 是否按解码序输出，VP模式下推荐配置为HI_TRUE, 一般模式下配置为HI_FALSE */
+                                                 /**<CNcomment: ??????????????????VP????????????????HI_TRUE, ????????????????HI_FALSE */
     HI_S32                      s32CtrlOptions;  /**<The value is HI_UNF_VCODEC_CTRL_OPTION_E, or the 'or' value of several enum type*/
-                                                 /**<CNcomment: 取值为HI_UNF_VCODEC_CTRL_OPTION_E，或者几个枚举的'或'  */
+                                                 /**<CNcomment: ??????HI_UNF_VCODEC_CTRL_OPTION_E????????????????'??'  */
     HI_VOID*                    pCodecContext;   /**<Private codec context */
 }HI_UNF_VCODEC_ATTR_S;
 
 
 /**Defines the sub stream protocol.*/
-/**CNcomment: 定义码流的协议分支枚举*/
+/**CNcomment: ??????????????????????*/
 typedef enum hiUNF_VIDEO_SUB_STANDARD_E
 {
-    HI_UNF_VIDEO_SUB_STANDARD_UNKNOWN,       /**<Unknown*/ /**<CNcomment: 未知协议分支*/
-    HI_UNF_VIDEO_SUB_STANDARD_MPEG2_MPEG1,   /**<The MPEG2 protocol family is compatible with MPEG1.*/ /**<CNcomment: MPEG2协议族可以兼容MPEG1 */
-    HI_UNF_VIDEO_SUB_STANDARD_MPEG4_SHV,     /**<The MPEG4 protocol family is compatible with SHV.*/ /**<CNcomment: MPEG4协议族可以兼容SHV*/
-    HI_UNF_VIDEO_SUB_STANDARD_MPEG4_XVID,    /**<The MPEG4 protocol family includes the sub protocol XVID.*/ /**<CNcomment: MPEG4协议包含XVID分支*/
-    HI_UNF_VIDEO_SUB_STANDARD_MPEG4_DIVX,    /**<The MPEG4 protocol family includes the sub protocol DIVX.*/ /**<CNcomment: MPEG4协议包含DIVX分支*/
+    HI_UNF_VIDEO_SUB_STANDARD_UNKNOWN,       /**<Unknown*/ /**<CNcomment: ????????????*/
+    HI_UNF_VIDEO_SUB_STANDARD_MPEG2_MPEG1,   /**<The MPEG2 protocol family is compatible with MPEG1.*/ /**<CNcomment: MPEG2??????????????MPEG1 */
+    HI_UNF_VIDEO_SUB_STANDARD_MPEG4_SHV,     /**<The MPEG4 protocol family is compatible with SHV.*/ /**<CNcomment: MPEG4??????????????SHV*/
+    HI_UNF_VIDEO_SUB_STANDARD_MPEG4_XVID,    /**<The MPEG4 protocol family includes the sub protocol XVID.*/ /**<CNcomment: MPEG4????????XVID????*/
+    HI_UNF_VIDEO_SUB_STANDARD_MPEG4_DIVX,    /**<The MPEG4 protocol family includes the sub protocol DIVX.*/ /**<CNcomment: MPEG4????????DIVX????*/
 
     HI_UNF_VIDEO_SUB_STANDARD_BUTT
 }HI_UNF_VIDEO_SUB_STANDARD_E;
 
 /**Defines the frame rate of the video stream.*/
-/**CNcomment: 定义视频码流帧率结构*/
+/**CNcomment: ????????????????????*/
 typedef struct hiUNF_VCODEC_FRMRATE_S
 {
-    HI_U32 u32fpsInteger;     /**<Integral part of the frame rate (in frame/s)*/ /**<CNcomment: 码流的帧率的整数部分, fps */
+    HI_U32 u32fpsInteger;     /**<Integral part of the frame rate (in frame/s)*/ /**<CNcomment: ????????????????????, fps */
     HI_U32 u32fpsDecimal;     /**<Fractional part (calculated to three decimal places) of the frame rate (in frame/s)*/
-                              /**<CNcomment: 码流的帧率的小数部分（保留3位）, fps */
+                              /**<CNcomment: ??????????????????????????3????, fps */
 }HI_UNF_VCODEC_FRMRATE_S;
 
 /**Defines the information about video streams.*/
-/**CNcomment: 定义视频码流信息结构*/
+/**CNcomment: ????????????????????*/
 typedef struct hiUNF_VCODEC_STREAMINFO_S
 {
-    HI_UNF_VCODEC_TYPE_E        enVCodecType;   /**<Stream type*/ /**<CNcomment: 码流类型 */
-    HI_UNF_VIDEO_SUB_STANDARD_E enSubStandard;  /**<Sub stream protocol*/ /**<CNcomment: 码流的协议分支 */
-    HI_U32                      u32SubVersion;  /**<Version of the sub stream protocol*/ /**<CNcomment: 码流子协议版本号 */
-    HI_U32                      u32Profile;     /**<Stream profile*/ /**<CNcomment: 码流的profile */
-    HI_U32                      u32Level;       /**<Stream level*/ /**<CNcomment: 码流的level */
-    HI_UNF_ENC_FMT_E            enDisplayNorm;  /**<Display norm (PAL or NTSC)*/ /**<CNcomment: 显示标准(P/N) */
-    HI_BOOL                     bProgressive;   /**<Sampling type (progressive or interlaced)*/ /**<CNcomment: 采样方式(逐行/隔行) */
-    HI_U32                      u32AspectWidth; /**<Output aspect ratio: width*/ /**<CNcomment: 输出宽高比之宽值 */
-    HI_U32                      u32AspectHeight;/**<Output aspect ratio: height*/ /**<CNcomment: 输出宽高比之高值 */
+    HI_UNF_VCODEC_TYPE_E        enVCodecType;   /**<Stream type*/ /**<CNcomment: ???????? */
+    HI_UNF_VIDEO_SUB_STANDARD_E enSubStandard;  /**<Sub stream protocol*/ /**<CNcomment: ?????????????? */
+    HI_U32                      u32SubVersion;  /**<Version of the sub stream protocol*/ /**<CNcomment: ???????????????? */
+    HI_U32                      u32Profile;     /**<Stream profile*/ /**<CNcomment: ??????profile */
+    HI_U32                      u32Level;       /**<Stream level*/ /**<CNcomment: ??????level */
+    HI_UNF_ENC_FMT_E            enDisplayNorm;  /**<Display norm (PAL or NTSC)*/ /**<CNcomment: ????????(P/N) */
+    HI_BOOL                     bProgressive;   /**<Sampling type (progressive or interlaced)*/ /**<CNcomment: ????????(????/????) */
+    HI_U32                      u32AspectWidth; /**<Output aspect ratio: width*/ /**<CNcomment: ???????????????? */
+    HI_U32                      u32AspectHeight;/**<Output aspect ratio: height*/ /**<CNcomment: ???????????????? */
 
-    HI_U32 u32bps;            /**<Bit rate, in kbit/s*/ /**<CNcomment: 码流的码率, Kbps */
-    HI_U32 u32fpsInteger;     /**<Integral part of the frame rate (in frame/s)*/ /**<CNcomment: 码流的帧率的整数部分, fps */
-    HI_U32 u32fpsDecimal;     /**<Fractional part (calculated to three decimal places) of the frame rate (in frame/s)*/ /**<CNcomment: 码流的帧率的小数部分（保留3位）, fps */
-    HI_U32 u32Width;          /**<Width of the decoded picture*/ /**<CNcomment: 解码图像宽 */
-    HI_U32 u32Height;         /**<Height of the decoded picture*/ /**<CNcomment: 解码图像高 */
-    HI_U32 u32DisplayWidth;   /**<Width of the displayed picture*/ /**<CNcomment: 显示图像宽 */
-    HI_U32 u32DisplayHeight;  /**<Height of the displayed picture*/ /**<CNcomment: 显示图像高 */
+    HI_U32 u32bps;            /**<Bit rate, in kbit/s*/ /**<CNcomment: ??????????, Kbps */
+    HI_U32 u32fpsInteger;     /**<Integral part of the frame rate (in frame/s)*/ /**<CNcomment: ????????????????????, fps */
+    HI_U32 u32fpsDecimal;     /**<Fractional part (calculated to three decimal places) of the frame rate (in frame/s)*/ /**<CNcomment: ??????????????????????????3????, fps */
+    HI_U32 u32Width;          /**<Width of the decoded picture*/ /**<CNcomment: ?????????? */
+    HI_U32 u32Height;         /**<Height of the decoded picture*/ /**<CNcomment: ?????????? */
+    HI_U32 u32DisplayWidth;   /**<Width of the displayed picture*/ /**<CNcomment: ?????????? */
+    HI_U32 u32DisplayHeight;  /**<Height of the displayed picture*/ /**<CNcomment: ?????????? */
     HI_U32 u32DisplayCenterX; /**<Horizontal coordinate of the center of the displayed picture (the upper left point of the source picture serves as the coordinate origin)*/
-                              /**<CNcomment: 显示图像中心横坐标，以原始图像的左上角为坐标原点 */
+                              /**<CNcomment: ???????????????????????????????????????????????? */
     HI_U32 u32DisplayCenterY; /**<Vertical coordinate of the center of the displayed picture (the upper left point of the source picture serves as the coordinate origin)*/
-                              /**<CNcomment: 显示图像中心纵坐标，以原始图像的左上角为坐标原点 */
+                              /**<CNcomment: ???????????????????????????????????????????????? */
 }HI_UNF_VCODEC_STREAMINFO_S;
 
 
 /**Defines the types of the user data in the video information.*/
-/**CNcomment: 定义视频信息中的用户数据类型 */
+/**CNcomment: ???????????????????????????? */
 typedef enum hiHI_UNF_VIDEO_USERDATA_TYPE_E
 {
-    HI_UNF_VIDEO_USERDATA_UNKNOWN = 0,      /**<Unknown type*/ /**<CNcomment: 未知类型*/
-    HI_UNF_VIDEO_USERDATA_DVB1_CC = 0x1,    /**<Closed Caption Data*/ /**<CNcomment: 字幕数据*/
-    HI_UNF_VIDEO_USERDATA_DVB1_BAR = 0x2,   /**<Bar Data*/ /**<CNcomment: Bar数据*/
-    HI_UNF_VIDEO_USERDATA_AFD = 0x10000,    /**<Active Format Description*/ /**<CNcomment: 模式描述数据*/
+    HI_UNF_VIDEO_USERDATA_UNKNOWN = 0,      /**<Unknown type*/ /**<CNcomment: ????????*/
+    HI_UNF_VIDEO_USERDATA_DVB1_CC = 0x1,    /**<Closed Caption Data*/ /**<CNcomment: ????????*/
+    HI_UNF_VIDEO_USERDATA_DVB1_BAR = 0x2,   /**<Bar Data*/ /**<CNcomment: Bar????*/
+    HI_UNF_VIDEO_USERDATA_AFD = 0x10000,    /**<Active Format Description*/ /**<CNcomment: ????????????*/
     HI_UNF_VIDEO_USERDATA_BUTT
 }HI_UNF_VIDEO_USERDATA_TYPE_E;
 
 /**Defines the profile of video broadcasting.*/
-/**CNcomment: 定义视频广播的profile枚举*/
+/**CNcomment: ??????????????profile????*/
 typedef enum hiUNF_VIDEO_BROADCAST_PROFILE_E
 {
-    HI_UNF_VIDEO_BROADCAST_DVB,        /**<Digital video broadcasting (DVB)*/ /**<CNcomment: 数字视频广播DVB*/
-    HI_UNF_VIDEO_BROADCAST_DIRECTV,    /**<American live broadcast operator DirecTV*/ /**<CNcomment: 美国直播运营商DirecTV*/
-    HI_UNF_VIDEO_BROADCAST_ATSC,       /**<Advanced Television Systems Committee (ATSC)*/ /**<CNcomment: 先进电视制式委员会ATSC（Advanced Television Systems Committee）*/
-    HI_UNF_VIDEO_BROADCAST_DVD,        /**<Digital video disc (DVD)*/ /**<CNcomment: 数字视频光盘*/
-    HI_UNF_VIDEO_BROADCAST_ARIB,       /**<Association of Radio Industries and Businesses (ARIB)*/ /**<CNcomment: 无线电工业及商业协会规格*/
+    HI_UNF_VIDEO_BROADCAST_DVB,        /**<Digital video broadcasting (DVB)*/ /**<CNcomment: ????????????DVB*/
+    HI_UNF_VIDEO_BROADCAST_DIRECTV,    /**<American live broadcast operator DirecTV*/ /**<CNcomment: ??????????????DirecTV*/
+    HI_UNF_VIDEO_BROADCAST_ATSC,       /**<Advanced Television Systems Committee (ATSC)*/ /**<CNcomment: ??????????????????ATSC??Advanced Television Systems Committee??*/
+    HI_UNF_VIDEO_BROADCAST_DVD,        /**<Digital video disc (DVD)*/ /**<CNcomment: ????????????*/
+    HI_UNF_VIDEO_BROADCAST_ARIB,       /**<Association of Radio Industries and Businesses (ARIB)*/ /**<CNcomment: ????????????????????????*/
     HI_UNF_VIDEO_BROADCAST_BUTT
 }HI_UNF_VIDEO_BROADCAST_PROFILE_E;
 
 /**Defines the position of the user data in the video information.*/
-/**CNcomment: 定义视频信息中用户数据的位置枚举*/
+/**CNcomment: ????????????????????????????????*/
 typedef enum hiUNF_VIDEO_USER_DATA_POSITION_E
 {
-    HI_UNF_VIDEO_USER_DATA_POSITION_UNKNOWN,       /**<Unknown*/ /**<CNcomment: 未知位置*/
-    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG2_SEQ,     /**<The data is parsed from sequences under the MPEG2 protocol.*/ /**<CNcomment: MPEG2协议下，从序列中解出*/
-    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG2_GOP,     /**<The data is parsed from the group of pictures (GOP) under the MPEG2 protocol.*/ /**<CNcomment: MPEG2协议下，从GOP（Group Of Pictures）中解出*/
-    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG2_FRAME,   /**<The data is parsed from picture frames under the MPEG2 protocol.*/ /**<CNcomment: MPEG2协议下，从图像帧中解出*/
-    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG4_VSOS,    /**<The data is parsed from the sequences of visible objects under the MPEG4 protocol.*/ /**<CNcomment: MPEG4协议下，从可视对像序列中解出*/
-    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG4_VSO,     /**<The data is parsed from visible objects under the MPEG4 protocol.*/ /**<CNcomment: MPEG4协议下，从可视对像中解出*/
-    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG4_VOL,     /**<The data is parsed from the video object layer under the MPEG4 protocol.*/ /**<CNcomment: MPEG4协议下，从视频对像层中解出*/
-    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG4_GOP,     /**<The data is parsed from the GOP under the MPEG4 protocol.*/ /**<CNcomment: MPEG4协议下，从GOP中解出*/
-    HI_UNF_VIDEO_USER_DATA_POSITION_H264_REG,      /**<The data is parsed from the user_data_regestered_itu_t_t35() syntax under the H.264 protocol.*/ /**<CNcomment: 从H.264协议的user_data_regestered_itu_t_t35()语法中解出*/
-    HI_UNF_VIDEO_USER_DATA_POSITION_H264_UNREG,    /**<The data is parsed from the user_data_unregestered() syntax under the H.264 protocol.*/ /**<CNcomment: 从H.264协议的user_data_unregestered()语法中解出*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_UNKNOWN,       /**<Unknown*/ /**<CNcomment: ????????*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG2_SEQ,     /**<The data is parsed from sequences under the MPEG2 protocol.*/ /**<CNcomment: MPEG2????????????????????*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG2_GOP,     /**<The data is parsed from the group of pictures (GOP) under the MPEG2 protocol.*/ /**<CNcomment: MPEG2??????????GOP??Group Of Pictures????????*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG2_FRAME,   /**<The data is parsed from picture frames under the MPEG2 protocol.*/ /**<CNcomment: MPEG2??????????????????????*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG4_VSOS,    /**<The data is parsed from the sequences of visible objects under the MPEG4 protocol.*/ /**<CNcomment: MPEG4????????????????????????????*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG4_VSO,     /**<The data is parsed from visible objects under the MPEG4 protocol.*/ /**<CNcomment: MPEG4????????????????????????*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG4_VOL,     /**<The data is parsed from the video object layer under the MPEG4 protocol.*/ /**<CNcomment: MPEG4??????????????????????????*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_MPEG4_GOP,     /**<The data is parsed from the GOP under the MPEG4 protocol.*/ /**<CNcomment: MPEG4??????????GOP??????*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_H264_REG,      /**<The data is parsed from the user_data_regestered_itu_t_t35() syntax under the H.264 protocol.*/ /**<CNcomment: ??H.264??????user_data_regestered_itu_t_t35()??????????*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_H264_UNREG,    /**<The data is parsed from the user_data_unregestered() syntax under the H.264 protocol.*/ /**<CNcomment: ??H.264??????user_data_unregestered()??????????*/
     HI_UNF_VIDEO_USER_DATA_POSITION_BUTT
 }HI_UNF_VIDEO_USER_DATA_POSITION_E;
 
 /**Defines the structure of the user data in the video information.*/
-/**CNcomment: 定义视频信息中的用户数据结构*/
+/**CNcomment: ????????????????????????????*/
 typedef struct hiUNF_VIDEO_USERDATA_S
 {
-    HI_UNF_VIDEO_BROADCAST_PROFILE_E   enBroadcastProfile;   /**<Broadcasting profile of the user data*/ /**<CNcomment: 用户数据的广播profile*/
-    HI_UNF_VIDEO_USER_DATA_POSITION_E  enPositionInStream;   /**<Position of the user data in video streams*/ /**<CNcomment: 用户数据在视频流中的位置*/
-    HI_U32                             u32Pts;               /**<PTS corresponding to the user data*/ /**<CNcomment: 用户数据对应的时间戳*/
-    HI_U32                             u32SeqCnt;            /**<Sequence ID of the user data*/ /**<CNcomment: 用户数据的前一序列数*/
-    HI_U32                             u32SeqFrameCnt;       /**<Frame number of the user data*/ /**<CNcomment: 用户数据的前一帧数*/
-    HI_U8                              *pu8Buffer;           /**<Initial address of the user data memory, output parameter*/ /**<CNcomment: 用户数据内存区的初始地址,输出参数*/
-    HI_U32                             u32Length;            /**<User data size (a multiple of 1 byte)*/ /**<CNcomment: 用户数据的大小，以1byte为单位*/
-    HI_BOOL                            bBufferOverflow;      /**<Indicate that whether the user data size exceeds the maximum size defined by MAX_USER_DATA_LEN.*/ /**<CNcomment: 标志用户数据的长度是否超过了MAX_USER_DATA_LEN定义的最大值*/
-    HI_BOOL                            bTopFieldFirst;       /**<Top field first flag*/ /**<CNcomment: 顶场优先标志*/
+    HI_UNF_VIDEO_BROADCAST_PROFILE_E   enBroadcastProfile;   /**<Broadcasting profile of the user data*/ /**<CNcomment: ??????????????profile*/
+    HI_UNF_VIDEO_USER_DATA_POSITION_E  enPositionInStream;   /**<Position of the user data in video streams*/ /**<CNcomment: ????????????????????????*/
+    HI_U32                             u32Pts;               /**<PTS corresponding to the user data*/ /**<CNcomment: ????????????????????*/
+    HI_U32                             u32SeqCnt;            /**<Sequence ID of the user data*/ /**<CNcomment: ????????????????????*/
+    HI_U32                             u32SeqFrameCnt;       /**<Frame number of the user data*/ /**<CNcomment: ??????????????????*/
+    HI_U8                              *pu8Buffer;           /**<Initial address of the user data memory, output parameter*/ /**<CNcomment: ????????????????????????,????????*/
+    HI_U32                             u32Length;            /**<User data size (a multiple of 1 byte)*/ /**<CNcomment: ??????????????????1byte??????*/
+    HI_BOOL                            bBufferOverflow;      /**<Indicate that whether the user data size exceeds the maximum size defined by MAX_USER_DATA_LEN.*/ /**<CNcomment: ????????????????????????????MAX_USER_DATA_LEN????????????*/
+    HI_BOOL                            bTopFieldFirst;       /**<Top field first flag*/ /**<CNcomment: ????????????*/
 }HI_UNF_VIDEO_USERDATA_S;
 
 /**Defines the parameters of format changing */
-/**CNcomment: 定义制式切换时的相关参数*/
+/**CNcomment: ????????????????????????*/
 typedef struct hiUNF_NORMCHANGE_PARAM_S
 {
-    HI_UNF_ENC_FMT_E            enNewFormat;            /**<New format*/ /**<CNcomment: 新的制式*/
-    HI_U32                      u32ImageWidth;          /**<Width of image*/ /**<CNcomment: 图像宽度*/
-    HI_U32                      u32ImageHeight;         /**<Height of image*/ /**<CNcomment: 图像高度*/
-    HI_BOOL                     bProgressive;           /**<Sampling type (progressive or interlaced)*/ /**<CNcomment: 采样方式(逐行/隔行) */
-    HI_U32                      u32FrameRate;           /**<Frame rate*//**<CNcomment:帧率*/
+    HI_UNF_ENC_FMT_E            enNewFormat;            /**<New format*/ /**<CNcomment: ????????*/
+    HI_U32                      u32ImageWidth;          /**<Width of image*/ /**<CNcomment: ????????*/
+    HI_U32                      u32ImageHeight;         /**<Height of image*/ /**<CNcomment: ????????*/
+    HI_BOOL                     bProgressive;           /**<Sampling type (progressive or interlaced)*/ /**<CNcomment: ????????(????/????) */
+    HI_U32                      u32FrameRate;           /**<Frame rate*//**<CNcomment:????*/
 }HI_UNF_NORMCHANGE_PARAM_S;
 
 /**Defines the video format.*/
-/**CNcomment: 定义视频格式枚举*/
+/**CNcomment: ????????????????*/
 typedef enum hiUNF_VIDEO_FORMAT_E
 {
     /* Semi-Planner */
-    HI_UNF_FORMAT_YUV_SEMIPLANAR_422,       /**<The YUV spatial sampling format is 4:2:2.*/ /**<CNcomment: YUV空间采样格式为4:2:2*/
-    HI_UNF_FORMAT_YUV_SEMIPLANAR_420,       /**<The YUV spatial sampling format is 4:2:0, V first.*/ /**<CNcomment: YUV空间采样格式为4:2:0，V在低位*/
+    HI_UNF_FORMAT_YUV_SEMIPLANAR_422,       /**<The YUV spatial sampling format is 4:2:2.*/ /**<CNcomment: YUV??????????????4:2:2*/
+    HI_UNF_FORMAT_YUV_SEMIPLANAR_420,       /**<The YUV spatial sampling format is 4:2:0, V first.*/ /**<CNcomment: YUV??????????????4:2:0??V??????*/
     HI_UNF_FORMAT_YUV_SEMIPLANAR_400,
     HI_UNF_FORMAT_YUV_SEMIPLANAR_411,
     HI_UNF_FORMAT_YUV_SEMIPLANAR_422_1X2,
     HI_UNF_FORMAT_YUV_SEMIPLANAR_444,
-    HI_UNF_FORMAT_YUV_SEMIPLANAR_420_UV,   /**<The YUV spatial sampling format is 4:2:0,U first.*/ /**<CNcomment: YUV空间采样格式为4:2:0, U在低位*/
+    HI_UNF_FORMAT_YUV_SEMIPLANAR_420_UV,   /**<The YUV spatial sampling format is 4:2:0,U first.*/ /**<CNcomment: YUV??????????????4:2:0, U??????*/
 
 
     /* Package */
-    HI_UNF_FORMAT_YUV_PACKAGE_UYVY,         /**<The YUV spatial sampling format is package, and the pixel arrangement sequence in the memory is UYVY.*/ /**<CNcomment: YUV空间采样格式为package,内存排列为UYVY*/
-    HI_UNF_FORMAT_YUV_PACKAGE_YUYV,         /**<The YUV spatial sampling format is package, and the pixel arrangement sequence in the memory is YUYV.*/ /**<CNcomment: YUV空间采样格式为package,内存排列为YUYV*/
-    HI_UNF_FORMAT_YUV_PACKAGE_YVYU,         /**<The YUV spatial sampling format is package, and the pixel arrangement sequence in the memory is YVYU.*/ /**<CNcomment: YUV空间采样格式为package,内存排列为YVYU*/
+    HI_UNF_FORMAT_YUV_PACKAGE_UYVY,         /**<The YUV spatial sampling format is package, and the pixel arrangement sequence in the memory is UYVY.*/ /**<CNcomment: YUV??????????????package,??????????UYVY*/
+    HI_UNF_FORMAT_YUV_PACKAGE_YUYV,         /**<The YUV spatial sampling format is package, and the pixel arrangement sequence in the memory is YUYV.*/ /**<CNcomment: YUV??????????????package,??????????YUYV*/
+    HI_UNF_FORMAT_YUV_PACKAGE_YVYU,         /**<The YUV spatial sampling format is package, and the pixel arrangement sequence in the memory is YVYU.*/ /**<CNcomment: YUV??????????????package,??????????YVYU*/
 
     /* Planner */
     HI_UNF_FORMAT_YUV_PLANAR_400,
@@ -485,32 +485,32 @@ typedef enum hiUNF_VIDEO_FORMAT_E
 }HI_UNF_VIDEO_FORMAT_E;
 
 /**Defines the type of the video frame.*/
-/**CNcomment: 定义视频帧的类型枚举*/
+/**CNcomment: ????????????????????*/
 typedef enum hiUNF_VIDEO_FRAME_TYPE_E
 {
-    HI_UNF_FRAME_TYPE_UNKNOWN,   /**<Unknown*/ /**<CNcomment: 未知的帧类型*/
-    HI_UNF_FRAME_TYPE_I,         /**<I frame*/ /**<CNcomment: I帧*/
-    HI_UNF_FRAME_TYPE_P,         /**<P frame*/ /**<CNcomment: P帧*/
-    HI_UNF_FRAME_TYPE_B,         /**<B frame*/ /**<CNcomment: B帧*/
+    HI_UNF_FRAME_TYPE_UNKNOWN,   /**<Unknown*/ /**<CNcomment: ????????????*/
+    HI_UNF_FRAME_TYPE_I,         /**<I frame*/ /**<CNcomment: I??*/
+    HI_UNF_FRAME_TYPE_P,         /**<P frame*/ /**<CNcomment: P??*/
+    HI_UNF_FRAME_TYPE_B,         /**<B frame*/ /**<CNcomment: B??*/
     HI_UNF_FRAME_TYPE_BUTT
 }HI_UNF_VIDEO_FRAME_TYPE_E;
 
 /**Defines the video frame/field mode.*/
-/**CNcomment: 定义视频帧场模式枚举*/
+/**CNcomment: ????????????????????*/
 typedef enum hiUNF_VIDEO_FIELD_MODE_E
 {
-    HI_UNF_VIDEO_FIELD_ALL,        /**<Frame mode*/ /**<CNcomment: 帧模式*/
-    HI_UNF_VIDEO_FIELD_TOP,        /**<Top field mode*/ /**<CNcomment: 顶场模式*/
-    HI_UNF_VIDEO_FIELD_BOTTOM,     /**<Bottom field mode*/ /**<CNcomment: 底场模式*/
+    HI_UNF_VIDEO_FIELD_ALL,        /**<Frame mode*/ /**<CNcomment: ??????*/
+    HI_UNF_VIDEO_FIELD_TOP,        /**<Top field mode*/ /**<CNcomment: ????????*/
+    HI_UNF_VIDEO_FIELD_BOTTOM,     /**<Bottom field mode*/ /**<CNcomment: ????????*/
     HI_UNF_VIDEO_FIELD_BUTT
 }HI_UNF_VIDEO_FIELD_MODE_E;
 
 
 typedef struct hiUNF_CAPTURE_MEM_MODE_S
 {
-    HI_U32              u32StartPhyAddr;        /**<start phy addr*/ /**<CNcomment: 起始物理地址*/
-    HI_U32              u32StartUserAddr;       /**<start user addr*/ /**<CNcomment: 起始用户地址*/
-    HI_U32              u32DataLen;             /**<len of databuf*/ /**<CNcomment: 数据区长度*/
+    HI_U32              u32StartPhyAddr;        /**<start phy addr*/ /**<CNcomment: ????????????*/
+    HI_U32              u32StartUserAddr;       /**<start user addr*/ /**<CNcomment: ????????????*/
+    HI_U32              u32DataLen;             /**<len of databuf*/ /**<CNcomment: ??????????*/
 }HI_UNF_CAPTURE_MEM_MODE_S;
 
 
@@ -526,40 +526,40 @@ typedef enum hiUNF_VIDEO_FRAME_PACKING_TYPE_E
 
 typedef struct hiUNF_VIDEO_FRAME_ADDR_S
 {
-    HI_U32             u32YAddr;    /**<Address of the Y component in the current frame*/ /**<CNcomment: 当前帧Y分量数据的地址*/
-    HI_U32             u32CAddr;    /**<Address of the C component in the current frame*/ /**<CNcomment: 当前帧C分量数据的地址*/
-    HI_U32             u32CrAddr;   /**<Address of the Cr component in the current frame*/ /**<CNcomment: 当前帧Cr分量数据的地址*/
+    HI_U32             u32YAddr;    /**<Address of the Y component in the current frame*/ /**<CNcomment: ??????Y??????????????*/
+    HI_U32             u32CAddr;    /**<Address of the C component in the current frame*/ /**<CNcomment: ??????C??????????????*/
+    HI_U32             u32CrAddr;   /**<Address of the Cr component in the current frame*/ /**<CNcomment: ??????Cr??????????????*/
 
-    HI_U32             u32YStride;  /**<Stride of the Y component*/ /**<CNcomment: Y分量数据的跨幅*/
-    HI_U32             u32CStride;  /**<Stride of the C component*/ /**<CNcomment: C分量数据的跨幅*/
-    HI_U32             u32CrStride; /**<Stride of the Cr component*/ /**<CNcomment: Cr分量数据的跨幅*/
+    HI_U32             u32YStride;  /**<Stride of the Y component*/ /**<CNcomment: Y??????????????*/
+    HI_U32             u32CStride;  /**<Stride of the C component*/ /**<CNcomment: C??????????????*/
+    HI_U32             u32CrStride; /**<Stride of the Cr component*/ /**<CNcomment: Cr??????????????*/
 }HI_UNF_VIDEO_FRAME_ADDR_S;
 
 typedef struct hiUNF_VIDEO_FRAME_INFO_S
 {
-    HI_U32                              u32FrameIndex;      /**<Frame index ID of a video sequence*/ /**<CNcomment: 视频序列中的帧索引号*/
+    HI_U32                              u32FrameIndex;      /**<Frame index ID of a video sequence*/ /**<CNcomment: ????????????????????*/
     HI_UNF_VIDEO_FRAME_ADDR_S           stVideoFrameAddr[2];
-    HI_U32                              u32Width;           /**<Width of the source picture*/ /**<CNcomment: 原始图像宽*/
-    HI_U32                              u32Height;          /**<Height of the source picture*/ /**<CNcomment: 原始图像高*/
-    HI_U32                              u32SrcPts;          /**<Original PTS of a video frame*/ /**<CNcomment: 视频帧的原始时间戳*/
-    HI_U32                              u32Pts;             /**<PTS of a video frame*/ /**<CNcomment: 视频帧的时间戳*/
+    HI_U32                              u32Width;           /**<Width of the source picture*/ /**<CNcomment: ??????????*/
+    HI_U32                              u32Height;          /**<Height of the source picture*/ /**<CNcomment: ??????????*/
+    HI_U32                              u32SrcPts;          /**<Original PTS of a video frame*/ /**<CNcomment: ??????????????????*/
+    HI_U32                              u32Pts;             /**<PTS of a video frame*/ /**<CNcomment: ??????????????*/
     HI_U32                              u32AspectWidth;
     HI_U32                              u32AspectHeight;
     HI_UNF_VCODEC_FRMRATE_S             stFrameRate;
 
-    HI_UNF_VIDEO_FORMAT_E               enVideoFormat;      /**<Video YUV format*/ /**<CNcomment: 视频YUV格式*/
-    HI_BOOL                             bProgressive;       /**<Sampling type (progressive or interlaced)*/ /**<CNcomment: 采样方式(逐行/隔行) */
-    HI_UNF_VIDEO_FIELD_MODE_E           enFieldMode;        /**<Frame or field encoding mode*/ /**<CNcomment: 帧或场编码模式*/
-    HI_BOOL                             bTopFieldFirst;     /**<Top field first flag*/ /**<CNcomment: 顶场优先标志*/
+    HI_UNF_VIDEO_FORMAT_E               enVideoFormat;      /**<Video YUV format*/ /**<CNcomment: ????YUV????*/
+    HI_BOOL                             bProgressive;       /**<Sampling type (progressive or interlaced)*/ /**<CNcomment: ????????(????/????) */
+    HI_UNF_VIDEO_FIELD_MODE_E           enFieldMode;        /**<Frame or field encoding mode*/ /**<CNcomment: ??????????????*/
+    HI_BOOL                             bTopFieldFirst;     /**<Top field first flag*/ /**<CNcomment: ????????????*/
     HI_UNF_VIDEO_FRAME_PACKING_TYPE_E   enFramePackingType; /**<3D frame packing type*/
     HI_U32                              u32Circumrotate;    /**<Need circumrotate, 1 need */
     HI_BOOL                             bVerticalMirror;
     HI_BOOL                             bHorizontalMirror;
-    HI_U32                              u32DisplayWidth;    /**<Width of the displayed picture*/ /**<CNcomment: 显示图像宽*/
-    HI_U32                              u32DisplayHeight;   /**<Height of the displayed picture*/ /**<CNcomment: 显示图像高*/
-    HI_U32                              u32DisplayCenterX;  /**<Horizontal coordinate of the center of the displayed picture (the upper left point of the source picture serves as the coordinate origin)*/ /**<CNcomment: 显示中心x坐标，原始图像左上角为坐标原点*/
-    HI_U32                              u32DisplayCenterY;  /**<Vertical coordinate of the center of the displayed picture (the upper left point of the source picture serves as the coordinate origin)*/ /**<CNcomment: 显示中心y坐标，原始图像左上角为坐标原点*/
-    HI_U32                              u32ErrorLevel;      /**<Error percentage of a decoded picture, ranging from 0% to 100%*/ /**<CNcomment: 一幅解码图像中的错误比例，取值为0～100*/
+    HI_U32                              u32DisplayWidth;    /**<Width of the displayed picture*/ /**<CNcomment: ??????????*/
+    HI_U32                              u32DisplayHeight;   /**<Height of the displayed picture*/ /**<CNcomment: ??????????*/
+    HI_U32                              u32DisplayCenterX;  /**<Horizontal coordinate of the center of the displayed picture (the upper left point of the source picture serves as the coordinate origin)*/ /**<CNcomment: ????????x??????????????????????????????*/
+    HI_U32                              u32DisplayCenterY;  /**<Vertical coordinate of the center of the displayed picture (the upper left point of the source picture serves as the coordinate origin)*/ /**<CNcomment: ????????y??????????????????????????????*/
+    HI_U32                              u32ErrorLevel;      /**<Error percentage of a decoded picture, ranging from 0% to 100%*/ /**<CNcomment: ????????????????????????????????0??100*/
     HI_U32                              u32Private[64];
 }HI_UNF_VIDEO_FRAME_INFO_S;
 
