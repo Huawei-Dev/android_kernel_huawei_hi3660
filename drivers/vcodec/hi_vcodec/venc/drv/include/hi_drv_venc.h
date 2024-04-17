@@ -87,11 +87,11 @@ enum venc_port_dir {
 };
 
 typedef struct venc_metadata_buf_s {
-	void  *bufferaddr;     //虚拟地址
+	void  *bufferaddr;     //????????????
     HI_U32 bufferaddr_Phy;
 	HI_U32 vir2phy_offset;   //kernel VirAddr - PhyAddr
 	HI_U32 buffer_size;    //buffer alloc size
-	HI_U32 offset_YC;    //YC分量的偏移
+	HI_U32 offset_YC;    //YC???????????????
     HI_U32 offset_YCr;   //YCr offset
 	HI_U32 offset;
 	HI_U32 data_len;      //filled len
@@ -105,7 +105,7 @@ typedef struct venc_user_buf_s {
 	HI_U64 kernelbufferaddr;	 //kernel VirAddr - PhyAddr
 
 	HI_U32 buffer_size;    //buffer alloc size
-	HI_U32 offset_YC;    //YC分量的偏移
+	HI_U32 offset_YC;    //YC???????????????
 	HI_U32 offset_YCr;   //YCr offset
 	HI_U32 offset;
 	HI_U32 data_len;      //filled len
@@ -140,8 +140,8 @@ typedef struct venc_user_buf_s {
 }venc_user_buf;
 
 typedef struct venc_msginfo_s {
-	HI_U32 status_code;          //记录操作的返回值(success/failure)
-	HI_U32 msgcode;              //自定义的上行消息返回值，定义在此处
+	HI_U32 status_code;          //????????????????????????(success/failure)
+	HI_U32 msgcode;              //???????????????????????????????????????????????????
 	venc_user_buf buf;     //
 	HI_U32 msgdatasize;
 }venc_msginfo;

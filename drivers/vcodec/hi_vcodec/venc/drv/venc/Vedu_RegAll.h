@@ -6,7 +6,7 @@
 // Version       : 2.0
 // Created       : 2014-10-28
 // Last Modified : 
-// Description   :  逻辑寄存器结构体
+// Description   :  ????????????????
 // Function List : 
 // History       : 
 // 1 Date        : 
@@ -2714,7 +2714,7 @@ typedef struct
 
 /*-------------- Curld  start 0x20620400---------------------*/ 
 /*-------------- Curld  end 0x206205FF---------------------*/ 
-/* Curld寄存器结构体   0x20620400  */
+/* Curld????????????   0x20620400  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -2875,7 +2875,7 @@ typedef union
 /*--------------Pme  end 0x20620600--------------------*/
 
 
-/* Pme寄存器结构体   0x20620600  */
+/* Pme????????????   0x20620600  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -3076,7 +3076,7 @@ typedef union
 /*--------------Refid  end 0x20620800--------------------*/  
 
 
-/* Refid寄存器结构体   0x20620800  */
+/* Refid????????????   0x20620800  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -3259,7 +3259,7 @@ typedef union
 /*--------------Ime end 0x20620a00--------------------*/  
 
 
-/* Ime寄存器结构体   0x20620a00  */
+/* Ime????????????   0x20620a00  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -4807,7 +4807,7 @@ typedef union
 /*--------------Mrg  end 0x20620e00--------------------*/  
 
 
-/* Mrg寄存器结构体   0x20620e00  */
+/* Mrg????????????   0x20620e00  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -4892,7 +4892,7 @@ typedef union
 /*--------------Fme  end 0x20621000--------------------*/  
 
 
-/* Fme寄存器结构体   0x20621000  */
+/* Fme????????????   0x20621000  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -5521,7 +5521,7 @@ typedef union
 /*--------------Intra  end 0x20621200--------------------*/  
 
 
-/* Intra寄存器结构体   0x20621200  */
+/* Intra????????????   0x20621200  */
 
 //==============================================================================
 /* Define the global struct */
@@ -5968,7 +5968,7 @@ typedef union
 
 /*--------------Pmv end 0x20621400--------------------*/  
 
-/* Pmv寄存器结构体   0x20621400  */
+/* Pmv????????????   0x20621400  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -6025,7 +6025,7 @@ typedef union
 /*--------------Tqitq   end 0x20621600--------------------*/ 
 
 
-/* Tqitq寄存器结构体   0x20621600  */
+/* Tqitq????????????   0x20621600  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -6553,7 +6553,7 @@ typedef union
 /*--------------Dblk    end  0x20621a00--------------------*/ 
 
 
-/* Dblk寄存器结构体   0x20621a00  */
+/* Dblk????????????   0x20621a00  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -6690,7 +6690,7 @@ typedef union
 /*--------------Pack    end  0x20621e00--------------------*/
 
 
-/* Pack寄存器结构体   0x20621e00  */
+/* Pack????????????   0x20621e00  */
 /* Define the global struct */
 typedef struct
 {
@@ -6765,7 +6765,7 @@ typedef union
 /*--------------Cabac    end  0x20622000--------------------*/
 
 
-/* Cabac寄存器结构体   0x20622000  */
+/* Cabac????????????   0x20622000  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -6914,12 +6914,12 @@ typedef union
 
 /*--------------nbi     end  0x20622600--------------------*/ 
 
-/* nbi寄存器结构体   0x20622600  */
+/* nbi????????????   0x20622600  */
 
 
 /*--------------RESERVED     start 0x20622800--------------------*/  
 /*--------------RESERVED     end  0x20622800--------------------*/  
-/* RESERVED保留 0x20622800  */
+/* RESERVED???? 0x20622800  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -6940,7 +6940,7 @@ typedef struct
 
 /*--------------Unvld       start 0x20623200--------------------*/ 
 /*--------------Unvld       end  0x20623200--------------------*/ 
-/* unvld  寄存器结构体   0x20622800  */
+/* unvld  ????????????   0x20622800  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -6956,7 +6956,7 @@ typedef struct
 /*--------------recst     start 0x20622a00--------------------*/  
 /*--------------recst     end  0x20622a00--------------------*/ 
 
-/* recst寄存器结构体   0x20622a00  */
+/* recst????????????   0x20622a00  */
 /* Define the union U_RECST_DDR_CROSS */
 typedef union
 {
@@ -7527,7 +7527,7 @@ typedef union
 
 /*--------------vlcst      end  0x20622c00--------------------*/
 
-/* vlcst 寄存器结构体   0x20622c00  */
+/* vlcst ????????????   0x20622c00  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -7683,7 +7683,7 @@ typedef union
 
 /*--------------vlc       end  0x20622e00--------------------*/  
 
-/* vlc  寄存器结构体   0x20622e00  */
+/* vlc  ????????????   0x20622e00  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -8481,7 +8481,7 @@ typedef union
 
 /*--------------Curpre       end  0x20623000--------------------*/ 
 
-/* Curpre  寄存器结构体   0x20623000  */
+/* Curpre  ????????????   0x20623000  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -8545,7 +8545,7 @@ typedef struct
 /*--------------Imeld       start 0x20623200--------------------*/ 
 /*--------------Imeld       end  0x20623200--------------------*/ 
 
-/* Imeld  寄存器结构体   0x20623200  */
+/* Imeld  ????????????   0x20623200  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -8761,7 +8761,7 @@ typedef union
 
 /*--------------Emar       end  0x20623400--------------------*/ 
 
-/* Emar  寄存器结构体   0x20623400  */
+/* Emar  ????????????   0x20623400  */
 //==============================================================================
 /* Define the global struct */
 typedef struct
@@ -14666,106 +14666,106 @@ typedef struct
 } S_axidfx_REGS_TYPE;
 typedef struct
 { 
-    /* Vcpi寄存器结构体   0x20620000  */
+    /* Vcpi????????????   0x20620000  */
     volatile S_vcpi_REGS_TYPE   VEDU_VCPI_REGS;
     
-    /* Vctrl寄存器结构体   0x20620200  */
+    /* Vctrl????????????   0x20620200  */
     volatile S_vctrl_REGS_TYPE  VEDU_VCTRL_REGS;
     
-    /* Curld寄存器结构体   0x20620400  */
+    /* Curld????????????   0x20620400  */
     volatile S_curld_REGS_TYPE  VEDU_CURID_REGS;
     
-    /* Pme寄存器结构体    0x20620600  */
+    /* Pme????????????    0x20620600  */
     volatile S_pme_REGS_TYPE  VEDU_PME_REGS;
     
-    /* Refid寄存器结构体   0x20620800  */
+    /* Refid????????????   0x20620800  */
     volatile S_refld_REGS_TYPE VEDU_REFID_REGS;
     
-    /* Ime寄存器结构体   0x20620a00  */
+    /* Ime????????????   0x20620a00  */
     volatile S_ime_REGS_TYPE VEDU_IME_REGS;
     
-    /* Qpg寄存器结构体   0x20620c00  */
+    /* Qpg????????????   0x20620c00  */
     volatile S_qpg_REGS_TYPE VEDU_QPG_REGS;
     
-    /* Mrg寄存器结构体   0x20620e00  */
+    /* Mrg????????????   0x20620e00  */
     volatile S_mrg_REGS_TYPE VEDU_MRG_REGS;
     
-    /* Fme寄存器结构体   0x20621000  */
+    /* Fme????????????   0x20621000  */
     volatile S_fme_REGS_TYPE VEDU_FME_REGS;
     
-    /* Intra寄存器结构体   0x20621200  */
+    /* Intra????????????   0x20621200  */
     volatile S_intra_REGS_TYPE VEDU_INTRA_REGS;
     
-    /* Pmv寄存器结构体   0x20621400  */
+    /* Pmv????????????   0x20621400  */
     volatile S_pmv_REGS_TYPE VEDU_PMV_REGS;
 
-    /* Tqitq寄存器结构体   0x20621600  */
+    /* Tqitq????????????   0x20621600  */
      volatile S_tqitq_REGS_TYPE VEDU_TQITQ_REGS;   
        
-    /* Sel寄存器结构体   0x20621800  */
+    /* Sel????????????   0x20621800  */
     volatile S_sel_REGS_TYPE  VEDU_SEL_REGS;   
           
-    /* Dblk寄存器结构体   0x20621a00  */
+    /* Dblk????????????   0x20621a00  */
     volatile S_dblk_REGS_TYPE  VEDU_DBLK_REGS;   
      
-    /* Sao寄存器结构体   0x20621c00  */
+    /* Sao????????????   0x20621c00  */
     volatile S_sao_REGS_TYPE  VEDU_SAO_REGS; 
     
-    /* Pack寄存器结构体   0x20621e00  */
+    /* Pack????????????   0x20621e00  */
     volatile S_pack_REGS_TYPE  VEDU_PACK_REGS;     
       
-    /* Cabac寄存器结构体   0x20622000  */
+    /* Cabac????????????   0x20622000  */
     volatile S_cabac_REGS_TYPE  VEDU_CABAC_REGS;     
 
-    /* Pmeld寄存器结构体   0x20622200  */
+    /* Pmeld????????????   0x20622200  */
     volatile S_pmeld_REGS_TYPE  VEDU_PMEID_REGS;  
    
-    /* Pmest寄存器结构体   0x20622400  */ 
+    /* Pmest????????????   0x20622400  */ 
     volatile S_pmest_REGS_TYPE  VEDU_PMEST_REGS;
     
-    /* nbi寄存器结构体   0x20622600  */
+    /* nbi????????????   0x20622600  */
     volatile S_nbi_REGS_TYPE  VEDU_NBI_REGS;
     
-    /* unvld寄存器结构体   0x20622800  */
+    /* unvld????????????   0x20622800  */
     volatile S_unvld_REGS_TYPE  VEDU_UNVLD_REGS;
   
-    /* recst寄存器结构体   0x20622a00  */
+    /* recst????????????   0x20622a00  */
     volatile S_recst_REGS_TYPE  VEDU_RECST_REGS;
      
-    /* vlcst 寄存器结构体   0x20622c00  */
+    /* vlcst ????????????   0x20622c00  */
     volatile S_vlcst_REGS_TYPE  VEDU_VLCST_REGS;
          
-    /* vlc  寄存器结构体   0x20622e00  */       
+    /* vlc  ????????????   0x20622e00  */       
     volatile S_vlc_REGS_TYPE  VEDU_VLC_REGS;
 
-    /* Curpre  寄存器结构体   0x20623000  */
+    /* Curpre  ????????????   0x20623000  */
     volatile S_curpre_REGS_TYPE  VEDU_CURPRE_REGS;
 
-    /* Imeld  寄存器结构体   0x20623200  */
+    /* Imeld  ????????????   0x20623200  */
     volatile S_imeld_REGS_TYPE  VEDU_IMEID_REGS;    
     
-    /* Emar  寄存器结构体   0x20623400  */
+    /* Emar  ????????????   0x20623400  */
     volatile S_emar_REGS_TYPE  VEDU_EMAR_REGS;
     
-    /* Comn0  寄存器结构体   0x20623600  */
+    /* Comn0  ????????????   0x20623600  */
     volatile  S_comn0_REGS_TYPE VEDU_COMN0_REGS;
     
-    /* Comn1  寄存器结构体   0x20623800  */
+    /* Comn1  ????????????   0x20623800  */
     volatile  S_comn1_REGS_TYPE VEDU_COMN1_REGS;
     
-    /* Comn2  寄存器结构体   0x20623a00  */
+    /* Comn2  ????????????   0x20623a00  */
     volatile  S_comn2_REGS_TYPE  VEDU_COMN2_REGS;
 
-    /* Comn3  寄存器结构体   0x20623c00  */
+    /* Comn3  ????????????   0x20623c00  */
     volatile  S_comn3_REGS_TYPE  VEDU_COMN3_REGS;
     
-    /* mmu0  寄存器结构体   0x20623e00  */
+    /* mmu0  ????????????   0x20623e00  */
     volatile  S_mmu0_REGS_TYPE VEDU_MMU0_REGS;
 
-    /* mmu1  寄存器结构体   0x20624000  */
+    /* mmu1  ????????????   0x20624000  */
     volatile  S_mmu1_REGS_TYPE VEDU_MMU1_REGS;
 
-    /* axidfx  寄存器结构体   0x20624200  */
+    /* axidfx  ????????????   0x20624200  */
     volatile  S_axidfx_REGS_TYPE VEDU_AXIDFX_REGS;
 }S_HEVC_AVC_REGS_TYPE;
 

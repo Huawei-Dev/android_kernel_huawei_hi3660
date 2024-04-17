@@ -9,7 +9,7 @@
 extern HI_BOOL  g_DynamicFsEnable;
 extern HI_U32   g_ExtraDispNum;
 extern HI_U32   g_SegSize;         // (M)
-extern HI_BOOL  g_RawMoveEnable;   // 码流搬移使能标志，解决scd切割失败不释放码流的情况
+extern HI_BOOL  g_RawMoveEnable;   // ??????????????????????scd????????????????????????
 extern OMXVDEC_ENTRY *g_pOmxVdec;
 extern OMXVDEC_FUNC   g_OmxFunc;
 
@@ -1353,7 +1353,7 @@ HI_S32 decoder_release_inst(OMXVDEC_CHAN_CTX *pchan)
     if (ret != HI_SUCCESS)
     {
        OmxPrint(OMX_FATAL, "%s destroy vfmw failed\n", __func__);
-       //return ret;  /* 不退出，强制释放资源 */
+       //return ret;  /* ???????????????????? */
     }
 
     decoder_exit_vfmw(pchan);

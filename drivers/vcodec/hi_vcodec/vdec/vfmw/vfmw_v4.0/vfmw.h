@@ -38,7 +38,7 @@ extern "C" {
 #endif
 
 /***********************************************************************
-      VFMWµÄ°æ±¾ºÅ
+      VFMW????????
  ***********************************************************************/
 #define  VFMW_VERSION_NUM       (2016080400)
 
@@ -525,11 +525,11 @@ typedef struct
     SINT8            s8IsOmxPath;           /* specify for omx path */
     SINT8            s8SpecMode;            /* special mode switch, bit 0: CRC check*/
     UINT8            u8UVOrder;             /* 0: uv, 1: vu */
-    SINT8            s8DecOrderOutput ;     /* 0: output by display order£¬1:output by decode order */
+    SINT8            s8DecOrderOutput ;     /* 0: output by display order??1:output by decode order */
     SINT8            s8LowdlyEnable ;       /* lowdly enable */
     SINT8            s8VcmpEn ;             /* frame compress enable */   
     SINT8            s8WmEn ;               /* water marker enable */
-    DEC_MODE_E       s32DecMode;            /* decode mode£¬0£ºIPB£¬ 1£ºIP£¬ 2£ºI */
+    DEC_MODE_E       s32DecMode;            /* decode mode??0??IPB?? 1??IP?? 2??I */
     SINT32           eVidStd;               /* video compressing standard */
     SINT32           s32ChanPriority;       /* channel priority */
     SINT32           s32ChanErrThr;         /* channel error torlerance threshold. 0: zero torlerance; 100: display no matter how many error occured */
@@ -698,7 +698,7 @@ typedef struct
     UADDR   s32LumaPhyAddr;
     SINT32  s32LumaStride;
     UADDR   s32CbPhyAddr;    /* if semi-planar stand for the interlaced chrom addr; if planar stand for the Cb addr */
-    UADDR   s32CrPhyAddr;    /* if semi-planar do not care£¬if planar stand for the Cr addr */
+    UADDR   s32CrPhyAddr;    /* if semi-planar do not care??if planar stand for the Cr addr */
     SINT32  s32ChromStride;
     SINT32  s32ChromCrStride;
     UINT64  Pts;

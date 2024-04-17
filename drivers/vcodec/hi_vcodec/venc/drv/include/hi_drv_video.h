@@ -379,7 +379,7 @@ typedef struct hiDRV_VIDEO_FRAME_S
 typedef struct hiDRV_VIDEO_PRIVATE_S
 {
 	HI_BOOL bValid;
-	HI_U32 u32LastFlag;                  /*最后一帧标记*/
+	HI_U32 u32LastFlag;                  /*????????????*/
 	HI_DRV_COLOR_SPACE_E eColorSpace;    //?????????
 	HI_U32 u32BufferID;                    //?????????????ID
 	HI_U32 u32FrmCnt;

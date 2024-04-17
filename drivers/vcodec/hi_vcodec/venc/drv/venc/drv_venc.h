@@ -80,7 +80,7 @@ typedef struct tagOPTM_VENC_CHN_S
 	VeduEfl_SrcInfo_S     stSrcInfo;
 	VENC_PROC_WRITE_S     stProcWrite;
 
-	HI_U8 bhavecalc;//Md5º∆À„≈–∂œ”√µΩ
+	HI_U8 bhavecalc;//Md5????????????
 
 } OPTM_VENC_CHN_S;
 
