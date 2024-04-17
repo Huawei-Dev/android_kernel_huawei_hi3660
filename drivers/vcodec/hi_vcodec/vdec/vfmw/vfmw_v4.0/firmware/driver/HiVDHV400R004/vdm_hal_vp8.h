@@ -5,7 +5,7 @@
 #define __VDM_HAL_VP8_HERAER__
 
 
-//PIC 下行消息组
+//PIC ??????????
 typedef struct
 {
     USIGN cur_frame_type:                        1;
@@ -220,7 +220,7 @@ typedef struct
 } VP8_BITSTREAM_ADDR;
 
 
-//上行消息组
+//??????????
 typedef struct
 {
     USIGN error_mb_num:                         16;

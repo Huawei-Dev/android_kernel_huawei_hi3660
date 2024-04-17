@@ -77,7 +77,7 @@ extern "C" {
 #define REC_POS(Data)
 #endif
 
-/* MAX()/MIN(): 最大最小 */
+/* MAX()/MIN(): ???????? */
 #define MAX(a, b)         (( (a) < (b) ) ?  (b) : (a))
 #define MIN(a, b)         (( (a) > (b) ) ?  (b) : (a))
 #define ABS(x)            (( (x) <  0  ) ? -(x) : (x))

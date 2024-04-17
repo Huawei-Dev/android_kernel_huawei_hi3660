@@ -43,7 +43,7 @@ Nv0DVJKNzjCoYhavLSDl24fCwqYgiOgWzxpZ/6lwJDnTKsRY4a5PQylkmHJMtw==*/
       constants 
  ***********************************************************************/
 #define  SCD_SEG_BLANK_LEN      (128*1024)
-#define  MIN_BOTTOM_SEG_LEN     (1*1024) //SCD_SEG_BLANK_LEN  //128K太大了吧，这么多码流拷贝一旦发生会耗时很长，给互斥实现带来麻烦
+#define  MIN_BOTTOM_SEG_LEN     (1*1024) //SCD_SEG_BLANK_LEN  //128K??????????????????????????????????????????????????????????????
 #define  SCD_AVS_SEG_BLANK_LEN  (1024*1024)
 #define  MIN_BOTTOM_AVS_SEG_LEN (1023*1024)
 #define  SM_MAX_SEG_BUF_SIZE    (2*1024*1024)
@@ -53,10 +53,10 @@ Nv0DVJKNzjCoYhavLSDl24fCwqYgiOgWzxpZ/6lwJDnTKsRY4a5PQylkmHJMtw==*/
 #define  VFMW_FALSE             (1)
 
 // debug message print control
-#define  DEFAULT_PRINT_ENABLE   (0x0)          // 默认 关闭
-#define  DEFAULT_PRINT_DEVICE   (DEV_SCREEN)   // 默认 'DEV_SCREEN'，即打印到屏幕
+#define  DEFAULT_PRINT_ENABLE   (0x0)          // ???? ????
+#define  DEFAULT_PRINT_DEVICE   (DEV_SCREEN)   // ???? 'DEV_SCREEN'??????????????
 
-#define  MAX_USERDATA_NUM       (4)            // 最多支持4个，需保持与IMAGE结构体对应
+#define  MAX_USERDATA_NUM       (4)            // ????????4????????????IMAGE??????????
 
 /***********************************************************************
       enum  
@@ -71,68 +71,68 @@ typedef enum
 
 typedef enum
 {
-    PRN_FATAL = 0,       // 0.  致命异常（fatal error），比如未知异常
-    PRN_ERROR,           // 1.  一般异常（error），比如语法错误
-    PRN_CTRL,            // 2.  控制信息, 比如状态灯，内部状态机跳转信息等
-    PRN_VDMREG,          // 3.  VDM寄存器，包括控制寄存器、状态寄存器
+    PRN_FATAL = 0,       // 0.  ??????????fatal error????????????????
+    PRN_ERROR,           // 1.  ??????????error????????????????
+    PRN_CTRL,            // 2.  ????????, ????????????????????????????????
+    PRN_VDMREG,          // 3.  VDM??????????????????????????????????
 
-    PRN_DNMSG,           // 4.  解码下行消息，各消息字的值打印
-    PRN_RPMSG,           // 5.  修补消息，修补消息各个消息字
-    PRN_UPMSG,           // 6.  上行消息，上行消息各个消息字
-    PRN_STREAM,          // 7.  码流信息，如每个码流包的信息（地址，长度等）
+    PRN_DNMSG,           // 4.  ??????????????????????????????
+    PRN_RPMSG,           // 5.  ????????????????????????????
+    PRN_UPMSG,           // 6.  ????????????????????????????
+    PRN_STREAM,          // 7.  ????????????????????????????????????????????
 
-    PRN_STR_HEAD,        // 8.  码流头字节，（前8字节，用于查找比对）
-    PRN_STR_TAIL,        // 9.  码流尾字节，（后8字节，用于查找比对）
-    PRN_STR_BODY,        // 10. 码流中部字节，（前后8字节之外的码流）
-    PRN_IMAGE,           // 11. 解码图像信息（图像的id，地址，属性等）
+    PRN_STR_HEAD,        // 8.  ????????????????8????????????????????
+    PRN_STR_TAIL,        // 9.  ????????????????8????????????????????
+    PRN_STR_BODY,        // 10. ????????????????????8????????????????
+    PRN_IMAGE,           // 11. ????????????????????id????????????????
 
-    PRN_QUEUE,           // 12. 解码图队列信息（队列的图像个数，位置等）
-    PRN_REF,             // 13. 参考图信息（H264打印LIST相关信息，MPEG打印参考图及其维护的信息）
-    PRN_DPB,             // 14. DPB类信息（与dpb相关的各种信息）
-    PRN_POC,             // 15. POC类信息（POC的解码和计算）
+    PRN_QUEUE,           // 12. ????????????????????????????????????????
+    PRN_REF,             // 13. ????????????H264????LIST??????????MPEG??????????????????????????
+    PRN_DPB,             // 14. DPB??????????dpb????????????????
+    PRN_POC,             // 15. POC????????POC??????????????
 
-    PRN_MARK_MMCO,       // 16. MARK & MMCO操作信息（MARK和MMCO操作的信息，可表现执行的过程）
-    PRN_SEQ,             // 17. 序列级重要语法信息，H264打印SPS，MPEG2打印sequence信息，MPEG4打印VOL及以上层信息
-    PRN_PIC,             // 18. 图像级重要语法信息，H264打印PPS，MPEG2打印picture，MPEG4打印VOP/SHVOP头
-    PRN_SLICE,           // 19. Slice级重要语法信息
+    PRN_MARK_MMCO,       // 16. MARK & MMCO??????????MARK??MMCO??????????????????????????????
+    PRN_SEQ,             // 17. ????????????????????H264????SPS??MPEG2????sequence??????MPEG4????VOL????????????
+    PRN_PIC,             // 18. ????????????????????H264????PPS??MPEG2????picture??MPEG4????VOP/SHVOP??
+    PRN_SLICE,           // 19. Slice??????????????
 
-    PRN_SEI,             // 20. SEI信息
-    PRN_SE,              // 21. 语法信息
-    PRN_DBG,             // 22. 调试信息
-    PRN_BLOCK,           // 23. 解码线程阻塞信息
+    PRN_SEI,             // 20. SEI????
+    PRN_SE,              // 21. ????????
+    PRN_DBG,             // 22. ????????
+    PRN_BLOCK,           // 23. ????????????????
 
-    PRN_SCD_REGMSG,      // 24. SCD寄存器及消息池信息
-    PRN_SCD_STREAM,      // 25. SCD码流信息
-    PRN_SCD_INFO,        // 26. 打印SCD一些运行状态的信息
-    PRN_CRC,             // 27. CRC计算值
+    PRN_SCD_REGMSG,      // 24. SCD??????????????????
+    PRN_SCD_STREAM,      // 25. SCD????????
+    PRN_SCD_INFO,        // 26. ????SCD??????????????????
+    PRN_CRC,             // 27. CRC??????
     
-	PRN_POST,            // 28. 打印后级及其驱动程序相关信息
-	PRN_PTS,             // 29. 打印与PTS处理相关的信息
-    PRN_DEC_MODE,        // 30. 解码模式切换信息
-    PRN_FS,              // 31. 动态帧存打印
+	PRN_POST,            // 28. ????????????????????????????
+	PRN_PTS,             // 29. ??????PTS??????????????
+    PRN_DEC_MODE,        // 30. ????????????????
+    PRN_FS,              // 31. ????????????
 	
-    PRN_ALWS = 32        // 32. 不受控打印
+    PRN_ALWS = 32        // 32. ??????????
 } PRINT_MSG_TYPE;
 
 /* state type */
 typedef enum
 {
-    STATE_RCV_RAW = 0,           //接收RAW码流
-    STATE_SCD_START,             //启动SCD
-    STATE_SCD_INTERRUPT,         //SCD中断
+    STATE_RCV_RAW = 0,           //????RAW????
+    STATE_SCD_START,             //????SCD
+    STATE_SCD_INTERRUPT,         //SCD????
 
-    STATE_DECSYNTAX_SEG,         //语法解析SEG码流
-    STATE_GENERATE_DECPARAM,     //生成解码参数
+    STATE_DECSYNTAX_SEG,         //????????SEG????
+    STATE_GENERATE_DECPARAM,     //????????????
 
-    STATE_VDH_START,             //启动VDH
-    STATE_VDH_INTERRUPT,         //VDH中断
-    STATE_VDH_REPAIR,            //VDH修补
-    STATE_1D_TO_QUEUE,           //1D图像输出到队列
+    STATE_VDH_START,             //????VDH
+    STATE_VDH_INTERRUPT,         //VDH????
+    STATE_VDH_REPAIR,            //VDH????
+    STATE_1D_TO_QUEUE,           //1D??????????????
 
-    STATE_2D_TO_QUEUE,           //2D图像输出到队列
+    STATE_2D_TO_QUEUE,           //2D??????????????
 
-    STATE_VO_RCV_IMG,            //VO读取图像
-    STATE_VO_REL_IMG             //VO释放图像
+    STATE_VO_RCV_IMG,            //VO????????
+    STATE_VO_REL_IMG             //VO????????
 } VFMW_STATE_TYPE_E;
 
 /***********************************************************************
@@ -143,12 +143,12 @@ typedef enum
    Struct 'STREAM_PARAM' defines the stream info format. */
 typedef struct
 {
-    UINT8*    VirAddr;    // 码流的虚拟地址
-    UADDR     PhyAddr;    // 码流的物理地址
-    SINT32    Length;     // 码流长度（字节数）
+    UINT8*    VirAddr;    // ??????????????
+    UADDR     PhyAddr;    // ??????????????
+    SINT32    Length;     // ??????????????????
 } STREAM_PARAM;
 
-/* 内存打印数据结构  */
+/* ????????????????  */
 typedef struct 
 {      
     SINT8*    buf_addr;
@@ -157,7 +157,7 @@ typedef struct
     UINT32    total_msg_num;
 } MEMPRINT;
 
-/* MPEG2/4的码流暂存缓冲 */
+/* MPEG2/4?????????????? */
 typedef struct
 {
 	UINT8*    buf_vir_addr;
@@ -167,28 +167,28 @@ typedef struct
 	SINT32    length;
 } STRM_LOCAL_BUF;
 
-/* VDM 驱动的信息汇总 */
+/* VDM ?????????????? */
 typedef struct
 {
 	SINT32    DecTaskState;
 } VDMCMN_DECTASK_INFO_S;
 
-/* 低延迟各模块时间统计信息 */
+/* ???????????????????????? */
 typedef struct
 {
-    SINT32    lowdly_enable;             /* 低延迟使能标志 */
-    SINT32    chan_id;                   /* 通道 ID */
-	SINT32    receive_raw;               /* 记录收到 RAW 包时间 */
-	SINT32    scd_start;                 /* SCD 启动时间 */
-	SINT32    scd_return;                /* SCD 中断返回 */
-	SINT32    scd_count;                 /* SCD 工作一次所消耗的时间 */
-	SINT32    vdh_start;                 /* VDH 启动时间 */
-	SINT32    vdh_return;                /* VDH 中断返回 */
-	SINT32    vdh_count;                 /* VDH 工作一次所消耗的时间 */
-	SINT32    vo_read_img;               /* VO 成功读走图像的时间 */
-	SINT32    raw_to_scd_return;         /* 从VFMW收到码流到解出一帧图像的时间, 只有按帧送码流时才较为准确 */
-	SINT32    raw_to_img;                /* 从VFMW收到码流到解出一帧图像的时间, 只有按帧送码流时才较为准确 */
-	SINT32    raw_to_vo;                 /* 从VFMW收到码流到解出一帧图像的时间，只有按帧送码流时才较为准确 */
+    SINT32    lowdly_enable;             /* ?????????????? */
+    SINT32    chan_id;                   /* ???? ID */
+	SINT32    receive_raw;               /* ???????? RAW ?????? */
+	SINT32    scd_start;                 /* SCD ???????? */
+	SINT32    scd_return;                /* SCD ???????? */
+	SINT32    scd_count;                 /* SCD ???????????????????? */
+	SINT32    vdh_start;                 /* VDH ???????? */
+	SINT32    vdh_return;                /* VDH ???????? */
+	SINT32    vdh_count;                 /* VDH ???????????????????? */
+	SINT32    vo_read_img;               /* VO ?????????????????? */
+	SINT32    raw_to_scd_return;         /* ??VFMW????????????????????????????, ?????????????????????????? */
+	SINT32    raw_to_img;                /* ??VFMW????????????????????????????, ?????????????????????????? */
+	SINT32    raw_to_vo;                 /* ??VFMW???????????????????????????????????????????????????????? */
 	SINT32    OneTimeFlag;
 }LOWDLY_INFO_S;
 
@@ -220,7 +220,7 @@ extern  EXT_FN_EVENT_CALLBACK  g_event_report;
 /***********************************************************************
       macro 
  ***********************************************************************/
-//注意:有很多函数前面对空指针的判断就可以去掉了
+//????:????????????????????????????????????????
 //add for check null point parament
 #define CHECK_NULL_PTR_ReturnValue(parPoint,ReturnValue)                        \
     do                                                  \
@@ -243,9 +243,9 @@ extern  EXT_FN_EVENT_CALLBACK  g_event_report;
     }while(0)
 //end
 
-/*********************** 发送消息的宏封装 *************************/
+/*********************** ???????????????? *************************/
 
-/* type=1	图像的显示区域发生了变化 */
+/* type=1	???????????????????????? */
 #define REPORT_DISP_AREA_CHANGE(chan_id,w,h,center_x,center_y)                  \
 do{                                                         \
     if( NULL != g_event_report )                            \
@@ -259,7 +259,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=2, 图像宽高发生了变化 */
+/* type=2, ?????????????????? */
 #define REPORT_IMGSIZE_CHANGE( chan_id, oldw, oldh, neww, newh )	            \
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -273,7 +273,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=3, 帧率发生了变化 */
+/* type=3, ?????????????? */
 #define REPORT_FRMRATE_CHANGE( chan_id, newfr )    		    \
 do{                                                      	\
     if( NULL != g_event_report )                 		    \
@@ -284,7 +284,7 @@ do{                                                      	\
     }                                                       \
 }while(0)
 
-/* type=4, 图像的逐行/隔行信息变化，无参数 */
+/* type=4, ??????????/???????????????????? */
 #define REPORT_SCAN_CHANGE( chan_id, newscan ) 			    \
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -295,7 +295,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=5, 有一帧图像进入队列 */
+/* type=5, ?????????????????? */
 #define REPORT_IMGRDY( chan_id )            		        \
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -304,7 +304,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=6, 发现了user data */
+/* type=6, ??????user data */
 #define REPORT_USRDAT( chan_id, p_usrdat )              	\
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -313,7 +313,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=7  发现宽高比发生变化 */
+/* type=7  ?????????????????? */
 #define REPORT_ASPR_CHANGE( chan_id, oldasp, newasp )  	    \
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -325,7 +325,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=8  即将输出一个尺寸与之前不同的帧 */
+/* type=8  ?????????????????????????????? */
 #define REPORT_OUTPUT_IMG_SIZE_CHANGE( chan_id, oldw, oldh, neww, newh )	    \
     do{                                                     \
         if( NULL != g_event_report )                        \
@@ -340,7 +340,7 @@ do{                                                         \
     }while(0)
 
 
-/* type=20  发现一个I帧，准备解码此I帧 */
+/* type=20  ????????I??????????????I?? */
 #define REPORT_FIND_IFRAME( chan_id, stream_size )          \
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -352,7 +352,7 @@ do{                                                         \
 }while(0)
 
 /*--------------------------------------------------------------*/
-/* type=100 发现码流错误 p_args[3..0]：错误编号*/
+/* type=100 ???????????? p_args[3..0]??????????*/
 #define REPORT_STRMERR(chan_id, err_code )          		\
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -363,7 +363,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=101 VDM不响应 */
+/* type=101 VDM?????? */
 #define REPORT_VDMERR(chan_id)                           	\
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -372,7 +372,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=102 发现不支持的规格 无 */
+/* type=102 ???????????????? ?? */
 #define REPORT_UNSUPPORT(chan_id)                       	\
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -381,7 +381,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=103	码流的语法错误	无 */
+/* type=103	??????????????	?? */
 #define REPORT_SE_ERR(chan_id)                           	\
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -390,7 +390,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=104  图像错误率超过ref_error_thr	无 */
+/* type=104  ??????????????ref_error_thr	?? */
 #define REPORT_OVER_REFTHR(chan_id, CurrRate, RefRate)      \
 do{ 														\
 	if( NULL != g_event_report )							\
@@ -402,7 +402,7 @@ do{ 														\
 	}														\
 }while(0)
 
-/* type=105  图像错误率超过out_error_thr	无 */
+/* type=105  ??????????????out_error_thr	?? */
 #define REPORT_OVER_OUTTHR(chan_id)                     	\
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -411,7 +411,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=106  参考帧个数超过了设定值 p_args[3..0]：参考帧个数， p_args[7..4]：设定值 */
+/* type=106  ?????????????????????? p_args[3..0]?????????????? p_args[7..4]???????? */
 #define REPORT_REF_NUM_OVER(chan_id, RefNum, MaxRefNum)    	\
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -423,7 +423,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=107, 图像宽高超过阈值 */
+/* type=107, ???????????????? */
 #define REPORT_IMGSIZE_OVER( chan_id, w, h, maxw, maxh )	\
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -437,7 +437,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=108, slice个数超过阈值 */
+/* type=108, slice???????????? */
 #define REPORT_SLICE_NUM_OVER( chan_id, SliceNum, MaxSliceNum )	                \
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -449,7 +449,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=109, sps个数超过阈值 */
+/* type=109, sps???????????? */
 #define REPORT_SPS_NUM_OVER( chan_id, SpsNum, MaxSpsNum )	\
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -461,7 +461,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=110, pps个数超过阈值 */
+/* type=110, pps???????????? */
 #define REPORT_PPS_NUM_OVER( chan_id, PpsNum, MaxPpsNum )	\
 do{                                                         \
     if( NULL != g_event_report )                    		\
@@ -473,7 +473,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=111  发现I帧解码错误    无 */
+/* type=111  ????I??????????    ?? */
 #define REPORT_IFRAME_ERR(chan_id)                     	    \
 do{                                                         \
     if( NULL != g_event_report )                            \
@@ -482,7 +482,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=112  发现新的帧结束符    无 */
+/* type=112  ????????????????    ?? */
 #define REPORT_MEET_NEWFRM(chan_id)                     	\
 do{                                                         \
     if( NULL != g_event_report )                            \
@@ -491,7 +491,7 @@ do{                                                         \
     }                                                       \
 }while(0)
 
-/* type=113  码流解析错误*/
+/* type=113  ????????????*/
 #define REPORT_DECSYNTAX_ERR(chan_id)                     	\
 do{ 														\
     if( NULL != g_event_report )							\
@@ -500,7 +500,7 @@ do{ 														\
     }														\
 }while(0)
 
-/* type=114  错误率非零上报 */
+/* type=114  ?????????????? */
 #define REPORT_RATIO_NOTZERO(chan_id, ErrRatio)                                 \
 do{ 														\
     if( NULL != g_event_report )							\
@@ -511,7 +511,7 @@ do{ 														\
     }														\
 }while(0)
 
-/* type=115  最后一帧输出结果上报 */
+/* type=115  ???????????????????? */
 #define REPORT_LAST_FRAME(chan_id, flag)                    \
 do{ 														\
     if( NULL != g_event_report )							\
@@ -522,7 +522,7 @@ do{ 														\
     }														\
 }while(0)
 
-/* type=116  变分辨率重新分割帧存上报 */
+/* type=116  ???????????????????????? */
 #define REPORT_RESOLUTION_CHANGE(chan_id)                   \
 do{ 														\
     if( NULL != g_event_report )							\
@@ -531,7 +531,7 @@ do{ 														\
     }														\
 }while(0)
 	
-/* type=117  码流结束符上报 */
+/* type=117  ?????????????? */
 #define REPORT_STREAM_END_SYNTAX(chan_id)                   \
 do{ 														\
     if( NULL != g_event_report )							\
@@ -540,7 +540,7 @@ do{ 														\
 	}														\
 }while(0)
 
-/* type=118 码流信息上报划分帧存*/
+/* type=118 ????????????????????*/
 #define REPORT_NEED_ARRANGE(chan_id, FrmNum, FrmSize, PmvSize, DecWidth, DecHeight, Stride, DispWidth, DispHeight)                     	\
 do{ 														\
 	if( NULL != g_event_report )							\
@@ -558,7 +558,7 @@ do{ 														\
 	}														\
 }while(0)
     
-    /* type=119 发现不支持的规格 上报类型及数值 */
+    /* type=119 ???????????????? ?????????????? */
 #define REPORT_UNSUPPORT_SPEC(chan_id, unsupport_spec, data)                       \
 do{                                                         \
     if( NULL != g_event_report )                            \
@@ -570,7 +570,7 @@ do{                                                         \
     }                                                       \
 }while(0)
     
-/* type=120  变分辨率时输出假帧让后级还帧 */
+/* type=120  ???????????????????????????? */
 #define REPORT_FAKE_FRAME(chan_id)                     	    \
 do{                                                         \
     if( NULL != g_event_report )                            \
@@ -600,7 +600,7 @@ do{                                                                 \
 
 
 #ifdef HI_ADVCA_FUNCTION_RELEASE
-// 高安不能检测到字符串和printk
+// ??????????????????????printk
 #define dprint(type, fmt, arg...)  vfmw_dprint_nothing()
 #else
 

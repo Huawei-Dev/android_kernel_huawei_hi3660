@@ -18,7 +18,7 @@ extern "C" {
 #include "vfmw.h"
 #include "basedef.h"
 /************************************************************************/
-/*   常数                                                               */
+/*   ????                                                               */
 /************************************************************************/
 
 #define    MAX_PMV_SLOT_NUM               20
@@ -86,7 +86,7 @@ typedef struct
     UADDR     StreamPhyAddr[2];
     UINT32    StreamBitOffset[2];
     SINT32    StreamLength[2];
-    //STREAM_SEG_PACKET_S *pSegMan;//为Poliat版本写下行消息池的码流结构体
+    //STREAM_SEG_PACKET_S *pSegMan;//??Poliat????????????????????????????
 //    S_SEG_S   SSeg[512];
 //    SINT32    SegNum;
     AVS_SLCSTR_S SlcStr[MAX_AVS_SLICE_NUM];
@@ -99,8 +99,8 @@ typedef struct
     UADDR     CurPmvAddr;
     UADDR     ColPmvAddr;
 	
-	/* 显示图象输出地址 */
-    UADDR     rcn_address; //就是 DispFramePhyAddr
+	/* ???????????????? */
+    UADDR     rcn_address; //???? DispFramePhyAddr
     UADDR     pmv_colmb_addr;
     UINT32    PmvConfigTab[32];
 	UINT32    cur_wq_matrix[64];
@@ -350,10 +350,10 @@ typedef struct  tag_HEVC_DEC_SLICE_PARAM_S
 	UINT8   mvd_l1_zero_flag;
 	UINT32  listXsize[2];
 	UINT32  SliceType;
-	UINT32  slice_segment_address;//slice起始光栅扫描 地址
-	UINT32  SliceSegmentAddressX; //slice起始地址X
-	UINT32  SliceSegmentAddressY; //slice起始地址 Y
-	UINT32  SliceSegmentTileAddress;//slice 起始tile地址
+	UINT32  slice_segment_address;//slice???????????? ????
+	UINT32  SliceSegmentAddressX; //slice????????X
+	UINT32  SliceSegmentAddressY; //slice???????? Y
+	UINT32  SliceSegmentTileAddress;//slice ????tile????
 	SINT32  slice_cb_qp_offset;
 	SINT32  slice_cr_qp_offset;
 	SINT32  slice_tc_offset_div2;
@@ -367,8 +367,8 @@ typedef struct  tag_HEVC_DEC_SLICE_PARAM_S
 	UINT32  Idx2Apc[2][HEVC_APC_SIZE];
     UADDR   Apc2MvAddrTable[HEVC_APC_SIZE];
     UADDR   Apc2MvAddr;
-	SINT32  end_ctb_in_slice_raster;  // slice 结束光栅扫描地址 
-	SINT32  end_ctb_in_slice_tile;    // slice 结束tile 地址 
+	SINT32  end_ctb_in_slice_raster;  // slice ???????????????? 
+	SINT32  end_ctb_in_slice_tile;    // slice ????tile ???? 
     UADDR   next_slice_para_address;
 	UINT32  luma_log2_weight_denom;
 	UINT32  chroma_log2_weight_denom;
@@ -523,9 +523,9 @@ typedef H264_DEC_PIC_PARAM_S         MVC_DEC_PIC_PARAM_S;
 #endif
 /************************************************************/
 /***********************************************************/
-/* MPEG2协议的解码参数结构 */
+/* MPEG2?????????????????? */
 #ifdef VFMW_MPEG2_SUPPORT
-#define MP2_MAX_SLC_PARAM_NUM  1024        //final 1024. vfmw test 40000  //最大Slice个数
+#define MP2_MAX_SLC_PARAM_NUM  1024        //final 1024. vfmw test 40000  //????Slice????
 
 typedef struct
 {
@@ -556,7 +556,7 @@ typedef struct
     UINT8     NonIntraQuantTab[64];
     UINT8     IntraQuantTab[64];
 
-    /* 后处理设置 */
+    /* ?????????? */
     /* BEGIN: Added by y62639, 2010/9/13 */
     UINT8     EstmatedPicQp;
     /* END:   Added by y62639, 2010/9/13 */
@@ -568,7 +568,7 @@ typedef struct
     UINT32    StreamBitOffset[2];
     SINT32    StreamLength[2];
     UINT32    Mpeg1Flag;
-    /* 解码图象(及其参考图)的地址 */
+    /* ????????(??????????)?????? */
     UADDR     BwdRefPhyAddr;
     UADDR     FwdRefPhyAddr;
     UADDR     CurPicPhyAddr;
@@ -576,18 +576,18 @@ typedef struct
     UINT32    BwdRefIsFldSave;
     UINT32    FwdRefIsFldSave;
 
-    /* 后处理时域滤波图象地址 */
+    /* ?????????????????????? */
     UADDR     TfBwdPhyAddr;   
     UADDR     TfFwdPhyAddr;
     UADDR     TfCurPhyAddr;
-    /* 显示图象输出地址 */
+    /* ???????????????? */
     UADDR     DispFramePhyAddr; 
 #ifdef VFMW_MODULE_LOWDLY_SUPPORT
     UADDR     CurPicLineNumAddr;
 #endif
     UINT32    VahbStride;
     UADDR     PmvColmbPhyAddr;
-    //FRAME_POOL_S      *pFramePool;  /* 便于帧存地址与id之间互换 */
+    //FRAME_POOL_S      *pFramePool;  /* ??????????????id???????? */
 
     UINT32    AdjustQpDb;
     UINT32    AdjustQpDr;
@@ -600,8 +600,8 @@ typedef struct
 #endif
 /************************************************************/
 /***********************************************************/
-#define MAX_SLICE_NUM_IN_VOP  512   //所遇见的最大slice num 为475
-//码表初始化，在Cfg_Tab函数
+#define MAX_SLICE_NUM_IN_VOP  512   //????????????slice num ??475
+//??????????????Cfg_Tab????
 #ifdef VFMW_MPEG4_SUPPORT
 typedef struct 
 {
@@ -678,7 +678,7 @@ typedef struct
     UADDR       StreamBaseAddr;
     UINT32      StreamSegID;
     SINT32      StreamFirstIsLastFlag;
-    UADDR       StreamPhyAddr[2];         //g_BitsObj.phy_addr&(0xFFFFFFF0) 或 ptr_strm_para->StreamPack[1].PhyAddr &(0xFFFFFFF0)
+    UADDR       StreamPhyAddr[2];         //g_BitsObj.phy_addr&(0xFFFFFFF0) ?? ptr_strm_para->StreamPack[1].PhyAddr &(0xFFFFFFF0)
     UINT32      StreamBitOffset[2];
     SINT32      StreamLength[2]; 
     UINT32      Trb;                      //p_syntax_des->time_bp
@@ -696,11 +696,11 @@ typedef struct
     MP4_SLICE_INFO SlcPara[MAX_SLICE_NUM_IN_VOP];
     UINT32      SlcNum;
 
-    /* 后处理时域滤波图象地址 */
+    /* ?????????????????????? */
     UADDR     TfBwdPhyAddr;   
     UADDR     TfFwdPhyAddr;
     UADDR     TfCurPhyAddr;
-    /* 显示图象输出地址 */
+    /* ???????????????? */
     UADDR     DispFramePhyAddr; 
 
     UINT32    AdjustQpDb;
@@ -724,7 +724,7 @@ typedef struct
 /*******************************************************/
 /*******************************************************/
 #ifdef VFMW_REAL8_SUPPORT
-#define RV8_MAX_SLC_PARAM_NUM  256  //最大Slice个数
+#define RV8_MAX_SLC_PARAM_NUM  256  //????Slice????
 
 typedef struct
 {
@@ -739,7 +739,7 @@ typedef struct
     SINT32    last_mb_in_slice;
 } RV8_SLC_PARAM_S;
 
-/* REAL8协议的解码参数结构 */
+/* REAL8?????????????????? */
 typedef struct
 {
     UINT32    PicWidthInMb;
@@ -755,12 +755,12 @@ typedef struct
     UINT32    FstSlcGrp;
     UADDR     StreamBaseAddr;
     
-    /* 解码图象(及其参考图)的地址 */
+    /* ????????(??????????)?????? */
     UADDR     BwdRefPhyAddr;
     UADDR     FwdRefPhyAddr;
     UADDR     CurPicPhyAddr;
 
-    /* 显示图象输出地址 */
+    /* ???????????????? */
     UADDR     DispFramePhyAddr;
 
     UINT32    DDRStride;
@@ -769,13 +769,13 @@ typedef struct
 
     SINT32    Compress_en;
     RV8_SLC_PARAM_S   SliceParam[RV8_MAX_SLC_PARAM_NUM];
-    //FRAME_POOL_S      *pFramePool;  /* 便于帧存地址与id之间互换 */
+    //FRAME_POOL_S      *pFramePool;  /* ??????????????id???????? */
 } RV8_DEC_PARAM_S;
 #endif
 /**********************************************************/
 /**********************************************************/
 #ifdef VFMW_REAL9_SUPPORT
-#define RV9_MAX_SLC_PARAM_NUM  256  //最大Slice个数
+#define RV9_MAX_SLC_PARAM_NUM  256  //????Slice????
 
 typedef struct
 {
@@ -790,7 +790,7 @@ typedef struct
     SINT32    last_mb_in_slice;
 } RV9_SLC_PARAM_S;
 
-/* REAL9协议的解码参数结构 */
+/* REAL9?????????????????? */
 typedef struct
 {
     UINT8     PicCodingType;
@@ -807,12 +807,12 @@ typedef struct
     UINT32    FstSlcGrp;
     UADDR     StreamBaseAddr;
     
-    /* 解码图象(及其参考图)的地址 */
+    /* ????????(??????????)?????? */
     UADDR     BwdRefPhyAddr;
     UADDR     FwdRefPhyAddr;
     UADDR     CurPicPhyAddr;
 
-    /* 显示图象输出地址 */
+    /* ???????????????? */
     UADDR     DispFramePhyAddr;
 
     UINT32    DDRStride;
@@ -821,12 +821,12 @@ typedef struct
 
     RV9_SLC_PARAM_S   SliceParam[RV9_MAX_SLC_PARAM_NUM];
     SINT32    Compress_en;
-    //FRAME_POOL_S      *pFramePool;  /* 便于帧存地址与id之间互换 */
+    //FRAME_POOL_S      *pFramePool;  /* ??????????????id???????? */
 } RV9_DEC_PARAM_S;
 #endif
 
 #ifdef VFMW_DIVX3_SUPPORT
-/* DIVX3协议的解码参数结构 */
+/* DIVX3?????????????????? */
 typedef struct
 {
 
@@ -856,18 +856,18 @@ typedef struct
     UINT32    StreamBitOffset[2];
     SINT32    StreamLength[2];
 
-    /* 解码图象(及其参考图)的地址 */
+    /* ????????(??????????)?????? */
     UADDR     FwdRefPhyAddr;
     UADDR     CurPicPhyAddr;
 
-    /* 显示图象输出地址 */
+    /* ???????????????? */
     UADDR     DispFramePhyAddr;
 
     UINT32    DDRStride;
     UADDR     CurrPmvPhyAddr;
     UADDR     ColPmvPhyAddr;
 	SINT32    Compress_en;
-    //FRAME_POOL_S      *pFramePool;  /* 便于帧存地址与id之间互换 */
+    //FRAME_POOL_S      *pFramePool;  /* ??????????????id???????? */
 } DIVX3_DEC_PARAM_S;
 #endif
 
@@ -899,13 +899,13 @@ typedef struct
     SINT32 StreamID2;
 } VC1_SLCSTREAM_S;
 
-/* VC1协议的解码参数结构 */
+/* VC1?????????????????? */
 typedef struct
 {
     UINT8 picstructure;
     UINT8 IsSkpicCopy;
 	UINT8 NoBitplaneFlag;
-    //PIC下行消息
+    //PIC????????
     UINT8 ptype;
     UINT8 profile;
     UINT8 fcm;
@@ -970,7 +970,7 @@ typedef struct
     UINT8 *pIntensityConvertTab;   
     UINT8 ref_pic_type;
     UINT8 ff_apt_en;
-    //SLICE下行消息
+    //SLICE????????
     UINT8 SlcNum;
     
     UINT16 totalslicenum   ;
@@ -1000,14 +1000,14 @@ typedef struct
     UADDR  FIELDTX_ADDR;
     UADDR  FORWARDMB_ADDR;
 	
-    //PIC其他消息
+    //PIC????????
     UINT32 PicCnt;
 
-    //BITPLANE下行消息
+    //BITPLANE????????
     UINT32 BitPlaneNum;
     UINT32 vc1bitplane[VC1VFMW_MAX_PIC_MB];
     
-    //寄存器 
+    //?????? 
 
     //reg tmp
     UINT32  vdh_start;

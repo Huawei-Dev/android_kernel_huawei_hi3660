@@ -11,7 +11,7 @@ extern "C" {
 #define WAIT_NO_ISR_MAX 400
 
 /************************************************************************/
-/* BPD¼Ä´æÆ÷                                                            */
+/* BPD??????                                                            */
 /************************************************************************/
 //control registers
 #define    REG_BPD_START                      0x000
@@ -52,7 +52,7 @@ extern "C" {
 #define    REG_BPD_INT_STATE                  REG_BPD_NORM_INT_STATE
 #endif
 
-//¼Ä´æÆ÷×é
+//????????
 typedef struct
 {
     USIGN bpd_start:                            1;

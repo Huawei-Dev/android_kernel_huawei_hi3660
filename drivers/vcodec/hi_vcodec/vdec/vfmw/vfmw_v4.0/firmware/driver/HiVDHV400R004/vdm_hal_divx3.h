@@ -23,7 +23,7 @@
 #include "basedef.h"
 
 // REG & MSG START
-//寄存器组
+//????????
 typedef struct
 {
     USIGN dec_start:                            1;
@@ -123,7 +123,7 @@ typedef struct
     USIGN reserved:                             31;
 } DIVX3_RPR_START;
 
-//PIC 下行消息组
+//PIC ??????????
 typedef struct
 {
     USIGN pic_coding_type:                      1;
@@ -228,7 +228,7 @@ typedef struct
 } DIVX3_PICDNMSG_D63;
 
 
-//SLICE 下行消息组
+//SLICE ??????????
 typedef struct
 {
     USIGN slice_start_mbn:                      20;
@@ -247,7 +247,7 @@ typedef struct
 } DIVX3_SLCDNMSG_D63;
 
 
-//上行消息组
+//??????????
 typedef struct
 {
     USIGN error_mb_num:                         16;
@@ -275,7 +275,7 @@ typedef struct
     USIGN reserved:                             32;
 } DIVX3_UPMSG_D3;
 
-//PIC消息池结构体
+//PIC????????????
 typedef struct
 {
     DIVX3_PICDNMSG_D0  *d0;
@@ -301,7 +301,7 @@ typedef struct
 } DIVX3_PICDNMSG_S;
 
 
-//SLICE消息池结构体
+//SLICE????????????
 typedef struct
 {
     DIVX3_SLCDNMSG_D0  *d0;

@@ -358,7 +358,7 @@ typedef struct
     UINT32 HOldScaled;       
     UINT32 VOldScaled;       
     
-    UINT32 UsedDecMode;      //当前正在使用的解码模式(IPB, IP, I) 	
+    UINT32 UsedDecMode;      //??????????????????????(IPB, IP, I) 	
     UINT32 RefNum;
     UINT32 Imgbuf_allocated;
 

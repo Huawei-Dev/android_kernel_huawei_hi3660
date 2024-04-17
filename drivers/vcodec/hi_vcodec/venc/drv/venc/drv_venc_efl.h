@@ -28,14 +28,14 @@ extern "C" {
 #define VEDU_MAX_ENC_HEIGHT  (2160)
 #define VEDU_MIN_ENC_HEIGHT  (144)
 #define VEDU_REG_BASE_ADDR  (0xe8800000)
-#define VEDU_REG_LENGTH    (0x10000) //寄存器长度
+#define VEDU_REG_LENGTH    (0x10000) //??????????
 
 
 //rc start
-#define MAX_FRAME_RATE (240) //支持最大帧率
+#define MAX_FRAME_RATE (240) //????????????
 #define RC_MAX_INTRA_LOADSIZE (2)
 #define RC_MAX_INTER_LOADSIZE (5)
-#define I_RATIO_NUM (5) //I比重数
+#define I_RATIO_NUM (5) //I??????
 #define SMALL_MOVE_DET_THRESH     (60)
 #define LARGE_MOVE_DET_THRESH     (120)
 #define STATIC_FRAME_NUM          (3)
@@ -90,7 +90,7 @@ extern "C" {
 
 #define __VEDU_NEW_RC_ALG__
 
-//调试函数
+//????????
 #define pos()  printk("***### %s: L%d\n", __FUNCTION__, __LINE__ )
 
 #define SWAP(a,b) {HI_U32 c;c=a;a=b;b=c;}
@@ -282,8 +282,8 @@ typedef struct
 
 typedef struct
 {
-    // 记录venc获取帧存/码流次数(dequeue)，
-    // 以及释放帧存/码流次数(fill buffer done empty buffer done)
+    // ????venc????????/????????(dequeue)??
+    // ????????????/????????(fill buffer done empty buffer done)
     HI_U32 GetFrameNumTry;
     HI_U32 PutFrameNumTry;
     HI_U32 GetStreamNumTry;
@@ -299,7 +299,7 @@ typedef struct
     HI_U32 GetStreamNumInIsrTry;
     HI_U32 GetStreamNumInIsrOK;
 
-    // 记录omx送入帧存/码流次数(queue)，(fill this buffer ,empty this buffer)
+    // ????omx????????/????????(queue)??(fill this buffer ,empty this buffer)
     HI_U32 QueueFrameNumTry;
     HI_U32 QueueFrameNumOK;
     HI_U32 QueueStreamNumTry;
@@ -333,49 +333,49 @@ typedef struct
 
 	HI_U32 InputNum;
 	HI_U32 OutputNum;
-	HI_U32 EtbTime[5];//queueframe的时间 ms
-	HI_U32 FbdTime[5];//QueueStreamNumOK 的时间 ms
-	HI_U32 TotalEncTime;// 编码总时间 ( (FbdTime - EtbTime)* QueueStreamNumOK ) ms
+	HI_U32 EtbTime[5];//queueframe?????? ms
+	HI_U32 FbdTime[5];//QueueStreamNumOK ?????? ms
+	HI_U32 TotalEncTime;// ?????????? ( (FbdTime - EtbTime)* QueueStreamNumOK ) ms
 	HI_U32 AvgEncTime;
-	HI_U32 StartVencTime;//启动硬件编码时间 ms
-	HI_U32 EndVencTime;//硬件编码结束时间 ms
-	HI_U32 TotalIPVencTime;// 硬件编码总时间  ms
+	HI_U32 StartVencTime;//???????????????? ms
+	HI_U32 EndVencTime;//???????????????? ms
+	HI_U32 TotalIPVencTime;// ??????????????  ms
 	HI_U32 AvgIPVencTime; //ms
 
 	HI_U32 StartCfgRegTime;
 	HI_U32 EndCfgRegTime;
-	HI_U32 TotalCfgRegTime;// 硬件编码总时间  ms
+	HI_U32 TotalCfgRegTime;// ??????????????  ms
 	HI_U32 AvgCfgRegTime; //ms
 
 	HI_U32 StartEncSHTime;
 	HI_U32 EndEncSHTime;
-	HI_U32 TotalEncSHTime;// 硬件编码总时间  ms
+	HI_U32 TotalEncSHTime;// ??????????????  ms
 	HI_U32 AvgEncSHTime; //ms
 
 
 	HI_U32 StartEncRCTime;
 	HI_U32 EndEncRCTime;
-	HI_U32 TotalEncRCTime;// 硬件编码总时间  ms
+	HI_U32 TotalEncRCTime;// ??????????????  ms
 	HI_U32 AvgEncRCTime; //ms
 
 	HI_U32 StartEncSHRCTime;
 	HI_U32 EndEncSHRCTime;
-	HI_U32 TotalEncSHRCTime;// 硬件编码总时间  ms
+	HI_U32 TotalEncSHRCTime;// ??????????????  ms
 	HI_U32 AvgEncSHRCTime; //ms
 
 	HI_U32 StartCfgRegTime1;
 	HI_U32 EndCfgRegTime1;
-	HI_U32 TotalCfgRegTime1;// 硬件编码总时间  ms
+	HI_U32 TotalCfgRegTime1;// ??????????????  ms
 	HI_U32 AvgCfgRegTime1; //ms
 
 	HI_U32 StartCfgRegTime2;
 	HI_U32 EndCfgRegTime2;
-	HI_U32 TotalCfgRegTime2;// 硬件编码总时间  ms
+	HI_U32 TotalCfgRegTime2;// ??????????????  ms
 	HI_U32 AvgCfgRegTime2; //ms
 
 	HI_U32 StartISRTime;
 	HI_U32 EndISRTime;
-	HI_U32 TotalISRTime;// 硬件编码总时间  ms
+	HI_U32 TotalISRTime;// ??????????????  ms
 	HI_U32 AvgISRTime; //ms
 
     HI_U64 Total_VEDU_TIMER;
@@ -384,12 +384,12 @@ typedef struct
     HI_U64 Total_VEDU_IDLE_TIMER;
     HI_U64 Avg_VEDU_IDLE_TIMER;
 
-	HI_U32 TotalISRTime1;// 硬件编码总时间  ms
-	HI_U32 TotalISRTime2;// 硬件编码总时间  ms
-	HI_U32 TotalISRTime3;// 硬件编码总时间  ms
-	HI_U32 TotalISRTime4;// 硬件编码总时间  ms
-	HI_U32 TotalISRTime5;// 硬件编码总时间  ms
-	HI_U32 TotalISRTime6;// 硬件编码总时间  ms
+	HI_U32 TotalISRTime1;// ??????????????  ms
+	HI_U32 TotalISRTime2;// ??????????????  ms
+	HI_U32 TotalISRTime3;// ??????????????  ms
+	HI_U32 TotalISRTime4;// ??????????????  ms
+	HI_U32 TotalISRTime5;// ??????????????  ms
+	HI_U32 TotalISRTime6;// ??????????????  ms
 
 /*************************************************************************/
     HI_U32 BufFullNum;
@@ -846,7 +846,7 @@ typedef struct
 	HI_U32 vcpi_skin_en;
     HI_U32 vcpi_pblk_pre_mvy_thr;
     HI_U32 vcpi_pblk_pre_mvx_thr;
-	HI_U32 down_freq_en; //降频开启
+	HI_U32 down_freq_en; //????????
 //vctrl 0x20620200
     HI_U32 region7keep;
     HI_U32 region6keep;
@@ -2389,17 +2389,17 @@ typedef struct
     HI_U32 VEDU_SRC_VLength;
 
     /* stream buffer parameter */
-    HI_U64	VEDU_STRM_ADDR[16];// 16片码流地址
-    HI_U64	VEDU_STRM_BUFLEN[16]; // 16片码流最大长度
-    HI_U64	VEDU_SLICE_LENGTH[16];	// 16片码流真正长度
-    HI_U64	VEDU_SLICE_IS_END[16]; //16片码流是否end标志
+    HI_U64	VEDU_STRM_ADDR[16];// 16??????????
+    HI_U64	VEDU_STRM_BUFLEN[16]; // 16??????????????
+    HI_U64	VEDU_SLICE_LENGTH[16];	// 16??????????????
+    HI_U64	VEDU_SLICE_IS_END[16]; //16??????????end????
 
     HI_U32  VEDU_HEADER[48];
     HI_U32  vlcst_para_set_en;
     HI_U32  vlcst_para_set_len;
-    HI_U32  uHeaderRealLength;//sps pps真实长度
+    HI_U32  uHeaderRealLength;//sps pps????????
 
-    /* 地址分配结构体 */
+    /* ?????????????? */
     MEM_BUFFER_S MEM_VEDU_START_ADDR;
 
     /* use for smmu tlb miss err */
@@ -2424,7 +2424,7 @@ typedef struct
     HI_U32  VoFrmRate;
 
     HI_U32  IntraPic;
-    HI_BOOL bAddHeader;//表示下一帧要不要带序列头信息
+    HI_BOOL bAddHeader;//????????????????????????????
     HI_BOOL bRequestIFrame;
     HI_U32  InterFrmCnt;
     HI_U32  RcnYAddr[2];
@@ -2452,7 +2452,7 @@ typedef struct
     queue_info_s *StreamQueue_OMX;
     queue_info_s *FrameQueue_OMX;
 
-    HI_BOOL bOutPutbufflush;//表示buffer已经flush，不要再发送done消息
+    HI_BOOL bOutPutbufflush;//????buffer????flush????????????done????
     HI_BOOL bInPutbufflush;
 
     venc_user_buf  stImage_OMX;
@@ -2539,7 +2539,7 @@ typedef struct
     HI_S32 iImgHeight;
     HI_S32 iFrameRate;
     HI_S32 iBitRate;
-    //HI_S32 iMaxQP;//统一使用寄存器来配置 ljh
+    //HI_S32 iMaxQP;//???????????????????? ljh
     //HI_S32 iMinQP;
     HI_S32 bFrameSkip;
     /* frame rate control out */
@@ -2569,12 +2569,12 @@ typedef struct
 	HI_S32 iIpQpDelta;
 	HI_S32 iLastIFrameQp;
 	HI_S32 iLastIFrameBits;
-    HI_S32 aiIRatio[I_RATIO_NUM]; //I块比重
+    HI_S32 aiIRatio[I_RATIO_NUM]; //I??????
     HI_S32 iIRatioCounter;
-    HI_S32 iIRatioDelta; //I块比重差
-    HI_S32 iFrameCuNum; //一帧8x8块数
-    HI_S32 iStaticFrame; //静止帧数
-    HI_S32 iI8x8Num; //一帧8x8 I块数
+    HI_S32 iIRatioDelta; //I????????
+    HI_S32 iFrameCuNum; //????8x8????
+    HI_S32 iStaticFrame; //????????
+    HI_S32 iI8x8Num; //????8x8 I????
 
 	HI_S32 bLastIFrameFlag;
 	HI_S32 bInitFlag;
@@ -2606,7 +2606,7 @@ typedef struct
     HI_U32  bAXIPressEn;
     HI_U32  QuickEncode;
 
-    HI_U32  bSecureFlag;//是否安全通道标志
+    HI_U32  bSecureFlag;//????????????????
     HI_U32 iReEncodeTimeFrameI;
     HI_U32 iReEncodeTimeFrameP;
     HI_U32 SceneMode;
@@ -2643,8 +2643,8 @@ typedef struct
     HI_U32 BusViY;      /* 16-byte aligned  */
     HI_U32 BusViC;      /* 16-byte aligned  */
     HI_U32 BusViV;
-    HI_U32 ViYStride;   /* 16-byte aligned  即SStrideY*/
-    HI_U32 ViCStride;   /* 16-byte aligned  即SStrideC*/
+    HI_U32 ViYStride;   /* 16-byte aligned  ??SStrideY*/
+    HI_U32 ViCStride;   /* 16-byte aligned  ??SStrideC*/
 
     HI_U32 PTS0;
     HI_U32 PTS1;

@@ -7,7 +7,7 @@ Author        : Hisilicon multimedia software group
 Created       : 2005/4/23
 Last Modified :
 Description   : Common data types of the system.
-                CNcomment: 系统共用的数据类型定义 CNend
+                CNcomment: ?????????????????????? CNend
 Function List :
 History       :
 ******************************************************************************/
@@ -23,7 +23,7 @@ extern "C"{
 
 /*--------------------------------------------------------------------------------------------------------------*
  * Defintion of basic data types. The data types are applicable to both the application layer and kernel codes. *
- * CNcomment: 基本数据类型定义，应用层和内核代码均使用  CNend                                                   *
+ * CNcomment: ????????????????????????????????????????  CNend                                                   *
  *--------------------------------------------------------------------------------------------------------------*/
 /*************************** Structure Definition ****************************/
 /** \addtogroup      Common_TYPE */
@@ -65,7 +65,7 @@ typedef unsigned long  	        HI_VIRT_ADDR_T;
 typedef unsigned long  	        HI_ULONG;
 
 /** Constant Definition */
-/** CNcomment: 常量定义  */
+/** CNcomment: ????????  */
 typedef enum {
     HI_FALSE    = 0,
     HI_TRUE     = 1,

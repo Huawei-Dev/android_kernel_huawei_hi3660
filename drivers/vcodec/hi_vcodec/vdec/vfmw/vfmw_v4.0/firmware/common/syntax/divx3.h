@@ -52,12 +52,12 @@ txOHmYcbA60Bs63+OGKQNF92o6GMJhpCg+VxHAv4Rd44IpFVJFtpSg7N99NR2w==*/
 #define DIVX3_SLC_DN_MSG_SLOT_INDEX                   3
 #define DIVX3_SLC_DN_MSG_SLOT_FULL_THRESHOLD          (DIVX3_MAX_SLOT_NUM-4)
 
-/*********************(64*4*X) 没部分空间都为64word整数倍****/
+/*********************(64*4*X) ??????????????64word??????****/
 #define DIVX3_ALIGN_LEN                               (64*4)
 #define DIVX3_SED_TOP_ADDR_LEN                        (64*4*DIVX3_VFMW_MAX_PIC_WIDTH)
 #define DIVX3_PMV_TOP_ADDR_LEN                        (64*4*DIVX3_VFMW_MAX_PIC_WIDTH)
 #define DIVX3_IT_TOP_ADDR_LEN                         (64*4*DIVX3_VFMW_MAX_PIC_WIDTH)
-#define DIVX3_PMV_ONECOLMB_ADDR_LEN                   (20*4)              //计算得知，大致需要16words/mb，现在多分配一点             
+#define DIVX3_PMV_ONECOLMB_ADDR_LEN                   (20*4)              //??????????????????16words/mb????????????????             
 #define DIVX3_MSG_SLOT_BURST_LEN                      (64*4)              // 1 burst, 64 word    
 #define DIVX3_UP_MSG_SLOT_LEN                         DIVX3_MSG_SLOT_BURST_LEN
 #define DIVX3_RP_MSG_SLOT_LEN                         DIVX3_MSG_SLOT_BURST_LEN
@@ -78,7 +78,7 @@ typedef enum
     DIVX3_VFMW_TRUE  = 1
 } DIVX3_TRUEFALSE;
 
-#define DIVX3_NOTDEC  (-2)    //表示DIVX3DEC_Decode()里面有一个NAL没有解码就返回了，下次调用不用送码流了
+#define DIVX3_NOTDEC  (-2)    //????DIVX3DEC_Decode()??????????NAL??????????????????????????????????????
 
 typedef struct
 {
@@ -130,12 +130,12 @@ typedef struct
     UINT8  IsStreamEndFlag;
     UINT8  Last_FieldStruct;
     UINT8  Imgbuf_allocated;
-    UINT8  UsedDecMode;       //当前正在使用的解码模式(IPB, IP, I)
+    UINT8  UsedDecMode;       //??????????????????????(IPB, IP, I)
     UINT8* image_vir_addr[DIVX3_MAXIMUM_IMAGE_NUM];
   	UINT8 *BsVirAddr;         //current bs virtual start addr
     UINT8 *BsVirAddr1;        //current bs virtual start addr
 
-    UINT8* vahb_vir_addr;         // VAHB物理地址，1024对齐
+    UINT8* vahb_vir_addr;         // VAHB??????????1024????
     UINT8* upmsg_vir_addr;
     UINT8* rpmsg_vir_addr;
     UINT8* picdnmsg_vir_addr;
@@ -154,7 +154,7 @@ typedef struct
     SINT32 BsLength1;
     SINT32 IsLastSeg1;
 
-    DIVX3_VOBUFINF VOBufInf[MAX_QUEUE_IMAGE_NUM];        //VO帧存管理信息
+    DIVX3_VOBUFINF VOBufInf[MAX_QUEUE_IMAGE_NUM];        //VO????????????
     DIVX3_PictureHeader_S PictureHeader;
     UINT32 PrevSwitchRounding;
 
@@ -162,7 +162,7 @@ typedef struct
 
     SINT32 PacketTail;
     UINT32 NewSeqInited;
-    UINT32 StreamIntegrality; //码流中各种头的完整性和正确性信息
+    UINT32 StreamIntegrality; //????????????????????????????????
     UINT32 SeqCnt;
     UINT32 FrmCnt;
     UINT32 RefNum;
@@ -175,7 +175,7 @@ typedef struct
 
 
     /************** VAHB *************/
-    UADDR    vahb_phy_addr;         // VAHB物理地址，1024对齐
+    UADDR    vahb_phy_addr;         // VAHB??????????1024????
     //up msg slot
     UADDR    upmsg_phy_addr;
     //repair msg slot
@@ -190,10 +190,10 @@ typedef struct
     UADDR    rcn_top_phy_addr;
     //it_top_addr
     UADDR    it_top_phy_addr;
-    // PMV ColMB存储空间
+    // PMV ColMB????????
 
-    // 图像存储空间
-    SINT32     QueueImageNum;       // 总共分配的图像个数
+    // ????????????
+    SINT32     QueueImageNum;       // ??????????????????
     UINT32     ddr_stride;
     UADDR    image_phy_addr[DIVX3_MAXIMUM_IMAGE_NUM];
 

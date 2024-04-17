@@ -52,13 +52,13 @@ P1ZjwMetuOZOkqHSgxpjoZKEYTlarpPw3gg/o6cSzZAROquO60jzTwA22LF3Yw==*/
 #define REAL9_SLC_DN_MSG_SLOT_INDEX                   3
 #define REAL9_SLC_DN_MSG_SLOT_FULL_THRESHOLD          (REAL9_MAX_SLOT_NUM-4)
 
-/*********************(64*4*X) 没部分空间都为64word整数倍****/
+/*********************(64*4*X) ??????????????64word??????****/
 #define REAL9_ALIGN_LEN                               (64*4)
 #define REAL9_SED_TOP_ADDR_LEN                        (64*4*REAL9_VFMW_MAX_PIC_WIDTH)
 #define REAL9_PMV_TOP_ADDR_LEN                        (64*4*REAL9_VFMW_MAX_PIC_WIDTH)
 #define REAL9_RCN_TOP_ADDR_LEN                        (64*4*REAL9_VFMW_MAX_PIC_WIDTH)
 #define REAL9_DBLK_TOP_ADDR_LEN                       (64*4*REAL9_VFMW_MAX_PIC_WIDTH)
-#define REAL9_PMV_ONECOLMB_ADDR_LEN                   (20*4)              //计算得知，大致需要16words/mb，现在多分配一点             
+#define REAL9_PMV_ONECOLMB_ADDR_LEN                   (20*4)              //??????????????????16words/mb????????????????             
 #define REAL9_MSG_SLOT_BURST_LEN                      (64*4)              // 1 burst, 64 word    
 #define REAL9_UP_MSG_SLOT_LEN                         REAL9_MSG_SLOT_BURST_LEN
 #define REAL9_RP_MSG_SLOT_LEN                         REAL9_MSG_SLOT_BURST_LEN
@@ -207,7 +207,7 @@ typedef struct
     SINT8  IsLastSeg;
     SINT8  IsLastSeg1;
     UINT8 *BsVirAddr1;        //current bs virtual start addr
-    UINT8  UsedDecMode;      //当前正在使用的解码模式(IPB, IP, I)
+    UINT8  UsedDecMode;      //??????????????????????(IPB, IP, I)
     UINT8  RefNum;
     UINT8  LastDecPicCodingType;
     UINT8  Last_FieldStruct;
@@ -215,7 +215,7 @@ typedef struct
     UINT8  HDRState;//search pic or slc
     SINT8  YuvOutputOrder;
 
-    UINT8*     vahb_vir_addr;         // VAHB物理地址，1024对齐
+    UINT8*     vahb_vir_addr;         // VAHB??????????1024????
     UINT8*     upmsg_vir_addr;
     UINT8*     rpmsg_vir_addr;
     UINT8*     picdnmsg_vir_addr;
@@ -227,7 +227,7 @@ typedef struct
     UINT8*     rpr_vir_addr[2];  // 0 used for forward, 1 used for backward
     UINT8*     image_vir_addr[REAL9_MAXIMUM_IMAGE_NUM];
 
-    RV9_VOBUFINF VOBufInf[MAX_QUEUE_IMAGE_NUM];        //VO帧存管理信息
+    RV9_VOBUFINF VOBufInf[MAX_QUEUE_IMAGE_NUM];        //VO????????????
 
     RV9_PictureHeader PictureHeader;
     RV9_SliceHeader SliceHeader;
@@ -247,7 +247,7 @@ typedef struct
 
     SINT32 PacketTail;
     UINT32 NewSeqInited;
-    UINT32 StreamIntegrality;//码流中各种头的完整性和正确性信息
+    UINT32 StreamIntegrality;//????????????????????????????????
     UINT32 SeqCnt;
     UINT32 FrmCnt;
     UINT32 ErrorMbCnt;
@@ -265,7 +265,7 @@ typedef struct
     SINT32 Ratio1;
 
     /************** VAHB *************/
-    UADDR    vahb_phy_addr;         // VAHB物理地址，1024对齐
+    UADDR    vahb_phy_addr;         // VAHB??????????1024????
 
     //up msg slot
     UADDR    upmsg_phy_addr;
@@ -286,13 +286,13 @@ typedef struct
     //rcn_top_addr
     UADDR      rcn_top_phy_addr;
 
-    // PMV ColMB存储空间
+    // PMV ColMB????????
 
     UINT32     rpr_stride;
     UADDR      rpr_phy_addr[2];  // 0 used for forward, 1 used for backward
 
-    // 图像存储空间
-    SINT32     QueueImageNum;       // 总共分配的图像个数
+    // ????????????
+    SINT32     QueueImageNum;       // ??????????????????
     UINT32     ddr_stride;
     UADDR      image_phy_addr[REAL9_MAXIMUM_IMAGE_NUM];
 

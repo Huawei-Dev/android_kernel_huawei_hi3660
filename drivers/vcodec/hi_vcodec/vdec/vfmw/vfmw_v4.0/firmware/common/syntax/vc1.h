@@ -21,7 +21,7 @@ extern "C" {
 #endif
 
 /*----------------------------------------------*
-* 宏定义                                       *
+* ??????                                       *
 *----------------------------------------------*/
 #define VC1_VFMW_FALSE 0
 #define VC1_VFMW_TRUE 1
@@ -30,9 +30,9 @@ extern "C" {
 #define VC1_OUTPUT_IN_DEC 1
 #define VC1_OUTPUT_IN_DSP 0
 
-#define VC1_REG_SIZE        128  //寄存器信息长度，单位WORDs
-#define VC1_PICDNMSG_SIZE   96   //Pic下行消息长度，单位WORD
-#define VC1_SLCDNMSG_SIZE   64   //Slc下行消息长度，单位WORD
+#define VC1_REG_SIZE        128  //????????????????????WORDs
+#define VC1_PICDNMSG_SIZE   96   //Pic??????????????????WORD
+#define VC1_SLCDNMSG_SIZE   64   //Slc??????????????????WORD
 
 #define VC1_SPSOK 1
 #define VC1_ENTOK 2
@@ -53,8 +53,8 @@ extern "C" {
 #define VC1_MAX_PIC_HEIGHT 128 // unit: MB
 #define VC1_MAX_PIC_MB (VC1_MAX_PIC_WIDTH * VC1_MAX_PIC_HEIGHT) // 16129, unit: MB
 
-#define VC1_MB_PITCH 16   /* 亮度块的边长 */
-#define VC1_SUBMB_PITCH 8    /* 色度块的边长 */
+#define VC1_MB_PITCH 16   /* ???????????? */
+#define VC1_SUBMB_PITCH 8    /* ???????????? */
 
 #define VC1_ALL_BLK_4x4 15
 
@@ -65,9 +65,9 @@ extern "C" {
 #define VC1VFMW_DNMSG_NUM 2
 #define VC1VFMW_UPMSG_NUM 1
 #define VC1VFMW_RPMSG_NUM 1
-#define VC1VFMW_MSG_BUF_SIZE (((((VC1VFMW_DNMSG_NUM + VC1VFMW_UPMSG_NUM + VC1VFMW_RPMSG_NUM) * 4) + 1023) >> 10) << 10)        /* 32 行深度:32*1024  */
+#define VC1VFMW_MSG_BUF_SIZE (((((VC1VFMW_DNMSG_NUM + VC1VFMW_UPMSG_NUM + VC1VFMW_RPMSG_NUM) * 4) + 1023) >> 10) << 10)        /* 32 ??????:32*1024  */
 
-#define VC1VFMW_NEIGHBOR_BUF_SIZE       ((((VC1VFMW_MAX_PIC_WIDTH * 4) + 1023) >> 10) << 10)  /* 32 行深度:32*1024  */
+#define VC1VFMW_NEIGHBOR_BUF_SIZE       ((((VC1VFMW_MAX_PIC_WIDTH * 4) + 1023) >> 10) << 10)  /* 32 ??????:32*1024  */
 
 #define  MAX_PACKET_NUM  300//512
 typedef enum
@@ -321,7 +321,7 @@ typedef struct
 
     //derived
     UINT8  ALTPQUANT;
-    VC1_QUANTMODE QuantMode; // 哪条边用ALTPQUANT, fk ms
+    VC1_QUANTMODE QuantMode; // ????????ALTPQUANT, fk ms
 } VC1_VOPDQUANT_S;
 
 typedef struct
@@ -495,7 +495,7 @@ typedef struct
     VC1_ADVENTSYNTAX_S AdvEntSyntax;
     VC1_SMPPICSYNTAX_S SMPPicSyntax;
     VC1_ADVPICSYNTAX_S AdvPicSyntax;
-    VC1_ADVSLCSYNTAX_S AdvSlcSyntax[256]; //1080p just need these. max is 512 for VC1 original protocol  //20130730  维数128
+    VC1_ADVSLCSYNTAX_S AdvSlcSyntax[256]; //1080p just need these. max is 512 for VC1 original protocol  //20130730  ????128
 } VC1_VFMWSYNTAX_S;
 
 typedef struct
@@ -545,11 +545,11 @@ typedef struct
     VC1_ADVENTSYNTAX_S  AdvEntSyntax;
     VC1_SMPPICSYNTAX_S  SMPPicSyntax;
     VC1_ADVPICSYNTAX_S  AdvPicSyntax;
-    VC1_ADVSLCSYNTAX_S  AdvSlcSyntax[256]; //1080p just need these. max is 512 for VC1 original protocol    //20130730  维数128
+    VC1_ADVSLCSYNTAX_S  AdvSlcSyntax[256]; //1080p just need these. max is 512 for VC1 original protocol    //20130730  ????128
     VC1_VFMWFRAMEOBJ_S  FrameObj[VC1VFMW_MAX_FRAME_BUF_NUM];
     VC1_VFMWFRAMEOBJ_S  ZeroFrm;
     VC1_VFMWFRAMEOBJ_S* pCurFrm;
-    VC1_VFMWFRAMEOBJ_S* pRef[3];    /*其中0为最近解出的参考图，1为较早解出的参考图*/
+    VC1_VFMWFRAMEOBJ_S* pRef[3];    /*????0????????????????????1??????????????????*/
     SINT32              MbWidth;
     SINT32              MbHeight;
     SINT32              MbWidthLast;
@@ -591,7 +591,7 @@ typedef struct
     UADDR               OVERFLAGS_ADDR;
     UADDR               FIELDTX_ADDR;
     UADDR               FORWARDMB_ADDR;
-    UINT32              UsedDecMode;      //当前正在使用的解码模式(IPB, IP, I)
+    UINT32              UsedDecMode;      //??????????????????????(IPB, IP, I)
     UINT8               u8LastCodecStatus;
 } VC1_VFMWCODECINF_S;
 

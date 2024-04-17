@@ -43,7 +43,7 @@ extern "C" {
 #define HEVC_MAX_DELTA_POC             (5)
 #endif
 
-#define HEVC_MAX_DPB_PIC_BUF           (6)             //参考协议文档A.4
+#define HEVC_MAX_DPB_PIC_BUF           (6)             //????????????A.4
 #define HEVC_MAX_ENTRY_POINT           (100)
 
 #define HEVC_MAX_LSB_NUM               (33)
@@ -157,7 +157,7 @@ extern "C" {
 #define   HEVC_CLEAN_ASPECT_RATIO      (~(7<<14))
 
 /******************* some define of start contrl ******************/
-/*小于这个值需要拼包，否则可能码流解析不完整*/
+/*??????????????????????????????????????????*/
 #define HEVC_GET_ONE_NALU_SIZE         (4*1024)
 #define HEVC_START_FRAME               (0)
 
@@ -165,11 +165,11 @@ extern "C" {
 typedef struct
 {
     /************** VAHB *************/
-    SINT32     total_image_num;       // 总共分配的图像个数
-    SINT32     total_pmvblk_num;      // 总共分配的PMV块个数
+    SINT32     total_image_num;       // ??????????????????
+    SINT32     total_pmvblk_num;      // ??????????PMV??????
     
-    UADDR      vahb_phy_addr;         // VAHB物理地址，1024对齐
-    UINT8*     vahb_vir_addr;         // VAHB物理地址，1024对齐
+    UADDR      vahb_phy_addr;         // VAHB??????????1024????
+    UINT8*     vahb_vir_addr;         // VAHB??????????1024????
 
     //sed_top_addr
     UADDR      sed_top_phy_addr;
@@ -211,16 +211,16 @@ typedef struct
     UADDR      upmsgslot_phy_addr;
     UINT8*     upmsgslot_vir_addr;
         
-    //消息池
+    //??????
     UADDR      msgpool_phy_addr;
     UINT8*     msgpool_vir_addr;
     
-    //图像存储空间
+    //????????????
     UINT32     image_stride;
     UADDR      image_phy_addr[HEVC_MAX_FRAME_STORE];
     UINT16*    image_vir_addr[HEVC_MAX_FRAME_STORE ];
     
-    //PMV存储空间
+    //PMV????????
     UINT32     half_pmvblk_offset;
     UADDR      pmvblk_phy_addr[HEVC_MAX_PMV_STORE];
     UINT8*     pmvblk_vir_addr[HEVC_MAX_PMV_STORE];
@@ -1042,8 +1042,8 @@ typedef struct
     UADDR        slot_addr_ph;
     UINT32       first_mb_in_slice; // is valid when slice slot
     UINT32       slice_type;
-    SINT32       picid_refidx0;     // 当前slice在list0中第一个元素对应的帧存槽位号，负数无效，P slice repair
-    SINT32       picid_nearpoc;     // 当前slice在dpb中找到的poc距离最近的帧存的槽位号，负数无效，I slice repair
+    SINT32       picid_refidx0;     // ????slice??list0????????????????????????????????????????P slice repair
+    SINT32       picid_nearpoc;     // ????slice??dpb????????poc??????????????????????????????????I slice repair
     
     UINT32      *slot_addr_vir;
     HEVC_NALU_S *slice_nal; 
@@ -1108,8 +1108,8 @@ enum NalUnitType
     NAL_UNIT_RESERVED_NVCL46,
     NAL_UNIT_RESERVED_NVCL47,
     
-    NAL_UNIT_EOPIC,                    // NAL_UNIT_UNSPECIFIED_48, 自定义一帧图像结束特殊nal类型
-    NAL_UNIT_EOSTREAM,                 // NAL_UNIT_UNSPECIFIED_49, 自定义码流结束特殊nal类型
+    NAL_UNIT_EOPIC,                    // NAL_UNIT_UNSPECIFIED_48, ??????????????????????nal????
+    NAL_UNIT_EOSTREAM,                 // NAL_UNIT_UNSPECIFIED_49, ??????????????????nal????
     NAL_UNIT_UNSPECIFIED_50,
     NAL_UNIT_UNSPECIFIED_51,
     NAL_UNIT_UNSPECIFIED_52,
@@ -1178,7 +1178,7 @@ typedef struct
     UINT8   bNoRaslOutputFlag;
     UINT8   bPPicFound;
     UINT8   bHaveNalNotDecoded;
-	UINT8   bIsInsertEOPICNal;          //是否是代码插入eopicnal还是真正码流里存在naltype=30的nal
+	UINT8   bIsInsertEOPICNal;          //??????????????eopicnal??????????????????naltype=30??nal
     UINT8   IsStreamEndFlag;
     UINT8   PrevRAPIsBLA;
     SINT8   bHaveIndependentSlice; 
@@ -1221,12 +1221,12 @@ typedef struct
     UINT32  PicOutCounter;
 	SINT32  TotalFrameNum;
 	SINT32  OutputFrameNum;
-	UINT32  prev_pic_parameter_set_id;  //用于判断是否是新的一帧图像,特别是第一个slice被丢弃(或者解错)的情况下
+	UINT32  prev_pic_parameter_set_id;  //??????????????????????????,????????????slice??????(????????)????????
     
     UINT32  scalingListSize[4]; 
     UINT32  scalingListSizeX[4];
     UINT32  sigLastScanCG32x32[64];
-    UINT32  qmatrix[4][6][16];          // 4 types:4x4 8x8 16x16 32x32, 对于4x4，16个bytes拼在4words中，其余64个bytes拼在16words中
+    UINT32  qmatrix[4][6][16];          // 4 types:4x4 8x8 16x16 32x32, ????4x4??16??bytes????4words????????64??bytes????16words??
     UINT32  PmvStoreUsedFlag[HEVC_MAX_PMV_STORE]; // pmv store memory allocate statistic 
     UINT32  scalingListNum[SCALING_LIST_SIZE_NUM];
     UINT32  scalingListDC[SCALING_LIST_SIZE_NUM][HEVC_SCALING_LIST_NUM];

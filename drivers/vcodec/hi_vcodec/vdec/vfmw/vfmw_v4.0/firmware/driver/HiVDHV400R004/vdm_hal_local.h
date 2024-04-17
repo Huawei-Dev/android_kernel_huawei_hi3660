@@ -27,11 +27,11 @@ extern "C" {
 #define    DN_MSG_SLOT_INDEX           (4)
 #define    RP_MSG_SLOT_NUM             (2)
 #define    DN_MSG_SLOT_NUM             (1)
-#define    VDM_REG_SIZE                (1024)                             //分配的寄存器大小
-#define    RP_MSG_SIZE                 (RP_MSG_SLOT_NUM * MSG_SLOT_SIZE)  //分配的消息大小, WORD
-#define    DN_MSG_SIZE                 (DN_MSG_SLOT_NUM * MSG_SLOT_SIZE)  //分配的消息大小, WORD
-#define    VDM_REG_USED_SIZE           (512)                              //实际使用的寄存器大小, WORD
-#define    RP_MSG_USED_SIZE            (RP_MSG_SIZE)                      //实际使用的消息大小, WORD
+#define    VDM_REG_SIZE                (1024)                             //????????????????
+#define    RP_MSG_SIZE                 (RP_MSG_SLOT_NUM * MSG_SLOT_SIZE)  //??????????????, WORD
+#define    DN_MSG_SIZE                 (DN_MSG_SLOT_NUM * MSG_SLOT_SIZE)  //??????????????, WORD
+#define    VDM_REG_USED_SIZE           (512)                              //????????????????????, WORD
+#define    RP_MSG_USED_SIZE            (RP_MSG_SIZE)                      //??????????????????, WORD
 #define    CA_HEVC_MN_ADDR_LEN         (1024)
 #define    CA_MN_ADDR_LEN              (64*4*20)
 #define    SED_TOP_ADDR_LEN            (352*96)   //(64*4*96)
@@ -40,7 +40,7 @@ extern "C" {
 #define    ITRANS_TOP_ADDR_LEN         (352*128)  //(128*128)
 #define    DBLK_TOP_ADDR_LEN           (352*192)  //(128*512)
 #define    PPFD_BUF_LEN_DEFAULT        (64*4*400) //(64*4*800)
-#define    ONEMB_PMV_COLMB_ADDR_LEN    (20*4)     //计算得知，大致需要16words/mb，现在多分配一点        
+#define    ONEMB_PMV_COLMB_ADDR_LEN    (20*4)     //??????????????????16words/mb????????????????        
 
 //db defines
 #define    DB_THR_LEASTBLKDIFF         (0)        //key para, (0-128)
@@ -51,7 +51,7 @@ extern "C" {
 #define    EMAR_ID_VALUE               (0x161f7)
 
 /************************************************************************/
-/* VDM寄存器                                                            */
+/* VDM??????                                                            */
 /************************************************************************/
 //control registers
 #define    VREG_VDH_START                      0x000
@@ -114,7 +114,7 @@ extern "C" {
 
 //clock switch registers
 #define    VREG_MFDE_CLK_EN                    0x09c
-#define    MFDE_CLK_EN_DEFAULT_VALUE           0xffffffff   //强制开时钟
+#define    MFDE_CLK_EN_DEFAULT_VALUE           0xffffffff   //??????????
 #define    VREG_CRG_CLK_EN                     0xf804
 #define    CRG_CLK_EN_DEFAULT_VALUE            0xffffffff
 #define    VREG_CRG_CLK_SEL                    0xf808
@@ -154,7 +154,7 @@ extern "C" {
 #define    VREG_AVSPLUS1                       0x7f0
 #define    VREG_AVSPLUS2                       0x70c
 
-/* VDM寄存器位域定义 */
+/* VDM?????????????? */
 typedef struct
 {
     USIGN dec_start:                            1;
@@ -177,8 +177,8 @@ typedef struct
     USIGN coef_idx_detect_en:                   1;
     USIGN vop_type_detect_en:                   1;
     USIGN reserved:                             2;
-    USIGN luma_sum_en:                          1;   //亮度像素和计算使能
-    USIGN luma_historgam_en:                    1;   //亮度直方图计算使能
+    USIGN luma_sum_en:                          1;   //??????????????????
+    USIGN luma_historgam_en:                    1;   //??????????????????
     USIGN load_qmatrix_flag:                    1;
     USIGN sec_mode_en:                          1;
 } BASIC_CFG0;
@@ -321,7 +321,7 @@ typedef struct
     USIGN reserved:                             16;
 } PPFD_BUF_LEN;
 
-//MPEG2修补消息池
+//MPEG2??????????
 typedef struct
 {
     USIGN src_luma_addr:                        32;
