@@ -14,4 +14,5 @@ enum sock_no {
 };
 
 int send_to_user(int sock_no, size_t len, int *data);
+void iaware_proc_fork_connector(struct task_struct *task);
 void iaware_proc_comm_connector(struct task_struct *task, const char* comm);
