@@ -87,7 +87,6 @@ EXTRA_CFLAGS +=  -DVOS_LINUX=4 -DOSA_CPU_ACPU=1 -DVOS_OS_VER=VOS_LINUX -DVOS_OSA
 EXTRA_CFLAGS += -DHAL_DIAG_SDM_USE
 
 	
-#编译器相关的宏定义
 EXTRA_CFLAGS += -fsigned-char 
 
 taf-objs := comm/src/acore/ADS/Src/AdsCtx.o
