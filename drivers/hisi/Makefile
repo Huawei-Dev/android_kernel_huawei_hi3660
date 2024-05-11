@@ -16,8 +16,7 @@ obj-$(CONFIG_HISILICON_PLATFORM_SLIMBUS)+= slimbus/
 
 obj-$(CONFIG_HI6402_HIFI_MISC) += hi64xx_dsp/
 obj-$(CONFIG_HISI_HISEE) += hisee/
-ifneq ($(strip $(CFG_HISI_OPENSOURCE)), true)
-endif
+
 obj-$(CONFIG_HISI_IVP) += ivp/
 obj-$(CONFIG_HISI_HISTAR_ISP) += isp/
 obj-$(CONFIG_DRMDRIVER)                         += drmdriver/
@@ -29,11 +28,11 @@ obj-$(CONFIG_HISI_SECS_CTRL) += secs_power_ctrl/
 obj-$(CONFIG_HISI_SR)                      += pm/
 obj-$(CONFIG_HISI_OCBC)                    += ocbc/
 obj-$(CONFIG_HISI_GPUFREQ)                 += gpufreq/
-ifneq ($(link_kernel),false)
-ifneq (,$(findstring $(CONFIG_HISI_BALONG_MODEM),y m))
+
+ifeq ($(CONFIG_HISI_BALONG_MODEM), y)
 obj-y += modem/
 endif
-endif
+
 obj-$(CONFIG_HISI_AXI) += axi/
 obj-$(CONFIG_HISI_PERFHUB) += perfhub/
 obj-$(CONFIG_HISI_TIMEKEEPER) += timekeeper/
