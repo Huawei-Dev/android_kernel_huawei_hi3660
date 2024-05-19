@@ -4579,63 +4579,60 @@ CONFIG_HISI_GPUFREQ=y
 #
 # Hisi Modem
 #
-CONFIG_HISI_BALONG_MODEM=y
-CONFIG_HISI_BALONG_MODEM_HI3650=y
-CONFIG_BALONG_OAM_PS=y
-CONFIG_VOWIFI_NEW_FRW=y
 
-#
-# Modem Drivers
-#
+# CONFIG_HISI_BALONG_MODEM is not set
+# CONFIG_HISI_BALONG_MODEM_HI3650 is not set
+# CONFIG_BALONG_OAM_PS is not set
+CONFIG_VOWIFI_NEW_FRW=y
 
 #
 # ipc driver
 #
-CONFIG_IPC_DRIVER=y
+# CONFIG_IPC_DRIVER is not set
 # CONFIG_IPC_TEST is not set
 
 #
 # multicore communication driver
 #
-CONFIG_ICC_BALONG=y
+# CONFIG_ICC_BALONG is not set
 # CONFIG_CA_ICC is not set
 # CONFIG_ICC_BALONG_TEST is not set
 
 #
 # linux kernel call secure func
 #
-CONFIG_SEC_CALL=y
+# CONFIG_SEC_CALL is not set
 
 #
 # timer driver
 #
-CONFIG_PRINTK_USE_HARDTIMER=y
-CONFIG_HARD_TIMER=y
+# CONFIG_PRINTK_USE_HARDTIMER is not set
+# CONFIG_HARD_TIMER is not set
 # CONFIG_HARD_TIMER_TEST is not set
 # CONFIG_TIMER_ADP is not set
-CONFIG_SOFT_TIMER=y
+# CONFIG_SOFT_TIMER is not set
 # CONFIG_SOFT_TIMER_TEST is not set
-CONFIG_BBP_TIMER=y
+# CONFIG_BBP_TIMER is not set
 
 #
 # balong modem reset
 #
-CONFIG_BALONG_MODEM_RESET=y
+# CONFIG_BALONG_MODEM_RESET is not set
 # CONFIG_BALONG_MODEM_RESET_TEST is not set
 # CONFIG_BALONG_MODEM_POWER_MANAGE is not set
 
 #
 # acore image load driver
 #
-CONFIG_RFILE_SUPPORT=y
+# CONFIG_RFILE_SUPPORT is not set
 # CONFIG_RFILE_TEST is not set
 # CONFIG_RFILE_MEM_OPTIMISE is not set
 
 #
 # nv driver
 #
-CONFIG_NVIM=y
-CONFIG_NVIM_TEST=y
+# CONFIG_NVIM is not set
+# CONFIG_NVIM_TEST is not set
 
 #
 # shared memory
@@ -4645,25 +4642,25 @@ CONFIG_NVIM_TEST=y
 #
 # get ip base addr
 #
-CONFIG_HW_IP_BASE_ADDR=y
+# CONFIG_HW_IP_BASE_ADDR is not set
 
 #
 # balong onoff management
 #
 # CONFIG_BALONG_ONOFF is not set
-CONFIG_BALONG_MODEM_ONOFF=y
+# CONFIG_BALONG_MODEM_ONOFF is not set
 # CONFIG_EFUSE_BALONG is not set
-CONFIG_EFUSE_BALONG_AGENT=y
+# CONFIG_EFUSE_BALONG_AGENT is not set
 
 #
 # ccore image load driver
 #
-CONFIG_IMAGE_LOAD=y
+# CONFIG_IMAGE_LOAD is not set
 
 #
 # udi adaption layer
 #
-CONFIG_UDI_SUPPORT=y
+# CONFIG_UDI_SUPPORT is not set
 
 #
 # sysctrl
@@ -4673,29 +4670,29 @@ CONFIG_UDI_SUPPORT=y
 #
 # mem driver
 #
-CONFIG_MEM_BALONG=y
-CONFIG_MEM_BALONG_TEST=y
+# CONFIG_MEM_BALONG is not set
+# CONFIG_MEM_BALONG_TEST is not set
 
 #
 # sync
 #
-CONFIG_SYNC_BALONG=y
+# CONFIG_SYNC_BALONG is not set
 
 #
 # misc driver
 #
-CONFIG_IPF_SUPPORT=y
-CONFIG_PSAM_SUPPORT=y
+# CONFIG_IPF_SUPPORT is not set
+# CONFIG_PSAM_SUPPORT is not set
 # CONFIG_HISI_DUMP is not set
 # CONFIG_BALONG_EASY_SHELL is not set
-CONFIG_PM_OM_BALONG=y
-CONFIG_PMIC_OCP=y
+# CONFIG_PM_OM_BALONG is not set
+# CONFIG_PMIC_OCP is not set
 CONFIG_HISI_SIM_HOTPLUG=y
 
 #
 # ccore image load driver
 #
-CONFIG_BBP_ACORE=y
+# CONFIG_BBP_ACORE is not set
 CONFIG_HISI_AXI=y
 
 #
