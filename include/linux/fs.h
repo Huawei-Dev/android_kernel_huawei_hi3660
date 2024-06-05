@@ -1856,9 +1856,6 @@ struct super_operations {
 				  struct shrink_control *);
 	long (*free_cached_objects)(struct super_block *,
 				    struct shrink_control *);
-#ifdef CONFIG_F2FS_JOURNAL_APPEND
-	void (*flush_mbio)(struct super_block *sb );
-#endif
 };
 
 /*
