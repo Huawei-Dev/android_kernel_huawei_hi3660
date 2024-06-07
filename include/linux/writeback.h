@@ -86,6 +86,7 @@ struct writeback_control {
 	unsigned for_reclaim:1;		/* Invoked from the page allocator */
 	unsigned range_cyclic:1;	/* range_start is cyclic */
 	unsigned for_sync:1;		/* sync(2) WB_SYNC_ALL writeback */
+	unsigned for_free_mem:1;	/* writeback for free some memory */
 #ifdef CONFIG_CGROUP_WRITEBACK
 	struct bdi_writeback *wb;	/* wb this writeback is issued under */
 	struct inode *inode;		/* inode being written out */
@@ -97,6 +98,10 @@ struct writeback_control {
 	size_t wb_bytes;		/* bytes written by current wb */
 	size_t wb_lcand_bytes;		/* bytes written by last candidate */
 	size_t wb_tcand_bytes;		/* bytes written by this candidate */
+#endif
+#ifdef CONFIG_HISI_SWAP_ZDATA
+	bool ishibernation_rec;
+	unsigned nr_writedblock;  /*the number of blocks that was writebacked*/
 #endif
 };
 
@@ -376,6 +381,10 @@ void tag_pages_for_writeback(struct address_space *mapping,
 int write_cache_pages(struct address_space *mapping,
 		      struct writeback_control *wbc, writepage_t writepage,
 		      void *data);
+typedef void (*submit_bio_first_t)(struct page *page, struct writeback_control *wbc, void *data);
+int __write_cache_pages(struct address_space *mapping,
+		      struct writeback_control *wbc, writepage_t writepage,
+		      void *data, submit_bio_first_t submit_bio_first);
 int do_writepages(struct address_space *mapping, struct writeback_control *wbc);
 void writeback_set_ratelimit(void);
 void tag_pages_for_writeback(struct address_space *mapping,
