@@ -202,7 +202,6 @@ obj-$(CONFIG_HW_CPULOAD_NOTI) += cpuload/
 obj-$(CONFIG_HW_MEMORY_MONITOR) += mmonitor/
 obj-$(CONFIG_HW_MEMORY_MONITOR) += allocpages_delayacct/
 obj-$(CONFIG_HUAWEI_DUBAI) += dubai/
-obj-$(CONFIG_OASES) += oases/
 obj-$(CONFIG_OAE_FW_PATCH) += oae_fw_patch/
 
 # memory reclaim delay accounting
