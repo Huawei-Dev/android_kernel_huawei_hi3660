@@ -111,11 +111,6 @@ config HW_SD_HEALTH_DETECT
 	help
 	  This is an option to diag sd health status.
 
-config HW_SYSTEM_HW_WR_PROTECT
-	bool "emmc hardware write protection function of system/cust partitions."
-	depends on HW_SYSTEM_WR_PROTECT
-	default n
-
 config SD_SCHEDULER_CFQ_ONLY
 	tristate "SD use cfq when io scheduler is row"
 	depends on MMC_BLOCK
