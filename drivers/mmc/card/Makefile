@@ -14,7 +14,6 @@ obj-$(CONFIG_SDIO_UART)		+= sdio_uart.o
 
 obj-$(CONFIG_MMC_FFU)		+= ffu.o
 
-obj-$(CONFIG_HW_SD_HEALTH_DETECT)	+= mmc_health_diag.o
 obj-$(CONFIG_HISI_MMC_SECURE_RPMB) += hisi_rpmb.o
 obj-$(CONFIG_HUAWEI_EMMC_DSM) += dsm_emmc.o
 obj-$(CONFIG_HUAWEI_SDCARD_DSM) += dsm_sdcard.o
