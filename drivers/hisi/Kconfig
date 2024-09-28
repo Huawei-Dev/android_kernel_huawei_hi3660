@@ -38,7 +38,6 @@ source "drivers/hisi/axi/Kconfig"
 source "drivers/hisi/ivp/Kconfig"
 source "drivers/hisi/timekeeper/Kconfig"
 source "drivers/hisi/tlb_conflict/Kconfig"
-source "drivers/hisi/hisi_lmk/Kconfig"
 source "drivers/hisi/secs_power_ctrl/Kconfig"
 endif #HISILICON_PLATFORM
 

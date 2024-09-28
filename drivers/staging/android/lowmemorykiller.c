@@ -47,7 +47,6 @@
 #include <linux/slab.h>
 #include <linux/poll.h>
 #include <linux/atomic.h>
-#include <hisi/hisi_lmk/lowmem_killer.h>
 
 #define CREATE_TRACE_POINTS
 #include "trace/lowmemorykiller.h"
@@ -250,11 +249,9 @@ static unsigned long lowmem_scan(struct shrinker *s, struct shrink_control *sc)
 				global_node_page_state(NR_SHMEM) -
 				global_node_page_state(NR_UNEVICTABLE) -
 				total_swapcache_pages();
-	int ret_tune;
+	int ret_tune = 0;
 
 	static atomic_t atomic_lmk = ATOMIC_INIT(0);
-
-	ret_tune = hisi_lowmem_tune(&other_free, &other_file, sc);
 
 	if (lowmem_adj_size < array_size)
 		array_size = lowmem_adj_size;
@@ -304,8 +301,6 @@ static unsigned long lowmem_scan(struct shrinker *s, struct shrink_control *sc)
 				rcu_read_unlock();
 				atomic_dec(&atomic_lmk);
 				return 0;
-			} else {
-				hisi_lowmem_dbg_timeout(tsk, p);
 			}
 		}
 
@@ -357,8 +352,6 @@ static unsigned long lowmem_scan(struct shrinker *s, struct shrink_control *sc)
 			     cache_size, cache_limit,
 			     min_score_adj,
 			     free, ret_tune, sc->gfp_mask);
-
-		hisi_lowmem_dbg(selected_oom_score_adj);
 
 #ifdef CONFIG_HW_ZEROHUNG
 			lmkwp_report(selected, sc, cache_size, cache_limit, selected_oom_score_adj, free);
