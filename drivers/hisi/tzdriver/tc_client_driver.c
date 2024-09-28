@@ -1586,6 +1586,11 @@ void spoof_hash(char *my_pkname, unsigned char *hash_buf)
 					    0x15, 0x3A, 0x16, 0x1E, 0xAC, 0x46, 0x09, 0xDB,
 					    0x25, 0xC4, 0xB3, 0x09, 0xE9, 0x41, 0x2E, 0x86};
 	
+	unsigned char hwsecurity_hash[32] = {0xCB, 0xEF, 0xCD, 0xC2, 0xFE, 0x90, 0xDA, 0x83,
+					    0xF4, 0x1E, 0x11, 0x9B, 0xFE, 0x81, 0x9A, 0xBD,
+					    0x94, 0xE3, 0xE2, 0xFE, 0xD1, 0xB6, 0x95, 0x41,
+					    0x7A, 0x1D, 0x57, 0xB5, 0x84, 0x54, 0xA7, 0x21};
+	
 	if (!strncmp(my_pkname, "/vendor/bin/hw/android.hardware.gatekeeper@1.0-service", 54))
 		memcpy(hash_buf, gatekeeper_hash, MAX_SHA_256_SZ);
 
@@ -1597,6 +1602,9 @@ void spoof_hash(char *my_pkname, unsigned char *hash_buf)
 
 	if (!strncmp(my_pkname, "/vendor/bin/hw/android.hardware.drm@1.1-service.widevine", 56))
 		memcpy(hash_buf, widevine_hash, MAX_SHA_256_SZ);
+
+	if (!strncmp(my_pkname, "/vendor/bin/hw/vendor.huawei.hardware.hwsecurity-service", 56))
+		memcpy(hash_buf, hwsecurity_hash, MAX_SHA_256_SZ);
 }
 
 int TC_NS_OpenSession(TC_NS_DEV_File *dev_file, TC_NS_ClientContext *context)
