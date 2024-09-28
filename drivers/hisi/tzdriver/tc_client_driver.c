@@ -1581,6 +1581,11 @@ void spoof_hash(char *my_pkname, unsigned char *hash_buf)
 					    0x7E, 0x52, 0x75, 0x5A, 0xBC, 0x43, 0x7B, 0xAE,
 					    0x42, 0x3E, 0x9C, 0x38, 0xAB, 0x45, 0x52, 0xCB};
 
+	unsigned char widevine_hash[32] = {0xE1, 0xE5, 0x73, 0x5C, 0x0C, 0x00, 0xA0, 0x0E,
+					    0x09, 0xCA, 0xFF, 0x44, 0x7A, 0xFA, 0xBB, 0x87,
+					    0x15, 0x3A, 0x16, 0x1E, 0xAC, 0x46, 0x09, 0xDB,
+					    0x25, 0xC4, 0xB3, 0x09, 0xE9, 0x41, 0x2E, 0x86};
+	
 	if (!strncmp(my_pkname, "/vendor/bin/hw/android.hardware.gatekeeper@1.0-service", 54))
 		memcpy(hash_buf, gatekeeper_hash, MAX_SHA_256_SZ);
 
@@ -1589,6 +1594,9 @@ void spoof_hash(char *my_pkname, unsigned char *hash_buf)
 
 	if (!strncmp(my_pkname, "/vendor/bin/hw/vendor.huawei.hardware.biometrics.fingerprint@2.1-service", 72))
 		memcpy(hash_buf, fingerprint_hash, MAX_SHA_256_SZ);
+
+	if (!strncmp(my_pkname, "/vendor/bin/hw/android.hardware.drm@1.1-service.widevine", 56))
+		memcpy(hash_buf, widevine_hash, MAX_SHA_256_SZ);
 }
 
 int TC_NS_OpenSession(TC_NS_DEV_File *dev_file, TC_NS_ClientContext *context)
