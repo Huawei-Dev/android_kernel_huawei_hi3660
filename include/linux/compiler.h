@@ -618,17 +618,4 @@ unsigned long read_word_at_a_time(const void *addr)
 # define nokprobe_inline	inline
 #endif
 
-#ifndef __randomize_layout
-# define __randomize_layout
-#endif
-
-#ifndef __no_randomize_layout
-# define __no_randomize_layout
-#endif
-
-#ifndef randomized_struct_fields_start
-# define randomized_struct_fields_start
-# define randomized_struct_fields_end
-#endif
-
 #endif /* __LINUX_COMPILER_H */

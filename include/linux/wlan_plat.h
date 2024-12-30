@@ -38,6 +38,6 @@ struct wifi_platform_data {
 	int (*get_bcn_timeout)(void);
 #endif /* HW_CUSTOM_BCN_TIMEOUT */
 #endif
-}__no_randomize_layout;
+};
 
 #endif

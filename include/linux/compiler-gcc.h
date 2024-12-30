@@ -261,10 +261,6 @@
 /* Mark a function definition as prohibited from being cloned. */
 #define __noclone	__attribute__((__noclone__, __optimize__("no-tracer")))
 
-#if defined(RANDSTRUCT_PLUGIN) && !defined(__CHECKER__)
-#define __randomize_layout __attribute__((randomize_layout))
-#define __no_randomize_layout __attribute__((no_randomize_layout))
-#endif
 #endif /* GCC_VERSION >= 40500 */
 
 #if GCC_VERSION >= 40600
@@ -275,16 +271,7 @@
  * this.
  */
 #define __visible	__attribute__((externally_visible))
-/*
- * RANDSTRUCT_PLUGIN wants to use an anonymous struct, but it is only
- * possible since GCC 4.6. To provide as much build testing coverage
- * as possible, this is used for all GCC 4.6+ builds, and not just on
- * RANDSTRUCT_PLUGIN builds.
- */
-#define randomized_struct_fields_start	struct {
-#define randomized_struct_fields_end	} __randomize_layout;
-
-#endif /* GCC_VERSION >= 40600 */
+#endif
 
 
 #if GCC_VERSION >= 40900 && !defined(__CHECKER__)
