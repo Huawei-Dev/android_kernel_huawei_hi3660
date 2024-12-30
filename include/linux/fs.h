@@ -342,7 +342,7 @@ struct kiocb {
 	void (*ki_complete)(struct kiocb *iocb, long ret, long ret2);
 	void			*private;
 	int			ki_flags;
-}__randomize_layout;
+};
 
 static inline bool is_sync_kiocb(struct kiocb *kiocb)
 {
@@ -1074,7 +1074,7 @@ struct file_lock {
 			int state;		/* state of grant or error if -ve */
 		} afs;
 	} fl_u;
-} __randomize_layout;
+};
 
 struct file_lock_context {
 	spinlock_t		flc_lock;

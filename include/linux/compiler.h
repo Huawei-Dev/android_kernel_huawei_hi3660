@@ -620,19 +620,6 @@ unsigned long read_word_at_a_time(const void *addr)
 # define nokprobe_inline	inline
 #endif
 
-#ifndef __randomize_layout
-# define __randomize_layout
-#endif
-
-#ifndef __no_randomize_layout
-# define __no_randomize_layout
-#endif
-
-#ifndef randomized_struct_fields_start
-# define randomized_struct_fields_start
-# define randomized_struct_fields_end
-#endif
-
 /*
  * This is needed in functions which generate the stack canary, see
  * arch/x86/kernel/smpboot.c::start_secondary() for an example.
