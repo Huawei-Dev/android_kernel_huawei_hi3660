@@ -619,6 +619,9 @@ oal_uint8 dmac_sta_up_rx_action(dmac_vap_stru *pst_dmac_vap,oal_netbuf_stru *pst
                     dmac_sta_up_rx_ch_switch(pst_mac_vap,puc_data,us_frame_len);
                     break;
 
+                case MAC_SPEC_TPC_REQUEST:
+                    uc_go_on = OAL_FALSE;
+                    break;
                 default:
                     break;
             }

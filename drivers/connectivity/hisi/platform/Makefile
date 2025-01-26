@@ -165,6 +165,9 @@ EXTRA_CFLAGS += $(COPTS) $(KBUILD_CFLAGS)
 EXTRA_CFLAGS += $(COMM_COPTS)
 EXTRA_CFLAGS += -Werror -Wuninitialized -Wempty-body -Woverride-init -Wtype-limits
 
+#ignore some option is not support by calng
+EXTRA_CFLAGS += -Wno-unknown-warning-option
+
 EXTRA_CFLAGS +=  -fno-pic
 MODFLAGS = -fno-pic
 else

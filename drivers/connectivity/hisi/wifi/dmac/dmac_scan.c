@@ -95,19 +95,16 @@ oal_void dmac_detect_2040_te_a_b(dmac_vap_stru *pst_dmac_vap, oal_uint8 *puc_fra
     oal_uint8            chan_index     = 0;
     oal_bool_enum_uint8  ht_cap         = OAL_FALSE;
     oal_uint8            uc_real_chan   = uc_curr_chan;
-    mac_device_stru     *pst_mac_device = OAL_PTR_NULL;
     oal_uint8           *puc_ie         = OAL_PTR_NULL;
+    mac_device_stru     *pst_mac_device = mac_res_get_dev(pst_dmac_vap->st_vap_base_info.uc_device_id);
 
-    pst_mac_device = mac_res_get_dev(pst_dmac_vap->st_vap_base_info.uc_device_id);
-    if (OAL_UNLIKELY(OAL_PTR_NULL == pst_mac_device))
-    {
+    if (OAL_UNLIKELY(OAL_PTR_NULL == pst_mac_device)) {
         OAM_WARNING_LOG0(pst_dmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_SCAN,
                          "{dmac_detect_2040_te_a_b::mac_res_get_dev return null.}");
         return;
     }
 
-    if (us_frame_len <= us_offset)
-    {
+    if (us_frame_len <= us_offset) {
         mac_get_channel_idx_from_num((pst_mac_device->st_scan_params.ast_channel_list[pst_mac_device->uc_scan_chan_idx]).en_band,
                                       uc_real_chan, &chan_index);
         /* Detect Trigger Event - A */
@@ -121,8 +118,7 @@ oal_void dmac_detect_2040_te_a_b(dmac_vap_stru *pst_dmac_vap, oal_uint8 *puc_fra
     puc_frame_body += us_offset;
 
     puc_ie = mac_find_ie(MAC_EID_HT_CAP, puc_frame_body, us_frame_len);
-    if (OAL_PTR_NULL != puc_ie)
-    {
+    if (OAL_PTR_NULL != puc_ie) {
         ht_cap = OAL_TRUE;
 
         /* Check for the Forty MHz Intolerant bit in HT-Capabilities */
@@ -135,8 +131,7 @@ oal_void dmac_detect_2040_te_a_b(dmac_vap_stru *pst_dmac_vap, oal_uint8 *puc_fra
     }
 
     puc_ie = mac_find_ie(MAC_EID_2040_COEXT, puc_frame_body, us_frame_len);
-    if (OAL_PTR_NULL != puc_ie)
-    {
+    if (OAL_PTR_NULL != puc_ie) {
         /* Check for the Forty MHz Intolerant bit in Coex-Mgmt IE */
         if((puc_ie[2] & BIT1) != 0)
         {
@@ -148,8 +143,7 @@ oal_void dmac_detect_2040_te_a_b(dmac_vap_stru *pst_dmac_vap, oal_uint8 *puc_fra
     }
 
     /* ??????HT??????False?????????????????????????????????????????? */
-    if(OAL_FALSE == ht_cap)
-    {
+    if (OAL_FALSE == ht_cap) {
         puc_ie = mac_find_ie(MAC_EID_DSPARMS, puc_frame_body, us_frame_len);
         if (OAL_PTR_NULL != puc_ie)
         {
@@ -175,8 +169,7 @@ oal_void  dmac_scan_proc_obss_scan_complete_event(dmac_vap_stru *pst_dmac_vap)
 #endif
 
     if(!pst_dmac_vap->st_vap_base_info.st_ch_switch_info.ul_chan_report_for_te_a
-       && (OAL_FALSE == pst_dmac_vap->st_vap_base_info.st_ch_switch_info.en_te_b))
-    {
+       && (OAL_FALSE == pst_dmac_vap->st_vap_base_info.st_ch_switch_info.en_te_b)) {
         return;
     }
 
@@ -192,21 +185,18 @@ OAL_STATIC oal_void  dmac_scan_set_vap_mac_addr_by_scan_state(mac_device_stru  *
 {
     dmac_vap_stru               *pst_dmac_vap;
     mac_vap_stru                *pst_mac_vap;
-    mac_scan_req_stru           *pst_scan_params;
 
     /* ???????????? */
-    pst_scan_params = &(pst_mac_device->st_scan_params);
+    mac_scan_req_stru *pst_scan_params = &(pst_mac_device->st_scan_params);
 
     /* ??????mac addr???????????????????????????????????? */
-    if (OAL_TRUE != pst_scan_params->en_is_random_mac_addr_scan)
-    {
+    if (OAL_TRUE != pst_scan_params->en_is_random_mac_addr_scan) {
         //OAM_INFO_LOG0(0, OAM_SF_SCAN, "{dmac_scan_set_vap_mac_addr_by_scan_state:: don't need modified mac addr.}");
         return;
     }
 
     /* p2p??????????????mac addr */
-    if (OAL_TRUE == pst_scan_params->bit_is_p2p0_scan)
-    {
+    if (OAL_TRUE == pst_scan_params->bit_is_p2p0_scan) {
         //OAM_INFO_LOG0(0, OAM_SF_SCAN, "{dmac_scan_set_vap_mac_addr_by_scan_state:: p2p scan, don't need modified mac addr.}");
         return;
     }
@@ -264,7 +254,6 @@ OAL_STATIC oal_uint32  dmac_scan_report_scanned_bss(dmac_vap_stru *pst_dmac_vap,
 {
     frw_event_mem_stru                    *pst_event_mem;
     frw_event_stru                        *pst_event;
-    mac_device_stru                       *pst_mac_device;
     dmac_tx_event_stru                    *pst_dtx_event;
     oal_netbuf_stru                       *pst_netbuf;
     dmac_rx_ctl_stru                      *pst_rx_ctrl;
@@ -274,7 +263,7 @@ OAL_STATIC oal_uint32  dmac_scan_report_scanned_bss(dmac_vap_stru *pst_dmac_vap,
     oal_uint16                             us_frame_len;
     oal_uint16                             us_remain_netbuf_len;
 
-    pst_mac_device = mac_res_get_dev(pst_dmac_vap->st_vap_base_info.uc_device_id);
+    mac_device_stru *pst_mac_device = mac_res_get_dev(pst_dmac_vap->st_vap_base_info.uc_device_id);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_mac_device))
     {
         OAM_WARNING_LOG0(pst_dmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_SCAN,
@@ -322,14 +311,10 @@ OAL_STATIC oal_uint32  dmac_scan_report_scanned_bss(dmac_vap_stru *pst_dmac_vap,
     /* ???????? */
     pst_event = (frw_event_stru *)pst_event_mem->puc_data;
 
-    FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr),
-                       FRW_EVENT_TYPE_WLAN_CRX,
-                       DMAC_WLAN_CRX_EVENT_SUB_TYPE_EVERY_SCAN_RESULT,
-                       OAL_SIZEOF(dmac_tx_event_stru),
-                       FRW_EVENT_PIPELINE_STAGE_1,
-                       pst_dmac_vap->st_vap_base_info.uc_chip_id,
-                       pst_dmac_vap->st_vap_base_info.uc_device_id,
-                       pst_dmac_vap->st_vap_base_info.uc_vap_id);
+    FRW_EVENT_HDR_INIT(&(pst_event->st_event_hdr), FRW_EVENT_TYPE_WLAN_CRX,
+                       DMAC_WLAN_CRX_EVENT_SUB_TYPE_EVERY_SCAN_RESULT, OAL_SIZEOF(dmac_tx_event_stru),
+                       FRW_EVENT_PIPELINE_STAGE_1, pst_dmac_vap->st_vap_base_info.uc_chip_id,
+                       pst_dmac_vap->st_vap_base_info.uc_device_id, pst_dmac_vap->st_vap_base_info.uc_vap_id);
 
     /***********************************************************************************************/
     /*            netbuf data??????????????????????????????                                        */
@@ -382,10 +367,8 @@ OAL_STATIC oal_uint32  dmac_scan_report_scanned_bss(dmac_vap_stru *pst_dmac_vap,
 }
 
 
-OAL_STATIC oal_uint32  dmac_scan_check_bss_in_pno_scan(oal_uint8         *puc_frame_body,
-                                                                  oal_int32          l_frame_body_len,
-                                                                  mac_pno_scan_stru *pst_pno_scan_info,
-                                                                  oal_int32          l_rssi)
+OAL_STATIC oal_uint32  dmac_scan_check_bss_in_pno_scan(oal_uint8 *puc_frame_body, oal_int32 l_frame_body_len,
+                                                       mac_pno_scan_stru *pst_pno_scan_info, oal_int32 l_rssi)
 {
     oal_uint8       *puc_ssid;
     oal_int32        l_loop;
@@ -436,15 +419,13 @@ OAL_STATIC oal_uint32  dmac_scan_check_bss_type(oal_uint8 *puc_frame_body, mac_s
     /* ----------------------------------------------------------------------*/
     pst_cap_info = (mac_cap_info_stru *)(puc_frame_body + MAC_TIME_STAMP_LEN + MAC_BEACON_INTERVAL_LEN);
 
-    if ((WLAN_MIB_DESIRED_BSSTYPE_INFRA == pst_scan_params->en_bss_type) &&
-        (1 != pst_cap_info->bit_ess))
+    if ((WLAN_MIB_DESIRED_BSSTYPE_INFRA == pst_scan_params->en_bss_type) && (1 != pst_cap_info->bit_ess))
     {
         //OAM_INFO_LOG0(0, OAM_SF_SCAN, "{dmac_scan_check_bss_type::expect infra bss, but it's not infra bss.}\r\n");
         return OAL_FAIL;
     }
 
-    if ((WLAN_MIB_DESIRED_BSSTYPE_INDEPENDENT == pst_scan_params->en_bss_type) &&
-        (1 != pst_cap_info->bit_ibss))
+    if ((WLAN_MIB_DESIRED_BSSTYPE_INDEPENDENT == pst_scan_params->en_bss_type) && (1 != pst_cap_info->bit_ibss))
     {
         //OAM_INFO_LOG0(0, OAM_SF_SCAN, "{dmac_scan_check_bss_type::expect ibss, but it's not ibss.}\r\n");
         return OAL_FAIL;
@@ -459,11 +440,12 @@ frw_timeout_stru g_csa_stop_timer = {0};
 
 oal_void  dmac_scan_check_assoc_ap_channel(dmac_vap_stru *pst_dmac_vap, mac_device_stru *pst_mac_device, oal_netbuf_stru *pst_netbuf)
 {
-    dmac_rx_ctl_stru                        *pst_rx_ctrl;
-    mac_ieee80211_frame_stru                *pst_frame_hdr;
-    oal_uint8                               *puc_frame_body;
-    oal_uint16                              us_frame_len;
-    oal_uint16                              us_offset =  MAC_TIME_STAMP_LEN + MAC_BEACON_INTERVAL_LEN + MAC_CAP_INFO_LEN;
+    dmac_rx_ctl_stru *pst_rx_ctrl = (dmac_rx_ctl_stru *)oal_netbuf_cb(pst_netbuf);
+    mac_ieee80211_frame_stru *pst_frame_hdr;
+    oal_uint8 *puc_frame_body = MAC_GET_RX_PAYLOAD_ADDR(&(pst_rx_ctrl->st_rx_info), pst_netbuf);
+    oal_uint16 us_frame_len = (oal_uint16)oal_netbuf_get_len(pst_netbuf);
+
+    oal_uint16                              us_offset = MAC_TIME_STAMP_LEN + MAC_BEACON_INTERVAL_LEN + MAC_CAP_INFO_LEN;
     mac_cfg_ssid_param_stru                 st_mib_ssid = {0};
     oal_uint8                               uc_mib_ssid_len = 0;
     oal_uint8                               uc_frame_channel;
@@ -473,12 +455,8 @@ oal_void  dmac_scan_check_assoc_ap_channel(dmac_vap_stru *pst_dmac_vap, mac_devi
     oal_uint8                               uc_idx;
     mac_scan_req_stru                       *pst_scan_params = &(pst_mac_device->st_scan_params);
 
-    pst_rx_ctrl = (dmac_rx_ctl_stru *)oal_netbuf_cb(pst_netbuf);
-
     /* ?????????? */
     pst_frame_hdr  = (mac_ieee80211_frame_stru *)mac_get_rx_cb_mac_hdr(&(pst_rx_ctrl->st_rx_info));
-    puc_frame_body = MAC_GET_RX_PAYLOAD_ADDR(&(pst_rx_ctrl->st_rx_info), pst_netbuf);
-    us_frame_len   = (oal_uint16)oal_netbuf_get_len(pst_netbuf);
 
     if (!OAL_MEMCMP(pst_frame_hdr->auc_address3, pst_dmac_vap->st_vap_base_info.auc_bssid, WLAN_MAC_ADDR_LEN))
     {
@@ -540,7 +518,7 @@ oal_uint32  dmac_scan_mgmt_filter(dmac_vap_stru *pst_dmac_vap, oal_void *p_param
     dmac_rx_ctl_stru           *pst_rx_ctrl;
     mac_ieee80211_frame_stru   *pst_frame_hdr;
     oal_uint8                  *puc_frame_body;
-    mac_device_stru            *pst_mac_device;
+    mac_device_stru            *pst_mac_device = mac_res_get_dev(pst_dmac_vap->st_vap_base_info.uc_device_id);
     mac_scan_req_stru          *pst_scan_params;
     oal_uint32                  ul_ret;
     oal_uint16                  us_frame_len;
@@ -551,7 +529,6 @@ oal_uint32  dmac_scan_mgmt_filter(dmac_vap_stru *pst_dmac_vap, oal_void *p_param
 #endif
 #endif
 
-    pst_mac_device  = mac_res_get_dev(pst_dmac_vap->st_vap_base_info.uc_device_id);
     if (OAL_PTR_NULL == pst_mac_device)
     {
         OAM_WARNING_LOG0(pst_dmac_vap->st_vap_base_info.uc_vap_id, OAM_SF_SCAN, "{dmac_scan_mgmt_filter::pst_mac_device null.}");
@@ -690,10 +667,9 @@ OAL_STATIC oal_uint16  dmac_scan_encap_probe_req_frame(dmac_vap_stru *pst_dmac_v
     oal_uint8       *puc_payload_addr        = puc_mac_header + MAC_80211_FRAME_LEN;
 #endif
     oal_uint8       *puc_payload_addr_origin = puc_payload_addr;
-    mac_device_stru *pst_mac_device = OAL_PTR_NULL;
+    mac_device_stru *pst_mac_device = mac_res_get_dev(pst_dmac_vap->st_vap_base_info.uc_device_id);
     oal_uint16       us_app_ie_len;
 
-    pst_mac_device = mac_res_get_dev(pst_dmac_vap->st_vap_base_info.uc_device_id);
     if (OAL_UNLIKELY(OAL_PTR_NULL == pst_mac_device))
     {
         OAM_ERROR_LOG1(0, OAM_SF_ANY, "{dmac_scan_encap_probe_req_frame::pst_mac_device[%d] null!}", pst_dmac_vap->st_vap_base_info.uc_device_id);
@@ -811,9 +787,7 @@ OAL_STATIC oal_uint16  dmac_scan_encap_probe_req_frame(dmac_vap_stru *pst_dmac_v
 }
 
 
-oal_uint32  dmac_scan_send_probe_req_frame(dmac_vap_stru *pst_dmac_vap,
-                                            oal_uint8 *puc_bssid,
-                                            oal_int8 *pc_ssid)
+oal_uint32  dmac_scan_send_probe_req_frame(dmac_vap_stru *pst_dmac_vap, oal_uint8 *puc_bssid, oal_int8 *pc_ssid)
 {
     oal_netbuf_stru        *pst_mgmt_buf;
     mac_tx_ctl_stru        *pst_tx_ctl;
@@ -881,10 +855,9 @@ oal_uint32  dmac_scan_proc_scan_complete_event(dmac_vap_stru *pst_dmac_vap,
     frw_event_mem_stru         *pst_event_mem;
     frw_event_stru             *pst_event;
     mac_device_stru            *pst_mac_device;
-    oal_uint8                   uc_vap_id;
     mac_scan_rsp_stru          *pst_scan_rsp_info;
 
-    uc_vap_id = pst_dmac_vap->st_vap_base_info.uc_vap_id;
+    oal_uint8 uc_vap_id = pst_dmac_vap->st_vap_base_info.uc_vap_id;
 
     //OAM_INFO_LOG0(uc_vap_id, OAM_SF_SCAN, "{dmac_scan_proc_scan_complete_event:: start proc scan complete event.}");
     //dmac_scan_print_time_stamp();
@@ -2628,7 +2601,6 @@ oal_void dmac_scan_begin(mac_device_stru *pst_mac_device)
         hal_enable_ch_statics(pst_mac_device->pst_device_stru, 1);
     }
     pst_dmac_vap = mac_res_get_dmac_vap(pst_scan_params->uc_vap_id);
-
 #ifdef _PRE_WLAN_FEATURE_11K
     if(OAL_TRUE == pst_dmac_vap->bit_11k_enable)
     {
@@ -2722,8 +2694,7 @@ oal_void dmac_scan_end(mac_device_stru *pst_mac_device)
 
     /* ????dmac vap */
     pst_dmac_vap = mac_res_get_dmac_vap(pst_mac_device->st_scan_params.uc_vap_id);
-    if (OAL_PTR_NULL == pst_dmac_vap)
-    {
+    if (OAL_PTR_NULL == pst_dmac_vap) {
         OAM_ERROR_LOG0(0, OAM_SF_SCAN, "{dmac_scan_end::pst_dmac_vap is null.}");
 
         /* ????device?????????????????? */

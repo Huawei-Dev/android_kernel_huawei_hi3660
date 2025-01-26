@@ -2309,10 +2309,8 @@ oal_uint32  dmac_sta_up_rx_beacon(
     if (MAC_BW_CHANGE & ul_change_flag)
     {
         OAM_WARNING_LOG3(pst_mac_vap->uc_vap_id, OAM_SF_ASSOC,
-                           "{dmac_sta_up_rx_beacon::change BW. ul_change[0x%x], uc_channel[%d], en_bandwidth[%d].}",
-                           ul_change_flag,
-                           pst_mac_vap->st_channel.uc_chan_number,
-                           pst_mac_vap->st_channel.en_bandwidth);
+            "{dmac_sta_up_rx_beacon::change BW. ul_change[0x%x], uc_channel[%d], en_bandwidth[%d].}", ul_change_flag,
+            pst_mac_vap->st_channel.uc_chan_number, pst_mac_vap->st_channel.en_bandwidth);
 
         dmac_chan_select_channel_mac(pst_mac_vap, pst_mac_vap->st_channel.uc_chan_number, pst_mac_vap->st_channel.en_bandwidth);
 

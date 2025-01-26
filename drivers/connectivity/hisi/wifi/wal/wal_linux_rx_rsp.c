@@ -324,7 +324,11 @@ oal_uint32  wal_roam_comp_proc_sta(frw_event_mem_stru *pst_event_mem)
     mac_device_stru             *pst_mac_device;
     hmac_roam_rsp_stru          *pst_roam_rsp;
     struct ieee80211_channel    *pst_channel;
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4,7,0))
+    enum nl80211_band            en_band = NUM_NL80211_BANDS;
+#else
     enum ieee80211_band          en_band = IEEE80211_NUM_BANDS;
+#endif
     oal_uint32                   ul_ret;
     oal_int                      l_freq;
 
@@ -360,6 +364,16 @@ oal_uint32  wal_roam_comp_proc_sta(frw_event_mem_stru *pst_event_mem)
         wal_free_roam_comp_proc_sta_ie_buf(pst_roam_rsp);
         return OAL_FAIL;
     }
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4,7,0))
+    if (WLAN_BAND_2G == pst_roam_rsp->st_channel.en_band)
+    {
+        en_band = NL80211_BAND_2GHZ;
+    }
+    if (WLAN_BAND_5G == pst_roam_rsp->st_channel.en_band)
+    {
+        en_band = NL80211_BAND_5GHZ;
+    }
+#else
     if (WLAN_BAND_2G == pst_roam_rsp->st_channel.en_band)
     {
         en_band = IEEE80211_BAND_2GHZ;
@@ -368,6 +382,7 @@ oal_uint32  wal_roam_comp_proc_sta(frw_event_mem_stru *pst_event_mem)
     {
         en_band = IEEE80211_BAND_5GHZ;
     }
+#endif
 
     /* for test, flush 192.168.1.1 arp */
     //arp_invalidate(pst_net_device, 0xc0a80101);

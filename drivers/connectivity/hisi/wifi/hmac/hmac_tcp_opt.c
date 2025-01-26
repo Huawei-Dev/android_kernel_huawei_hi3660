@@ -59,7 +59,7 @@ hmac_tcp_ack_opt_th_params g_st_tcp_ack_opt_th_params = {0, 0, 0, 0};
 /*****************************************************************************
   5 ????????????????
 *****************************************************************************/
-oal_uint16 hmac_tcp_opt_tx_tcp_ack_filter(hmac_vap_stru    *pst_hmac_vap, hmac_tcp_opt_queue type,hcc_chan_type dir, oal_netbuf_head_stru  *head);
+oal_uint16 hmac_tcp_opt_tx_tcp_ack_filter(void *pst_hmac_vap, hmac_tcp_opt_queue type,hcc_chan_type dir, oal_netbuf_head_stru  *head);
 
 /*****************************************************************************
   4 ????????
@@ -237,7 +237,7 @@ oal_uint32 hmac_tcp_opt_init_filter_tcp_ack_pool(hmac_vap_stru    *pst_hmac_vap)
         OAM_INFO_LOG1(0,OAM_SF_ANY,"{wifi tcp perform dir:%d init done.}", us_dir_index);
     }
 #ifdef _PRE_WLAN_FEATURE_OFFLOAD_FLOWCTL
-    pst_hmac_vap->st_hamc_tcp_ack[HCC_TX].filter[HMAC_TCP_ACK_QUEUE] = (hmac_trans_cb_func)hmac_tcp_opt_tx_tcp_ack_filter;
+    pst_hmac_vap->st_hamc_tcp_ack[HCC_TX].filter[HMAC_TCP_ACK_QUEUE] = hmac_tcp_opt_tx_tcp_ack_filter;
     pst_hmac_vap->st_hamc_tcp_ack[HCC_RX].filter[HMAC_TCP_ACK_QUEUE] = OAL_PTR_NULL;
 #endif
     return OAL_SUCC;
@@ -587,17 +587,17 @@ oal_tcp_ack_type_enum_uint8  hmac_tcp_opt_tx_get_tcp_ack(oal_netbuf_stru *skb, h
 }
 
 
-oal_uint16 hmac_tcp_opt_tx_tcp_ack_filter(hmac_vap_stru    *hmac_vap, hmac_tcp_opt_queue type,hcc_chan_type dir, oal_netbuf_head_stru  *head)
+oal_uint16 hmac_tcp_opt_tx_tcp_ack_filter(void *hmac_vap, hmac_tcp_opt_queue type,hcc_chan_type dir, oal_netbuf_head_stru  *head)
 {
-    hmac_vap_stru *pst_hmac_vap;
-    struct tcp_list_node *node;
+    hmac_vap_stru         *pst_hmac_vap;
+    struct tcp_list_node  *node;
     oal_netbuf_stru * skb;
     oal_netbuf_head_stru  head_t;
     struct wlan_perform_tcp_list *tmp_list;
     oal_dlist_head_stru        *pst_entry;
     oal_dlist_head_stru        *pst_entry_temp;
 
-    OAL_BUG_ON(!pst_hmac_vap);
+    OAL_BUG_ON(!hmac_vap);
     OAL_BUG_ON(!head);
     OAL_BUG_ON(HMAC_TCP_ACK_QUEUE != type);
     OAL_BUG_ON((HCC_TX != dir));

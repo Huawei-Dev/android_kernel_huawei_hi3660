@@ -2896,9 +2896,13 @@ oal_void hmac_rx_mgmt_send_to_host(hmac_vap_stru *pst_hmac_vap, oal_netbuf_stru 
     oal_int                     l_freq = 0;
 
     pst_rx_info  = (mac_rx_ctl_stru *)oal_netbuf_cb(pst_netbuf);
-
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4,7,0))
+    l_freq = oal_ieee80211_channel_to_frequency(pst_rx_info->uc_channel_number,
+                                                (pst_rx_info->uc_channel_number > 14) ? NL80211_BAND_5GHZ : NL80211_BAND_2GHZ);
+#else
     l_freq = oal_ieee80211_channel_to_frequency(pst_rx_info->uc_channel_number,
                                                 (pst_rx_info->uc_channel_number > 14) ? IEEE80211_BAND_5GHZ : IEEE80211_BAND_2GHZ);
+#endif
     hmac_send_mgmt_to_host(pst_hmac_vap, pst_netbuf, pst_rx_info->us_frame_len, l_freq);
 }
 #endif

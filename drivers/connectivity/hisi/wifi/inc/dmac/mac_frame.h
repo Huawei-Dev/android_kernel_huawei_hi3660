@@ -141,7 +141,6 @@ extern "C" {
 
 /* WPA ???????????????? */
 #define MAC_WPA_IE_VERSION          1
-#define WLAN_AKM_SUITE_WAPI_CERT    0x000FAC12
 
 /* OUI???????? */
 #define MAC_OUI_LEN                 3
@@ -466,6 +465,7 @@ typedef oal_uint8 mac_txbf_clb_enum_uint8;
 /* Spectrum Management Category????Action?????? */
 typedef enum
 {
+    MAC_SPEC_TPC_REQUEST        = 2,
     MAC_SPEC_CH_SWITCH_ANNOUNCE = 4   /*  Channel Switch Announcement */
 }mac_specmgmt_action_type_enum;
 typedef oal_uint8 mac_specmgmt_action_type_enum_uint8;

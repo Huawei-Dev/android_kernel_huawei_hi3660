@@ -139,7 +139,6 @@ typedef struct cookie_arry
     .hw_value       = (_rateid),                                \
     .flags          = (_flags),                                 \
 }
-
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(4,7,0))
 #define CHAN2G(_channel, _freq, _flags)  \
 {                       \
@@ -201,7 +200,6 @@ typedef struct cookie_arry
     .max_power              = 30,                           \
 }
 #endif
-
 #elif (_PRE_OS_VERSION_WIN32 == _PRE_OS_VERSION)
 
 #define RATETAB_ENT(_rate, _rateid, _flags)     \
@@ -333,6 +331,13 @@ extern oal_uint32 wal_cfg80211_add_vap(mac_cfg_add_vap_param_stru *pst_add_vap_p
 
 extern oal_void wal_cfg80211_reset_bands(oal_void);
 extern oal_void wal_cfg80211_save_bands(oal_void);
+oal_int32 wal_cfg80211_get_station(oal_wiphy_stru *pst_wiphy,
+                                   oal_net_device_stru *pst_dev,
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 16, 0))
+                                   const
+#endif
+                                   oal_uint8 *puc_mac,
+                                   oal_station_info_stru *pst_sta_info);
 
 #ifdef __cplusplus
     #if __cplusplus

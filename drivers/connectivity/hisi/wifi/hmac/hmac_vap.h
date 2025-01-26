@@ -168,6 +168,7 @@ typedef enum _hmac_tcp_opt_queue_
 
 #ifdef _PRE_WLAN_TCP_OPT
 typedef oal_uint16 (* hmac_trans_cb_func)(void *pst_hmac_device, hmac_tcp_opt_queue type,hcc_chan_type dir, oal_netbuf_head_stru* data);
+/*tcp_ack????*/
 typedef struct
 {
     struct wlan_perform_tcp      hmac_tcp_ack;

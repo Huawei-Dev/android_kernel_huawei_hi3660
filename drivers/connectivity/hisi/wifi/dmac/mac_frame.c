@@ -68,11 +68,8 @@ OAL_STATIC oal_void  mac_report_beacon(mac_rx_ctl_stru *pst_rx_cb,oal_netbuf_str
     oal_uint8     *puc_beacon_payload_addr = OAL_PTR_NULL;
 
     puc_beacon_payload_addr = oal_netbuf_payload(pst_netbuf);
-    ul_ret = oam_report_beacon((oal_uint8 *)mac_get_rx_cb_mac_hdr(pst_rx_cb),
-                               pst_rx_cb->bit_mac_header_len,
-                               puc_beacon_payload_addr,
-                               pst_rx_cb->us_frame_len,
-                               OAM_OTA_FRAME_DIRECTION_TYPE_RX);
+    ul_ret = oam_report_beacon((oal_uint8 *)mac_get_rx_cb_mac_hdr(pst_rx_cb), pst_rx_cb->bit_mac_header_len,
+                               puc_beacon_payload_addr, pst_rx_cb->us_frame_len, OAM_OTA_FRAME_DIRECTION_TYPE_RX);
 #else
     ul_ret = oam_report_beacon((oal_uint8 *)pst_rx_cb->pul_mac_hdr_start_addr,
                                pst_rx_cb->uc_mac_header_len,

@@ -2925,6 +2925,7 @@ oal_uint32 dmac_rx_filter_frame_encrypt(dmac_user_stru        *pst_dmac_user,
             && (WLAN_QOS_NULL_FRAME != pst_frame_hdr->st_frame_control.bit_sub_type)
             && (mac_get_data_type(pst_netbuf) != MAC_DATA_EAPOL))
         {
+            pst_dmac_user->st_query_stats.ul_rx_filter_encrypt_cnt++;
             OAM_WARNING_LOG1(pst_dmac_user->st_user_base_info.uc_vap_id, OAM_SF_RX,
                 "{dmac_rx_filter_frame_encrypt::plaintext drop! data type[%d]}",
                 mac_get_data_type(pst_netbuf));
