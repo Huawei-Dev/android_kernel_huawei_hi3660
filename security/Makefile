@@ -31,6 +31,5 @@ subdir-$(CONFIG_INTEGRITY)		+= integrity
 obj-$(CONFIG_INTEGRITY)			+= integrity/
 
 # HW Object
-obj-$(CONFIG_HUAWEI_PROC_CHECK_ROOT)    += check_root/
 obj-$(CONFIG_HW_ROOT_SCAN) += hw_root_scan/
 obj-$(CONFIG_HWAA) += hwaa/

@@ -43,8 +43,6 @@
 
 #include <linux/jiffies.h>
 
-#include <chipset_common/security/check_root.h>
-
 /*
  * Lock order:
  *   1. slab_mutex (Global Mutex)
@@ -3882,9 +3880,6 @@ err:
 	pr_err("ptr = %pK, page = %pK, n = %lu\n", ptr, page, n);
 	pr_err("page_addr = %pK, kmem_cache = %pK, size = %d, object= %lu, red_left_pad = %d",
 			page_address(page), s, s->size, object_size, s->red_left_pad);
-
-	/* record trace log for stp */
-	stp_save_trace_log(STP_NAME_USERCOPY);
 
 	BUG();
 }
