@@ -5505,11 +5505,6 @@ CONFIG_DEFAULT_SECURITY_SELINUX=y
 CONFIG_DEFAULT_SECURITY="selinux"
 
 #
-# Huawei kernel mdpp selftest
-#
-# CONFIG_HUAWEI_SELINUX_DSM is not set
-
-#
 # Huawei Kernel Harden
 #
 CONFIG_HUAWEI_HIDESYMS=y
