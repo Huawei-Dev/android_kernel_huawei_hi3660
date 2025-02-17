@@ -5507,7 +5507,6 @@ CONFIG_DEFAULT_SECURITY="selinux"
 #
 # Huawei Kernel Harden
 #
-CONFIG_HUAWEI_HIDESYMS=y
 # CONFIG_HUAWEI_PROC_CHECK_ROOT is not set
 
 #
