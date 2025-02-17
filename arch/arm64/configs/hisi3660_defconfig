@@ -5507,7 +5507,6 @@ CONFIG_DEFAULT_SECURITY="selinux"
 #
 # Huawei kernel mdpp selftest
 #
-CONFIG_HUAWEI_CRYPTO_TEST_MDPP=y
 # CONFIG_HUAWEI_SELINUX_DSM is not set
 
 #
