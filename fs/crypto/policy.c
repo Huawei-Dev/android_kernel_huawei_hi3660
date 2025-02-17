@@ -15,11 +15,6 @@
 #include <linux/mount.h>
 #include "fscrypt_private.h"
 
-#ifdef CONFIG_HWAA
-#include <linux/security.h>
-#include <huawei_platform/hwaa/hwaa_fs_hooks.h>
-#endif
-
 /*
  * check whether an encryption policy is consistent with an encryption context
  */

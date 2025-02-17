@@ -114,14 +114,7 @@ static inline void fscrypt_put_encryption_info(struct inode *inode,
 	return;
 }
 
-#ifdef CONFIG_HWAA
-static inline int hwaa_get_context(struct inode *inode)
-{
-	return -EAGAIN;
-}
-#endif
-
- /* fname.c */
+/* fname.c */
 static inline int fscrypt_setup_filename(struct inode *dir,
 					 const struct qstr *iname,
 					 int lookup, struct fscrypt_name *fname)

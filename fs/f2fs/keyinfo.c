@@ -827,7 +827,7 @@ static int f2fs_get_sdp_crypt_info(struct inode *inode, void *fs_data)
 }
 #endif
 
-#if (defined(DEFINE_F2FS_FS_SDP_ENCRYPTION) || defined(CONFIG_HWAA))
+#ifdef DEFINE_F2FS_FS_SDP_ENCRYPTION
 int f2fs_get_crypt_keyinfo(struct inode *inode, void *fs_data, int *flag)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
@@ -838,24 +838,6 @@ int f2fs_get_crypt_keyinfo(struct inode *inode, void *fs_data, int *flag)
 	 * or sdp crypt info.
 	 */
 	*flag = 0;
-
-#ifdef CONFIG_HWAA
-	if (!inode->i_crypt_info || (inode->i_crypt_info &&
-		(inode->i_crypt_info->ci_hw_enc_flag &
-		HWAA_XATTR_ENABLE_FLAG))) {
-		res = hwaa_get_context(inode);
-		if (res == -EOPNOTSUPP)
-			goto get_sdp_encryption_info;
-		else if (res) {
-			*flag = 1;
-			return -EACCES;
-		} else {
-			*flag = 1;
-			return 0;
-		}
-	}
-get_sdp_encryption_info:
-#endif
 
 	/* means only file use the sdp key, symlink dir use the origin key */
 	if (S_ISREG(inode->i_mode)) {

@@ -24,11 +24,6 @@
 
 #define FS_CRYPTO_BLOCK_SIZE		16
 
-#ifdef CONFIG_HWAA
-#define HWAA_XATTR_NAME "hwaa"
-#define HWAA_XATTR_ENABLE_FLAG 0x0010
-#endif
-
 struct fscrypt_info;
 
 struct fscrypt_ctx {
@@ -97,11 +92,6 @@ struct fscrypt_operations {
 	unsigned (*max_namelen)(struct inode *);
 	int (*get_keyinfo)(struct inode *, void *, int *);
 	int (*is_permitted_context)(struct inode *, struct inode *);
-#ifdef CONFIG_HWAA
-	int (*update_hwaa_attr)(struct inode *, const void *, size_t, void *);
-	int (*get_hwaa_attr)(struct inode *, void *, size_t);
-	int (*get_hwaa_flags)(struct inode *, void *, u32 *);
-#endif
 };
 
 static inline bool fscrypt_dummy_context_enabled(struct inode *inode)

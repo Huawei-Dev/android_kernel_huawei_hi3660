@@ -2057,40 +2057,6 @@ static int f2fs_set_context(struct inode *inode, const void *ctx, size_t len,
 				ctx, len, fs_data, XATTR_CREATE);
 }
 
-#ifdef CONFIG_HWAA
-static int f2fs_get_hwaa_attr(struct inode *inode, void *buf, size_t len)
-{
-	return f2fs_getxattr(inode, F2FS_XATTR_INDEX_ENCRYPTION, HWAA_XATTR_NAME,
-		buf, len, NULL, NULL);
-}
-
-/* mainly copied from f2fs_get_sdp_encrypt_flags */
-static int f2fs_get_hwaa_flags(struct inode *inode, void *fs_data, u32 *flags)
-{
-	struct f2fs_xattr_header *hdr;
-	struct page *xpage;
-	int err;
-
-	if (!fs_data)
-		down_read(&F2FS_I(inode)->i_sem);
-
-	*flags = 0;
-	hdr = get_xattr_header(inode, (struct page *)fs_data, &xpage);
-	if (IS_ERR_OR_NULL(hdr)) {
-		err = (long)PTR_ERR(hdr);
-		goto out_unlock;
-	}
-
-	*flags = hdr->h_xattr_flags;
-	err = 0;
-	f2fs_put_page(xpage, 1);
-out_unlock:
-	if (!fs_data)
-		up_read(&F2FS_I(inode)->i_sem);
-	return err;
-}
-#endif
-
 static int f2fs_get_verify_context(struct inode *inode, void *ctx, size_t len)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
@@ -2168,11 +2134,6 @@ static const struct fscrypt_operations f2fs_cryptops = {
 #if DEFINE_F2FS_FS_SDP_ENCRYPTION
 	.get_keyinfo          = f2fs_get_crypt_keyinfo,
 	.is_permitted_context = f2fs_is_permitted_context,
-#endif
-#ifdef CONFIG_HWAA
-	.get_keyinfo		= f2fs_get_crypt_keyinfo,
-	.get_hwaa_attr		= f2fs_get_hwaa_attr,
-	.get_hwaa_flags		= f2fs_get_hwaa_flags,
 #endif
 };
 #endif

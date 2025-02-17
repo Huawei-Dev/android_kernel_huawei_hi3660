@@ -30,5 +30,4 @@ obj-$(CONFIG_CGROUP_DEVICE)		+= device_cgroup.o
 subdir-$(CONFIG_INTEGRITY)		+= integrity
 obj-$(CONFIG_INTEGRITY)			+= integrity/
 
-# HW Object
-obj-$(CONFIG_HWAA) += hwaa/
+
